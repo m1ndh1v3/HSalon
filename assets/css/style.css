@@ -1,0 +1,503 @@
+/* ==========================
+   /assets/css/style.css — HSalon Admin NeoGlass Theme (Final Polished)
+   ========================== */
+
+/* Fonts & Base Setup */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap');
+
+html, body {
+  font-family: "Cairo", "Poppins", sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+}
+
+/* ==========================
+   Light / Dark Variables
+   ========================== */
+body.light {
+  --rose: #b76e79;
+  --rose-light: #fce8ec;
+  --rose-dark: #9a5061;
+  --bg-gradient: linear-gradient(135deg, #f8f9fa, #fce8ec);
+  --card-bg: rgba(255,255,255,0.85);
+  --nav-bg: rgba(255,255,255,0.8);
+  --border: rgba(0,0,0,0.08);
+  --text: #2b2b2b;
+  --shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+body.dark {
+  --rose: #d87b8a;
+  --rose-light: #3b1e23;
+  --rose-dark: #f5a2b0;
+  --bg-gradient: linear-gradient(135deg, #1a1a1a, #2b2b2b);
+  --card-bg: rgba(40,40,40,0.85);
+  --nav-bg: rgba(30,30,30,0.8);
+  --border: rgba(255,255,255,0.08);
+  --text: #f1f1f1;
+  --shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* ==========================
+   Navbar
+   ========================== */
+.navbar {
+  background: var(--nav-bg) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: background 0.3s ease;
+}
+.navbar-brand {
+  font-weight: 700;
+  color: var(--rose) !important;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+.navbar .btn {
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  transition: color 0.3s;
+}
+.navbar .btn:hover {
+  color: var(--rose);
+}
+
+/* “Book Now” nav button — no oval, subtle highlight */
+.navbar .btn-primary {
+  border-radius: 0.5rem;
+  background: var(--rose);
+  border: none;
+  box-shadow: 0 2px 6px rgba(183,110,121,0.4);
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+.navbar .btn-primary:hover {
+  background: var(--rose-dark);
+  box-shadow: 0 0 10px rgba(183,110,121,0.7);
+  transform: translateY(-2px);
+}
+
+/* ==========================
+   Cards & Panels
+   ========================== */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.card h5, .card h3, .card p {
+  color: var(--text);
+}
+.card i {
+  color: var(--rose);
+}
+
+/* Summary Cards */
+.card.bg-primary,
+.card.bg-success,
+.card.bg-warning,
+.card.bg-danger {
+  background: var(--rose) !important;
+  border: none;
+  color: #fff !important;
+  box-shadow: var(--shadow);
+}
+.card.bg-success { background: linear-gradient(135deg, #28a745, #6fdc7c) !important; }
+.card.bg-warning { background: linear-gradient(135deg, #ffc107, #ffe484) !important; color:#2b2b2b !important; }
+.card.bg-danger  { background: linear-gradient(135deg, #dc3545, #f9808a) !important; }
+.card.bg-primary { background: linear-gradient(135deg, #b76e79, #d68d9b) !important; }
+
+/* ==========================
+   Tables
+   ========================== */
+.table {
+  border-color: var(--border);
+}
+.table thead {
+  background-color: var(--rose-light);
+  color: var(--text);
+  font-weight: 600;
+}
+.table-hover tbody tr:hover {
+  background-color: rgba(183, 110, 121, 0.08);
+}
+
+/* ==========================
+   Buttons
+   ========================== */
+.btn-primary {
+  background: var(--rose);
+  border-color: var(--rose);
+}
+.btn-primary:hover {
+  background: var(--rose-dark);
+  border-color: var(--rose-dark);
+}
+.btn-outline-primary {
+  color: var(--rose);
+  border-color: var(--rose);
+}
+.btn-outline-primary:hover {
+  background: var(--rose);
+  color: #fff;
+}
+
+/* ==========================
+   Modals
+   ========================== */
+.modal-content {
+  background: var(--card-bg);
+  color: var(--text);
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.modal-header { border-bottom-color: var(--border); }
+.modal-footer { border-top-color: var(--border); }
+
+/* ==========================
+   Footer
+   ========================== */
+footer {
+  background: linear-gradient(135deg, var(--rose-light), #ffffff);
+  color: #2b2b2b;
+  border-top: 1px solid var(--border);
+  padding: 1rem 0;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+}
+footer p { margin: 0; }
+
+/* ==========================
+   Interactive Elements
+   ========================== */
+a {
+  color: var(--rose);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover { color: var(--rose-dark); }
+
+/* Hover cards for dashboard quick links */
+.hover-card {
+  transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
+  border-radius: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+}
+.hover-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  background: rgba(255,255,255,0.9);
+}
+
+/* ==========================
+   Animations & Effects
+   ========================== */
+@keyframes floatUp {
+  0% { transform: translateY(8px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+.fade-in { animation: floatUp .6s ease forwards; }
+
+/* Shake animation for bell */
+@keyframes shakeAnim {
+  0%,100% { transform: rotate(0); }
+  20% { transform: rotate(-15deg); }
+  40% { transform: rotate(10deg); }
+  60% { transform: rotate(-10deg); }
+  80% { transform: rotate(5deg); }
+}
+.shake { animation: shakeAnim 0.6s ease; }
+
+/* ==========================
+   Responsive Adjustments
+   ========================== */
+@media (max-width: 768px) {
+  .navbar-brand { font-size: 1.2rem; }
+  .card h5 { font-size: 1rem; }
+  .card h3 { font-size: 1.4rem; }
+  .table { font-size: 0.9rem; }
+}
+
+/* ==========================
+   Dark Mode Form & UI Fixes — Matte Charcoal Edition
+   ========================== */
+
+/* Universal text color fix */
+body.dark,
+body.dark p,
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark h5,
+body.dark h6,
+body.dark label,
+body.dark .nav-link,
+body.dark .card-title,
+body.dark .card-text {
+  color: #f1f1f1 !important;
+}
+
+/* Inputs, selects, textareas */
+body.dark .form-control,
+body.dark .form-select,
+body.dark textarea {
+  background-color: #2a2a2a;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: none;
+}
+body.dark .form-control:focus,
+body.dark .form-select:focus {
+  border-color: var(--rose);
+  box-shadow: 0 0 0 0.2rem rgba(183,110,121,0.25);
+}
+body.dark .form-control::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+/* Input icons (date/time pickers) */
+body.dark input[type="date"]::-webkit-calendar-picker-indicator,
+body.dark input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) brightness(1.5);
+}
+
+/* Table readability in dark mode */
+body.dark .table { color: #f1f1f1; }
+body.dark .table thead { background: #333; color: #fff; }
+body.dark .table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: rgba(255,255,255,0.05);
+}
+
+/* Navbar & dropdowns */
+body.dark .navbar,
+body.dark .dropdown-menu {
+  background: #1e1e1e !important;
+  color: #fff;
+}
+body.dark .navbar .nav-link,
+body.dark .navbar .btn,
+body.dark .navbar .dropdown-toggle {
+  color: #fff !important;
+}
+body.dark .navbar .nav-link:hover,
+body.dark .navbar .btn:hover {
+  color: var(--rose) !important;
+}
+body.dark .dropdown-menu {
+  border-color: rgba(255,255,255,0.1);
+}
+body.dark .dropdown-item { color: #f1f1f1; }
+body.dark .dropdown-item:hover {
+  background-color: var(--rose);
+  color: #fff;
+}
+
+/* Prevent dropdown cutoff in RTL */
+[dir="rtl"] .dropdown-menu-end {
+  right: auto;
+  left: 0;
+}
+
+/* Modals & notifications */
+body.dark .modal-content {
+  background-color: #222;
+  color: #fff;
+  border-color: rgba(255,255,255,0.1);
+}
+body.dark .modal-header,
+body.dark .modal-footer {
+  border-color: rgba(255,255,255,0.1);
+}
+
+/* Theme toggle & icon visibility */
+body.dark .nav-link .bi-moon,
+body.light .nav-link .bi-sun { display: none; }
+body.dark .nav-link .bi-sun,
+body.light .nav-link .bi-moon { display: inline-block; }
+
+
+/* ==========================
+   UNIFIED ICON BUTTONS + FINAL PERFECT ALIGNMENT
+   ========================== */
+
+/* base size + visual alignment */
+.navbar .nav-item .nav-link.icon-only,
+.navbar .nav-item .dropdown-toggle.icon-only,
+.navbar .btn.btn-outline-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0 !important;
+  border: none;
+  background: transparent;
+  border-radius: 0.5rem;
+  color: var(--text);
+  position: relative;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+/* icons inside */
+.navbar .nav-item .nav-link.icon-only i,
+.navbar .nav-item .dropdown-toggle.icon-only i,
+.navbar .btn.btn-outline-light i {
+  font-size: 1.25rem;
+  line-height: 1;
+  vertical-align: middle;
+  display: inline-block;
+  position: relative;
+}
+
+/* remove inner underline from <i> */
+.navbar .nav-item .nav-link.icon-only i::after,
+.navbar .nav-item .dropdown-toggle.icon-only i::after,
+.navbar .btn.btn-outline-light i::after {
+  display: none !important;
+}
+
+/* single, clean underline for all */
+.navbar .nav-item .nav-link.icon-only::after,
+.navbar .nav-item .dropdown-toggle.icon-only::after,
+.navbar .btn.btn-outline-light::after {
+  content: "";
+  position: absolute;
+  bottom: -4px; /* visually matches main nav links */
+  left: 8px;
+  right: 8px;
+  height: 2px;
+  background: var(--rose);
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.25s ease;
+}
+
+/* hover reveal */
+.navbar .nav-item .nav-link.icon-only:hover::after,
+.navbar .nav-item .dropdown-toggle.icon-only:hover::after,
+.navbar .btn.btn-outline-light:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* hover color + lift */
+.navbar .nav-item .nav-link.icon-only:hover,
+.navbar .nav-item .dropdown-toggle.icon-only:hover,
+.navbar .btn.btn-outline-light:hover {
+  color: var(--rose) !important;
+  transform: translateY(-1px);
+}
+
+/* === dropdown positioning + clipping fix === */
+.navbar,
+.navbar .collapse {
+  overflow: visible !important;
+  z-index: 1040;
+}
+
+/* align right for RTL, left for LTR automatically */
+.dropdown-menu {
+  inset: auto !important;
+  inset-inline-end: 0 !important;
+  transform: translateY(5px);
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  z-index: 1050;
+}
+
+/* ensure dropdown fits view */
+.dropdown-menu.show {
+  overflow: visible;
+}
+
+/* slight hover smoothness for dropdown items */
+.dropdown-item {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.dropdown-item:hover {
+  background-color: var(--rose-light);
+  color: var(--rose-dark);
+}
+
+/* ==========================
+   INDEX GRAY BUTTONS — NeoGlass Balanced
+   ========================== */
+
+/* Light mode */
+body.light .btn-outline-secondary,
+body.light .btn-secondary {
+  color: #fff !important;
+  background: #6c757d !important;
+  border: none !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: all 0.25s ease;
+}
+body.light .btn-outline-secondary:hover,
+body.light .btn-secondary:hover {
+  background: var(--rose) !important;
+  color: #fff !important;
+  box-shadow: 0 0 10px rgba(183,110,121,0.6);
+}
+
+/* Dark mode */
+body.dark .btn-outline-secondary,
+body.dark .btn-secondary {
+  color: #fff !important;
+  background: #444 !important;
+  border: none !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  transition: all 0.25s ease;
+}
+body.dark .btn-outline-secondary:hover,
+body.dark .btn-secondary:hover {
+  background: var(--rose-dark) !important;
+  color: #fff !important;
+  box-shadow: 0 0 10px rgba(245,162,176,0.5);
+}
+
+/* ==========================
+   BOOKING + PROFILE SPECIAL STYLING — Unified Rose Buttons
+   ========================== */
+
+/* Keep “Book Now” text always white */
+.navbar .btn-primary,
+.navbar .btn-primary:hover,
+.navbar .btn-primary:focus {
+  color: #fff !important;
+}
+
+/* Profile toggle (person icon) — same rose button style */
+.navbar .nav-item.dropdown.profile-toggle > .nav-link.icon-only {
+  background: var(--rose);
+  color: #fff !important;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px rgba(183,110,121,0.4);
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+.navbar .nav-item.dropdown.profile-toggle > .nav-link.icon-only:hover {
+  background: var(--rose-dark);
+  box-shadow: 0 0 10px rgba(183,110,121,0.7);
+  transform: translateY(-2px);
+  color: #fff !important;
+}
+
+/* Remove hover underline on profile toggle */
+.navbar .nav-item.dropdown.profile-toggle > .nav-link.icon-only::after {
+  display: none !important;
+}

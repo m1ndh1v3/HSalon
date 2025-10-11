@@ -1,0 +1,29 @@
+# ==========================
+# /.htaccess
+# ==========================
+
+# Enable URL rewriting
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Redirect all 404s to custom page
+  ErrorDocument 404 /404.php
+  ErrorDocument 403 /403.php
+
+  # Protect sensitive files
+  <FilesMatch "^(config\.php|hsalon\.sql|\.gitignore|composer\.json|composer\.lock)$">
+    Order allow,deny
+    Deny from all
+  </FilesMatch>
+
+  # Disable directory browsing
+  Options -Indexes
+</IfModule>
+
+# Handle UTF-8 URLs
+AddDefaultCharset UTF-8
+
+# PHP error logging (for production disable display)
+php_value log_errors On
+php_value error_log logs/php_errors.log
