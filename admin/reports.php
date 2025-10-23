@@ -47,7 +47,7 @@ if (isset($_GET['export'])) {
         header('Content-Disposition: attachment; filename="bookings_report.csv"');
         echo "\xEF\xBB\xBF"; // UTF-8 BOM for Excel Arabic support
         $out = fopen('php://output', 'w');
-        fputcsv($out, ['ID','العميل','الخدمة','تاريخ الموعد','الوقت','الحالة','تاريخ الإنشاء']);
+        fputcsv($out, ['ID','الزبون','الخدمة','تاريخ الموعد','الوقت','الحالة','تاريخ الإنشاء']);
         foreach ($rows as $r) {
             fputcsv($out, [$r['id'],$r['client_name'],$r['service_name'],$r['date'],$r['time'],$r['status'],$r['created_at']]);
         }
@@ -64,7 +64,7 @@ if (isset($_GET['export'])) {
         <html lang="ar" dir="rtl">
         <head>
           <meta charset="utf-8">
-          <title>تقرير الحجوزات</title>
+          <title>تقرير المواعيد</title>
           <style>
             @page { size: A4 landscape; margin: 20mm; }
             body { font-family: 'DejaVu Sans', 'Amiri', Arial, sans-serif; direction: rtl; background:#fff; color:#000; }
@@ -84,14 +84,14 @@ if (isset($_GET['export'])) {
         <body onload="window.print()">
           <div class="header">
             <img src="<?php echo SITE_URL; ?>/assets/img/hsalon_logo.png" alt="Logo">
-            <h2><?php echo SITE_NAME; ?> - تقرير الحجوزات</h2>
+            <h2><?php echo SITE_NAME; ?> - تقرير المواعيد</h2>
             <div class="date-range">تاريخ الإنشاء: <?= date('Y-m-d H:i') ?></div>
           </div>
           <table>
             <thead>
               <tr>
                 <th>ID</th>
-                <th>العميل</th>
+                <th>الزبون</th>
                 <th>الخدمة</th>
                 <th>تاريخ الموعد</th>
                 <th>الوقت</th>
@@ -118,7 +118,7 @@ if (isset($_GET['export'])) {
             </tbody>
           </table>
           <div class="footer">
-            <div>إجمالي الحجوزات: <?= count($rows) ?></div>
+            <div>إجمالي المواعيد: <?= count($rows) ?></div>
             <div class="signature">التوقيع: ______________________</div>
           </div>
         </body>
@@ -141,7 +141,7 @@ $total_cancelled = $pdo->query("SELECT COUNT(*) FROM bookings WHERE status='canc
 include_once __DIR__ . '/../includes/header.php';
 ?>
 
-<h2 class="text-center mb-4">تقارير الحجوزات</h2>
+<h2 class="text-center mb-4">تقارير المواعيد</h2>
 
 <form method="get" class="row g-3 mb-4 text-end" dir="rtl">
   <div class="col-md-2">
@@ -161,7 +161,7 @@ include_once __DIR__ . '/../includes/header.php';
     <input type="date" name="created_to" class="form-control" value="<?= clean($_GET['created_to'] ?? '') ?>">
   </div>
   <div class="col-md-2">
-    <label class="form-label">العميل</label>
+    <label class="form-label">الزبون</label>
     <select name="client_id" class="form-select">
       <option value="">الكل</option>
       <?php foreach ($clients as $c): ?>
@@ -251,7 +251,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <thead class="table-light">
     <tr>
       <th>ID</th>
-      <th>العميل</th>
+      <th>الزبون</th>
       <th>الخدمة</th>
       <th>تاريخ الموعد</th>
       <th>الوقت</th>

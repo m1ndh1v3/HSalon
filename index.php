@@ -8,11 +8,51 @@ include_once __DIR__ . '/includes/header.php';
 
 <div class="text-center py-5">
   <h1 class="fw-bold mb-3"><?php echo $lang['welcome']; ?></h1>
-  <p class="lead mb-4"><?php echo SITE_NAME; ?> — <?php echo $lang['book_now']; ?> 💇‍♀️</p>
+  <p class="lead mb-4"><?php //echo SITE_NAME; ?><?php //echo $lang['book_now']; ?> 💇‍♀️</p>
   <a href="booking.php" class="btn btn-lg btn-primary px-4 py-2">
     <i class="bi bi-calendar-check"></i> <?php echo $lang['book_now']; ?>
   </a>
 </div>
+
+<?php
+// ==========================
+// /includes/working_hours_section.php
+// ==========================
+try {
+    $stmt = $pdo->query("SELECT * FROM work_hours ORDER BY FIELD(day_name,'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday')");
+    $hours = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    $hours = [];
+}
+if ($hours):
+?>
+<section class="my-5 text-center">
+  <h2 class="fw-bold mb-4"><i class="bi bi-clock"></i> أوقات العمل</h2>
+  <div class="d-flex flex-wrap justify-content-center gap-3">
+    <?php foreach ($hours as $h): 
+      $open  = substr($h['open_time'],0,5);
+      $close = substr($h['close_time'],0,5);
+      $break = ($h['break_start'] && $h['break_end']) ? "🕐 {$h['break_start']} - {$h['break_end']}" : '';
+      $isOpen = $h['is_open'];
+      $day = [
+        'Sunday'=>'الأحد','Monday'=>'الاثنين','Tuesday'=>'الثلاثاء',
+        'Wednesday'=>'الأربعاء','Thursday'=>'الخميس','Friday'=>'الجمعة','Saturday'=>'السبت'
+      ][$h['day_name']];
+    ?>
+    <div class="card shadow-sm border-0 rounded-4 px-3 py-2 text-center" style="min-width:150px; background:var(--rose-light);">
+      <div class="fw-semibold"><?php echo $day; ?></div>
+      <?php if($isOpen): ?>
+        <div class="small text-muted"><?php echo "$open – $close"; ?></div>
+        <?php if($break): ?><div class="small text-muted"><?php echo $break; ?></div><?php endif; ?>
+      <?php else: ?>
+        <div class="text-danger fw-bold">مغلق</div>
+      <?php endif; ?>
+    </div>
+    <?php endforeach; ?>
+  </div>
+</section>
+<?php endif; ?>
+
 
 <section class="my-5">
   <h2 class="text-center mb-4"><?php echo $lang['services']; ?></h2>

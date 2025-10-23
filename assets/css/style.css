@@ -119,20 +119,6 @@ body.dark {
 .card.bg-danger  { background: linear-gradient(135deg, #dc3545, #f9808a) !important; }
 .card.bg-primary { background: linear-gradient(135deg, #b76e79, #d68d9b) !important; }
 
-/* ==========================
-   Tables
-   ========================== */
-.table {
-  border-color: var(--border);
-}
-.table thead {
-  background-color: var(--rose-light);
-  color: var(--text);
-  font-weight: 600;
-}
-.table-hover tbody tr:hover {
-  background-color: rgba(183, 110, 121, 0.08);
-}
 
 /* ==========================
    Buttons
@@ -275,13 +261,6 @@ body.dark input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(1) brightness(1.5);
 }
 
-/* Table readability in dark mode */
-body.dark .table { color: #f1f1f1; }
-body.dark .table thead { background: #333; color: #fff; }
-body.dark .table-striped > tbody > tr:nth-of-type(odd) {
-  background-color: rgba(255,255,255,0.05);
-}
-
 /* Navbar & dropdowns */
 body.dark .navbar,
 body.dark .dropdown-menu {
@@ -293,10 +272,7 @@ body.dark .navbar .btn,
 body.dark .navbar .dropdown-toggle {
   color: #fff !important;
 }
-body.dark .navbar .nav-link:hover,
-body.dark .navbar .btn:hover {
-  color: var(--rose) !important;
-}
+
 body.dark .dropdown-menu {
   border-color: rgba(255,255,255,0.1);
 }
@@ -500,4 +476,391 @@ body.dark .btn-secondary:hover {
 /* Remove hover underline on profile toggle */
 .navbar .nav-item.dropdown.profile-toggle > .nav-link.icon-only::after {
   display: none !important;
+}
+
+section .card * {
+  pointer-events: none;
+}
+section .card {
+  pointer-events: auto;
+}
+
+section .card .text-muted {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+section .card .text-danger.fw-bold {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* ==========================
+   THEME POLISH — Exact Requested Fixes
+   ========================== */
+
+/* --- LIGHT MODE --- */
+
+/* pagination buttons use rose theme */
+body.light .page-link {
+  color: var(--rose);
+  border: 1px solid var(--rose-light);
+  background: #fff;
+  transition: all 0.25s ease;
+}
+body.light .page-item.active .page-link,
+body.light .page-link:hover {
+  background: var(--rose);
+  color: #fff;
+  border-color: var(--rose-dark);
+  box-shadow: 0 0 6px rgba(183,110,121,0.4);
+}
+
+/* icons inside dashboard cards become black for contrast */
+body.light .card i {
+  color: #000 !important;
+}
+
+
+/* --- DARK MODE --- */
+
+/* footer fits dark palette */
+body.dark footer {
+  background: linear-gradient(135deg,#141414,#1f1f1f);
+  color: #eaeaea;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
+}
+
+/* index “work hours” cards text white (except red ‘closed’) */
+body.dark section .card .fw-semibold,
+body.dark section .card .small.text-muted {
+  color: #fff !important;
+}
+body.dark section .card .text-danger.fw-bold {
+  color: #ff7070 !important;
+}
+
+.summary-card {
+  background-color: #2b2b2b;
+  color: #fff;
+  transition: background .3s ease, color .3s ease;
+}
+body.light .summary-card {
+  background: linear-gradient(135deg, #b76e79, #d68d9b);
+  color: #fff;
+}
+body.dark .summary-card {
+  background: #1e1e1e;
+  color: #f1f1f1;
+}
+
+/* hover effect quick nav */
+.hover-card { transition: transform .2s, box-shadow .2s; }
+.hover-card:hover { transform: translateY(-5px); box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+body.dark .quick-nav-card {
+  background: #222 !important;
+  color: #f1f1f1 !important;
+}
+body.dark .quick-nav-card:hover {
+  background: #2b2b2b !important;
+}
+
+/* ==========================
+   TABLE THEME FIX — Adaptive Tables (Light/Dark)
+   ========================== */
+.adaptive-table {
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Light mode */
+body.light .adaptive-table {
+  background: #fff;
+  color: #212529;
+  border-color: rgba(0,0,0,0.1);
+}
+body.light .adaptive-table thead {
+  background: #f8f9fa;
+  color: #212529;
+}
+body.light .adaptive-table tbody tr:hover {
+  background: rgba(183,110,121,0.08);
+}
+
+/* Dark mode */
+body.dark .adaptive-table {
+  background: #1e1e1e;
+  color: #f1f1f1;
+  border-color: rgba(255,255,255,0.1);
+}
+body.dark .adaptive-table thead {
+  background: #2b2b2b;
+  color: #f1f1f1;
+}
+body.dark .adaptive-table tbody tr:hover {
+  background: rgba(183,110,121,0.15);
+}
+body.dark .adaptive-table td,
+body.dark .adaptive-table th {
+  border-color: rgba(255,255,255,0.08);
+}
+body.dark .adaptive-table .text-muted {
+  color: rgba(255,255,255,0.6) !important;
+}
+
+/* ==========================
+   FINAL TABLE & INACTIVE ROW FIX
+   ========================== */
+
+/* Light mode */
+body.light .table,
+body.light .table-striped,
+body.light .table-hover {
+  --bs-table-bg: #ffffff !important;
+  --bs-table-striped-bg: #f8f9fa !important;
+  --bs-table-striped-color: #212529 !important;
+  --bs-table-hover-bg: rgba(183,110,121,0.08) !important;
+  --bs-table-hover-color: #212529 !important;
+  --bs-table-color: #212529 !important;
+  --bs-table-border-color: rgba(0,0,0,0.1) !important;
+}
+
+/* Dark mode — default bright text */
+body.dark .table,
+body.dark .table-striped,
+body.dark .table-hover {
+  --bs-table-bg: #1e1e1e !important;
+  --bs-table-striped-bg: #2a2a2a !important;
+  --bs-table-striped-color: #f1f1f1 !important;
+  --bs-table-hover-bg: #333 !important;
+  --bs-table-hover-color: #fff !important;
+  --bs-table-color: #f1f1f1 !important;
+  --bs-table-border-color: rgba(255,255,255,0.1) !important;
+}
+
+/* Dark mode inactive/expired rows (dark background + dark text) */
+body.dark .table tbody tr.inactive,
+body.dark .table tbody tr.expired,
+body.dark .table tbody tr.table-secondary {
+  background-color: #f5f5f5 !important;
+  color: #212529 !important;
+}
+body.dark .table tbody tr.inactive td,
+body.dark .table tbody tr.expired td {
+  color: #212529 !important;
+}
+body.dark .table tbody tr.inactive:hover,
+body.dark .table tbody tr.expired:hover {
+  background-color: #e9e9e9 !important;
+  color: #212529 !important;
+}
+
+/* Muted text inside inactive rows */
+body.dark .table tbody tr.inactive .text-muted,
+body.dark .table tbody tr.expired .text-muted {
+  color: #6c757d !important;
+}
+
+/* Regular dark rows text fix */
+body.dark .table td,
+body.dark .table th {
+  color: #f1f1f1 !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+
+/* Muted text globally readable in dark mode */
+body.dark .table .text-muted {
+  color: rgba(255,255,255,0.6) !important;
+}
+
+/* ==========================
+   FINAL AUTO-DETECT TABLE COLOR FIX (Dark/Light + Expired Rows)
+   ========================== */
+
+/* general dark mode defaults */
+body.dark .table,
+body.dark .table-striped,
+body.dark .table-hover {
+  --bs-table-bg: #1e1e1e !important;
+  --bs-table-striped-bg: #2a2a2a !important;
+  --bs-table-striped-color: #f1f1f1 !important;
+  --bs-table-hover-bg: #333 !important;
+  --bs-table-hover-color: #fff !important;
+  --bs-table-color: #f1f1f1 !important;
+  --bs-table-border-color: rgba(255,255,255,0.1) !important;
+}
+
+/* ensure bright text everywhere */
+body.dark .table td,
+body.dark .table th {
+  color: #f1f1f1 !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+
+/* keep muted readable */
+body.dark .table .text-muted {
+  color: rgba(255,255,255,0.6) !important;
+}
+
+/* automatically dark-text expired or inactive rows */
+body.dark .table tr.table-secondary,
+body.dark .table tr.text-muted,
+body.dark .table tr:has(td.text-muted),
+body.dark .table tr:has(span.badge.bg-secondary),
+body.dark .table tr:has(span.badge.bg-light),
+body.dark .table tr:has(.status-expired),
+body.dark .table tr[aria-disabled="true"],
+body.dark .table tr.disabled {
+  background-color: #f8f9fa !important;
+  color: #212529 !important;
+}
+body.dark .table tr.table-secondary td,
+body.dark .table tr.text-muted td,
+body.dark .table tr:has(td.text-muted) td,
+body.dark .table tr:has(.status-expired) td {
+  color: #212529 !important;
+}
+body.dark .table tr.table-secondary:hover,
+body.dark .table tr:has(.status-expired):hover {
+  background-color: #e9ecef !important;
+  color: #212529 !important;
+}
+/* ==========================
+   PAGINATION THEME STYLES — Light / Dark Unified
+   ========================== */
+
+/* Light mode */
+body.light .pagination .page-link {
+  color: var(--rose);
+  background-color: #fff;
+  border: 1px solid var(--rose-light);
+  transition: all 0.25s ease;
+}
+body.light .pagination .page-link:hover {
+  background-color: var(--rose);
+  color: #fff;
+  border-color: var(--rose-dark);
+  box-shadow: 0 0 6px rgba(183,110,121,0.4);
+}
+body.light .pagination .page-item.active .page-link {
+  background-color: var(--rose);
+  color: #fff;
+  border-color: var(--rose-dark);
+  box-shadow: 0 0 8px rgba(183,110,121,0.6);
+}
+
+/* Dark mode */
+body.dark .pagination .page-link {
+  color: #f1f1f1;
+  background-color: #2b2b2b;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.25s ease;
+}
+body.dark .pagination .page-link:hover {
+  background-color: var(--rose);
+  color: #fff;
+  border-color: var(--rose-dark);
+  box-shadow: 0 0 6px rgba(245,162,176,0.5);
+}
+body.dark .pagination .page-item.active .page-link {
+  background-color: var(--rose);
+  color: #fff;
+  border-color: var(--rose-dark);
+  box-shadow: 0 0 8px rgba(245,162,176,0.6);
+}
+
+/* rounded pagination */
+.pagination .page-link {
+  border-radius: 0.5rem !important;
+  font-weight: 600;
+  min-width: 38px;
+  text-align: center;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ==========================
+   PERFORMANCE FIX — smoother scroll & hardware acceleration
+   ========================== */
+
+/* isolate GPU repaint regions */
+.navbar,
+.card,
+footer {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* reduce heavy blur that kills FPS */
+.navbar {
+  backdrop-filter: blur(6px);
+}
+.card {
+  backdrop-filter: blur(4px);
+}
+
+/* improve overall smooth scroll rendering */
+html, body {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+body.dark .card,
+body.light .card {
+  background: var(--card-bg);
+  backdrop-filter: none;
+}
+/* ==========================
+   DARK MODE — TABLE HEADER + CALENDAR FIX
+   ========================== */
+
+/* generic table header fix (all pages) */
+body.dark table thead {
+  background-color: #2b2b2b !important;
+  color: #f1f1f1 !important;
+  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+}
+body.dark table thead th {
+  background-color: #2b2b2b !important;
+  color: #f1f1f1 !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+body.dark table tbody td {
+  color: #f1f1f1 !important;
+}
+
+/* calendar page dark theme */
+body.dark .calendar-grid {
+  background-color: #1e1e1e !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+body.dark .calendar-day {
+  border-color: rgba(255,255,255,0.08) !important;
+}
+body.dark .calendar-day .bg-light {
+  background-color: #2b2b2b !important;
+  color: #f1f1f1 !important;
+}
+body.dark .calendar-day small.text-muted {
+  color: rgba(255,255,255,0.6) !important;
+}
+body.dark .calendar-day .p-2 {
+  background-color: #1a1a1a !important;
+  color: #f1f1f1 !important;
+}
+
+/* booking cards inside calendar dark mode */
+body.dark .calendar-day .card {
+  background-color: #222 !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #f1f1f1 !important;
+}
+body.dark .calendar-day .card .text-muted {
+  color: rgba(255,255,255,0.6) !important;
+}
+body.dark .calendar-day .card .fw-semibold {
+  color: #fff !important;
 }

@@ -1,6 +1,6 @@
 <?php
 // ==========================
-// /booking.php
+// /booking.php — updated with work_hours integration
 // ==========================
 require_once __DIR__ . '/config.php';
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
@@ -40,30 +40,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt = $pdo->prepare("INSERT INTO bookings (client_id, name, phone, email, service_id, date, time, notify_method, status, created_at)
                                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
                 $stmt->execute([$cid, $name, $phone, $email, $service, $date, $time, $notify, $status]);
-
                 $bookId = $pdo->lastInsertId();
                 log_debug("New booking created: ID=$bookId for $name");
 
-                $msg = "تم استلام طلب الحجز الخاص بك وهو الآن قيد المراجعة.\nالخدمة رقم: $service\nالتاريخ: $date $time";
+                $msg = "تم استلام طلب الموعد الخاص بك وهو الآن قيد المراجعة.\nالخدمة رقم: $service\nالتاريخ: $date $time";
                 if ($notify === 'whatsapp') {
                     $wa = send_whatsapp_message($phone, $msg);
-                    echo '<div class="alert alert-success text-center">تم إرسال طلب الحجز بنجاح!<br><a href="'.$wa.'" target="_blank">فتح واتساب</a></div>';
+                    echo '<div class="alert alert-success text-center">تم إرسال طلب الموعد بنجاح!<br><a href="'.$wa.'" target="_blank">فتح واتساب</a></div>';
                 } else {
-                    send_email($email, "تأكيد الحجز - ".SITE_NAME, nl2br($msg));
-                    echo '<div class="alert alert-success text-center">تم إرسال طلب الحجز بنجاح!<br>سيتم التواصل معك قريباً لتأكيد الموعد.</div>';
+                    send_email($email, "تأكيد الموعد - ".SITE_NAME, nl2br($msg));
+                    echo '<div class="alert alert-success text-center">تم إرسال طلب الموعد بنجاح!<br>سيتم التواصل معك قريباً لتأكيد الموعد.</div>';
                 }
             }
         } catch (Exception $e) {
             log_debug("Booking insert failed: ".$e->getMessage());
-            echo '<div class="alert alert-danger text-center">حدث خطأ أثناء إنشاء الحجز، يرجى المحاولة لاحقاً.</div>';
+            echo '<div class="alert alert-danger text-center">حدث خطأ أثناء إنشاء الموعد، يرجى المحاولة لاحقاً.</div>';
         }
     } else {
-        echo '<div class="alert alert-warning text-center">يرجى تعبئة جميع الحقول المطلوبة لإتمام الحجز.</div>';
+        echo '<div class="alert alert-warning text-center">يرجى تعبئة جميع الحقول المطلوبة لإتمام الموعد.</div>';
     }
 }
 ?>
 
-<h2 class="text-center mb-4">احجزي موعدك الآن</h2>
+<h2 class="text-center mb-4">لموعد موعد الآن</h2>
 
 <form method="POST" class="col-md-8 mx-auto card p-4 shadow-sm text-end" dir="rtl">
   <?php if (!empty($cid)): ?>
@@ -71,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <input type="hidden" name="phone" value="<?php echo clean($cphone); ?>">
     <input type="hidden" name="email" value="<?php echo clean($cemail); ?>">
     <p class="text-center mb-3">
-      يتم الحجز باسم <strong><?php echo clean($cname); ?></strong>
+      يتم الموعد باسم <strong><?php echo clean($cname); ?></strong>
       <?php if ($cemail): ?>(<?php echo clean($cemail); ?>)<?php endif; ?>
     </p>
   <?php else: ?>
@@ -104,11 +103,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="row mb-3">
     <div class="col-md-6">
       <label class="form-label">التاريخ</label>
-      <input type="date" name="date" class="form-control text-end" required min="<?php echo date('Y-m-d'); ?>">
+      <input type="date" id="datePicker" name="date" class="form-control text-end" required min="<?php echo date('Y-m-d'); ?>">
     </div>
     <div class="col-md-6">
       <label class="form-label">الوقت</label>
-      <input type="time" name="time" class="form-control text-end" required>
+      <select name="time" id="timeSelect" class="form-select text-end" required disabled>
+        <option value="">يرجى اختيار التاريخ أولاً</option>
+      </select>
     </div>
   </div>
 
@@ -120,7 +121,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </select>
   </div>
 
-  <button type="submit" class="btn btn-primary w-100">تأكيد الحجز</button>
+  <button type="submit" class="btn btn-primary w-100">تأكيد الموعد</button>
 </form>
+
 
 <?php include_once __DIR__ . '/includes/footer.php'; ?>

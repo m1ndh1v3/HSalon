@@ -39,7 +39,7 @@ $theme = $_SESSION['theme'];
   <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/style.css?v=<?php echo time(); ?>">
   <link rel="icon" href="<?php echo SITE_URL; ?>/assets/img/hsalon_logo.png">
 </head>
-<body class="<?php echo ($_SESSION['theme'] ?? 'light'); ?>">
+<body class="<?php echo ($_SESSION['theme'] ?? 'light'); ?> theme-body">
 
 <?php
 // ==========================

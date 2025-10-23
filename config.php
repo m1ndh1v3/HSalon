@@ -22,7 +22,7 @@ if (!ob_get_level()) {
 }
 
 // --- Site constants ---
-define('SITE_NAME', 'HSalon');
+define('SITE_NAME', 'HAYA Bridal Salon');
 define('SITE_EMAIL', 'noreply@hsalon.local');
 define('SITE_URL', 'http://localhost/hsalon');
 define('LANG_DEFAULT', 'ar');

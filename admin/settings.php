@@ -35,7 +35,7 @@ $contact_whatsapp = get_setting('contact_whatsapp', '');
   <div class="form-check form-switch mb-3 text-end">
     <input class="form-check-input" type="checkbox" name="notify_booking" id="notify_booking"
            <?php if ($notify_booking === '1') echo 'checked'; ?>>
-    <label class="form-check-label" for="notify_booking">تفعيل إشعارات الحجوزات</label>
+    <label class="form-check-label" for="notify_booking">تفعيل إشعارات المواعيد</label>
   </div>
   <div class="form-check form-switch mb-4 text-end">
     <input class="form-check-input" type="checkbox" name="notify_system" id="notify_system"

@@ -103,7 +103,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!-- Filters -->
 <form method="get" class="row mb-4 text-end" dir="rtl">
   <div class="col-md-4 mb-2">
-    <label class="form-label">تصفية حسب الحالة</label>
+    <label class="form-label">ترتيب حسب الحالة</label>
     <select name="status" class="form-select text-end">
       <option value="">كل الحالات</option>
       <option value="active" <?php if($statusFilter=='active') echo 'selected'; ?>>نشطة</option>
@@ -115,7 +115,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <input type="text" name="search" class="form-control text-end" placeholder="ابحث بالاسم أو السعر" value="<?= clean($search) ?>">
   </div>
   <div class="col-md-2 mb-2 align-self-end">
-    <button type="submit" class="btn btn-primary w-100">تصفية</button>
+    <button type="submit" class="btn btn-primary w-100">ترتيب</button>
   </div>
 </form>
 

@@ -57,7 +57,7 @@ $stmt->execute($params);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<h2 class="text-center mb-4">إدارة العملاء</h2>
+<h2 class="text-center mb-4">إدارة الزبائن</h2>
 
 <form method="get" class="row mb-3 text-end" dir="rtl">
   <div class="col-md-4 mb-2">
@@ -72,7 +72,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </div>
   <div class="col-md-4 mb-2 align-self-end text-start">
     <button type="button" class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#addModal">
-      <i class="bi bi-person-plus"></i> إضافة عميل جديد
+      <i class="bi bi-person-plus"></i> إضافة زبون جديد
     </button>
   </div>
 </form>
@@ -117,12 +117,12 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <td><?= format_date($r['created_at'], true) ?></td>
         <td>
           <a href="bookings.php?client_id=<?= $r['id'] ?>" class="btn btn-info btn-sm text-white">
-            <i class="bi bi-calendar-event"></i> (<?= $count ?>) الحجوزات
+            <i class="bi bi-calendar-event"></i> (<?= $count ?>) المواعيد
           </a>
           <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<?= $r['id'] ?>">
             <i class="bi bi-pencil"></i>
           </button>
-          <a href="?delete=<?= $r['id'] ?>" onclick="return confirm('هل أنت متأكد من حذف هذا العميل؟');" class="btn btn-danger btn-sm">
+          <a href="?delete=<?= $r['id'] ?>" onclick="return confirm('هل أنت متأكد من حذف هذا الزبون؟');" class="btn btn-danger btn-sm">
             <i class="bi bi-trash"></i>
           </a>
         </td>
@@ -133,7 +133,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="modal-dialog">
           <div class="modal-content text-end" dir="rtl">
             <div class="modal-header">
-              <h5 class="modal-title">تعديل العميل</h5>
+              <h5 class="modal-title">تعديل الزبون</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form method="POST">
@@ -202,7 +202,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <div class="modal-dialog">
     <div class="modal-content text-end" dir="rtl">
       <div class="modal-header">
-        <h5 class="modal-title">إضافة عميل جديد</h5>
+        <h5 class="modal-title">إضافة زبون جديد</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <form method="POST">

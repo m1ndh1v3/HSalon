@@ -1,6 +1,6 @@
 <?php
 // ==========================
-// /admin/schedule.php
+// /admin/work_hours
 // ==========================
 require_once __DIR__ . '/../config.php';
 if (!isset($_SESSION['admin_id'])) {

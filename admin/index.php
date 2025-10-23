@@ -1,19 +1,18 @@
 <?php
 // ==========================
-// /admin/index.php (Admin Login)
+// /admin/index.php (Admin Login) — fixed redirect handling
 // ==========================
 require_once __DIR__ . '/../config.php';
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
 
-// If already logged in, go to bookings
+// Redirect if already logged in (before output)
 if (!empty($_SESSION['admin_id'])) {
     header("Location: bookings.php");
     exit;
 }
 
-include_once __DIR__ . '/../includes/header.php';
-
-// Handle login submit
+// Handle login submit (before output)
+$login_error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = clean($_POST['email'] ?? '');
     $pass  = clean($_POST['password'] ?? '');
@@ -27,20 +26,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['admin_id']    = $admin['id'];
             $_SESSION['admin_name']  = $admin['name'];
             $_SESSION['admin_email'] = $admin['email'];
-
             log_debug("Admin logged in: ".$admin['email']);
             header("Location: bookings.php");
             exit;
         } else {
-            echo '<div class="alert alert-danger text-center">فشل تسجيل الدخول، يرجى التحقق من البيانات.</div>';
+            $login_error = 'فشل تسجيل الدخول، يرجى التحقق من البيانات.';
         }
     } else {
-        echo '<div class="alert alert-warning text-center">يرجى إدخال البريد الإلكتروني وكلمة المرور.</div>';
+        $login_error = 'يرجى إدخال البريد الإلكتروني وكلمة المرور.';
     }
 }
+
+include_once __DIR__ . '/../includes/header.php';
 ?>
 
 <h2 class="text-center mb-4">تسجيل دخول المدير</h2>
+
+<?php if ($login_error): ?>
+  <div class="alert alert-danger text-center"><?php echo $login_error; ?></div>
+<?php endif; ?>
 
 <form method="POST" class="col-md-6 mx-auto card p-4 shadow-sm text-end" dir="rtl">
   <div class="mb-3">
