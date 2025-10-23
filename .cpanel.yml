@@ -2,4 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/doconver/public_html/
-    - /bin/cp -R * $DEPLOYPATH
+    - /bin/rsync -av --exclude='.git' --exclude='.cpanel.yml' ./ $DEPLOYPATH
