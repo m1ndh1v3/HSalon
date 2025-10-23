@@ -162,7 +162,7 @@ if (isset($_SESSION['admin_id'])) {
   </div>
 </div>
 
-<audio id="notifPing" src="<?php echo SITE_URL; ?>/assets/sound/ping.mp3" preload="auto"></audio>
+<audio id="notifPing" src="<?php echo SITE_URL; ?>/assets/sound/ping-82822.mp3" preload="auto"></audio>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const notifBtn = document.getElementById('notifBtn');
