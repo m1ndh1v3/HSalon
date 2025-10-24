@@ -1,6 +1,6 @@
 <?php
 // ==========================
-// /index.php
+// /index.php — localized version (Arabic/English support for days + services)
 // ==========================
 require_once __DIR__ . '/config.php';
 include_once __DIR__ . '/includes/header.php';
@@ -8,7 +8,7 @@ include_once __DIR__ . '/includes/header.php';
 
 <div class="text-center py-5">
   <h1 class="fw-bold mb-3"><?php echo $lang['welcome']; ?></h1>
-  <p class="lead mb-4"><?php //echo SITE_NAME; ?><?php //echo $lang['book_now']; ?> 💇‍♀️</p>
+  <p class="lead mb-4">💇‍♀️</p>
   <a href="booking.php" class="btn btn-lg btn-primary px-4 py-2">
     <i class="bi bi-calendar-check"></i> <?php echo $lang['book_now']; ?>
   </a>
@@ -16,7 +16,7 @@ include_once __DIR__ . '/includes/header.php';
 
 <?php
 // ==========================
-// /includes/working_hours_section.php
+// /includes/working_hours_section.php — localized version
 // ==========================
 try {
     $stmt = $pdo->query("SELECT * FROM work_hours ORDER BY FIELD(day_name,'Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday')");
@@ -27,25 +27,23 @@ try {
 if ($hours):
 ?>
 <section class="my-5 text-center">
-  <h2 class="fw-bold mb-4"><i class="bi bi-clock"></i> أوقات العمل</h2>
+  <h2 class="fw-bold mb-4"><i class="bi bi-clock"></i> <?php echo $lang['working_hours']; ?></h2>
   <div class="d-flex flex-wrap justify-content-center gap-3">
     <?php foreach ($hours as $h): 
-      $open  = substr($h['open_time'],0,5);
-      $close = substr($h['close_time'],0,5);
-      $break = ($h['break_start'] && $h['break_end']) ? "🕐 {$h['break_start']} - {$h['break_end']}" : '';
+      $open  = substr($h['open_time'], 0, 5);
+      $close = substr($h['close_time'], 0, 5);
+      $break = ($h['break_start'] && $h['break_end']) ? sprintf($lang['break_time'], $h['break_start'], $h['break_end']) : '';
       $isOpen = $h['is_open'];
-      $day = [
-        'Sunday'=>'الأحد','Monday'=>'الاثنين','Tuesday'=>'الثلاثاء',
-        'Wednesday'=>'الأربعاء','Thursday'=>'الخميس','Friday'=>'الجمعة','Saturday'=>'السبت'
-      ][$h['day_name']];
+      $dayKey = strtolower($h['day_name']);
+      $dayLabel = $lang[$dayKey] ?? $h['day_name'];
     ?>
     <div class="card shadow-sm border-0 rounded-4 px-3 py-2 text-center" style="min-width:150px; background:var(--rose-light);">
-      <div class="fw-semibold"><?php echo $day; ?></div>
-      <?php if($isOpen): ?>
-        <div class="small text-muted"><?php echo "$open – $close"; ?></div>
-        <?php if($break): ?><div class="small text-muted"><?php echo $break; ?></div><?php endif; ?>
+      <div class="fw-semibold"><?php echo $dayLabel; ?></div>
+      <?php if ($isOpen): ?>
+        <div class="small text-muted"><?php echo sprintf($lang['open_from_to'], $open, $close); ?></div>
+        <?php if ($break): ?><div class="small text-muted"><?php echo $break; ?></div><?php endif; ?>
       <?php else: ?>
-        <div class="text-danger fw-bold">مغلق</div>
+        <div class="text-danger fw-bold"><?php echo $lang['closed']; ?></div>
       <?php endif; ?>
     </div>
     <?php endforeach; ?>
@@ -61,12 +59,14 @@ if ($hours):
     try {
         $stmt = $pdo->query("SELECT * FROM services ORDER BY id DESC LIMIT 6");
         $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $langKey = $_SESSION['lang'] ?? 'ar';
         if ($services) {
             foreach ($services as $srv) {
+                $srvName = $srv['name_' . $langKey] ?? $srv['name'];
                 echo '<div class="col-md-4 col-sm-6 mb-4">';
                 echo '<div class="card shadow-sm h-100">';
                 echo '<div class="card-body text-center">';
-                echo '<h5 class="card-title">' . clean($srv['name']) . '</h5>';
+                echo '<h5 class="card-title">' . clean($srvName) . '</h5>';
                 echo '<p class="card-text text-muted">' . clean($srv['duration']) . ' ' . $lang['service_duration'] . '</p>';
                 echo '<p class="fw-bold">' . clean($srv['price']) . '₪</p>';
                 echo '</div>';
@@ -83,7 +83,7 @@ if ($hours):
     ?>
   </div>
   <div class="text-center">
-    <a href="services.php" class="btn btn-outline-secondary"><?php echo $lang['services']; ?></a>
+    <a href="services.php" class="btn btn-outline-secondary"><?php echo $lang['view_more_services']; ?></a>
   </div>
 </section>
 
@@ -104,7 +104,7 @@ if ($hours):
     }
     ?>
   </div>
-  <a href="gallery.php" class="btn btn-outline-secondary mt-3"><?php echo $lang['gallery']; ?></a>
+  <a href="gallery.php" class="btn btn-outline-secondary mt-3"><?php echo $lang['view_more_gallery']; ?></a>
 </section>
 
 <?php include_once __DIR__ . '/includes/footer.php'; ?>

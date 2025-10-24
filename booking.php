@@ -1,13 +1,16 @@
 <?php
 // ==========================
-// /booking.php — updated with work_hours integration
+// /booking.php — localized version (Arabic/English)
 // ==========================
 require_once __DIR__ . '/config.php';
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
 include_once __DIR__ . '/includes/header.php';
 
+$langKey = $_SESSION['lang'] ?? 'ar';
+
 try {
-    $services = $pdo->query("SELECT * FROM services ORDER BY name ASC")->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->query("SELECT * FROM services ORDER BY id ASC");
+    $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
     $services = [];
     log_debug("Error loading services for booking: " . $e->getMessage());
@@ -35,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $exists = $stmt->fetchColumn();
 
             if ($exists) {
-                echo '<div class="alert alert-danger text-center">الوقت المحدد غير متاح حالياً، يرجى اختيار موعد آخر.</div>';
+                echo '<div class="alert alert-danger text-center">' . $lang['booking_unavailable'] . '</div>';
             } else {
                 $stmt = $pdo->prepare("INSERT INTO bookings (client_id, name, phone, email, service_id, date, time, notify_method, status, created_at)
                                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
@@ -43,58 +46,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $bookId = $pdo->lastInsertId();
                 log_debug("New booking created: ID=$bookId for $name");
 
-                $msg = "تم استلام طلب الموعد الخاص بك وهو الآن قيد المراجعة.\nالخدمة رقم: $service\nالتاريخ: $date $time";
+                $msg = "Your appointment request has been received and is now under review.\nService ID: $service\nDate: $date $time";
+
                 if ($notify === 'whatsapp') {
                     $wa = send_whatsapp_message($phone, $msg);
-                    echo '<div class="alert alert-success text-center">تم إرسال طلب الموعد بنجاح!<br><a href="'.$wa.'" target="_blank">فتح واتساب</a></div>';
+                    echo '<div class="alert alert-success text-center">' . $lang['booking_success_whatsapp'] . '<br><a href="'.$wa.'" target="_blank">WhatsApp</a></div>';
                 } else {
-                    send_email($email, "تأكيد الموعد - ".SITE_NAME, nl2br($msg));
-                    echo '<div class="alert alert-success text-center">تم إرسال طلب الموعد بنجاح!<br>سيتم التواصل معك قريباً لتأكيد الموعد.</div>';
+                    send_email($email, "Appointment Confirmation - ".SITE_NAME, nl2br($msg));
+                    echo '<div class="alert alert-success text-center">' . $lang['booking_success_sent'] . '</div>';
                 }
             }
         } catch (Exception $e) {
             log_debug("Booking insert failed: ".$e->getMessage());
-            echo '<div class="alert alert-danger text-center">حدث خطأ أثناء إنشاء الموعد، يرجى المحاولة لاحقاً.</div>';
+            echo '<div class="alert alert-danger text-center">' . $lang['booking_error'] . '</div>';
         }
     } else {
-        echo '<div class="alert alert-warning text-center">يرجى تعبئة جميع الحقول المطلوبة لإتمام الموعد.</div>';
+        echo '<div class="alert alert-warning text-center">' . $lang['booking_required_fields'] . '</div>';
     }
 }
 ?>
 
-<h2 class="text-center mb-4">لحجز موعد الآن</h2>
+<h2 class="text-center mb-4"><?php echo $lang['booking_page_title']; ?></h2>
 
-<form method="POST" class="col-md-8 mx-auto card p-4 shadow-sm text-end" dir="rtl">
+<form method="POST" class="col-md-8 mx-auto card p-4 shadow-sm <?php echo ($langKey == 'ar') ? 'text-end' : 'text-start'; ?>" dir="<?php echo ($langKey == 'ar') ? 'rtl' : 'ltr'; ?>">
   <?php if (!empty($cid)): ?>
     <input type="hidden" name="name"  value="<?php echo clean($cname); ?>">
     <input type="hidden" name="phone" value="<?php echo clean($cphone); ?>">
     <input type="hidden" name="email" value="<?php echo clean($cemail); ?>">
     <p class="text-center mb-3">
-      يتم الموعد باسم <strong><?php echo clean($cname); ?></strong>
+      <?php echo ($langKey == 'ar') ? "يتم الموعد باسم" : "Appointment will be under the name of"; ?>
+      <strong><?php echo clean($cname); ?></strong>
       <?php if ($cemail): ?>(<?php echo clean($cemail); ?>)<?php endif; ?>
     </p>
   <?php else: ?>
     <div class="mb-3">
-      <label class="form-label">الاسم الكامل</label>
-      <input type="text" name="name" class="form-control text-end" required>
+      <label class="form-label"><?php echo $lang['booking_full_name']; ?></label>
+      <input type="text" name="name" class="form-control <?php echo ($langKey == 'ar') ? 'text-end' : ''; ?>" required>
     </div>
     <div class="mb-3">
-      <label class="form-label">رقم الهاتف</label>
-      <input type="text" name="phone" class="form-control text-end" required>
+      <label class="form-label"><?php echo $lang['booking_phone']; ?></label>
+      <input type="text" name="phone" class="form-control <?php echo ($langKey == 'ar') ? 'text-end' : ''; ?>" required>
     </div>
     <div class="mb-3">
-      <label class="form-label">البريد الإلكتروني (اختياري)</label>
-      <input type="email" name="email" class="form-control text-end">
+      <label class="form-label"><?php echo $lang['booking_email_optional']; ?></label>
+      <input type="email" name="email" class="form-control <?php echo ($langKey == 'ar') ? 'text-end' : ''; ?>">
     </div>
   <?php endif; ?>
 
   <div class="mb-3">
-    <label class="form-label">اختاري الخدمة</label>
-    <select name="service" class="form-select text-end" required>
-      <option value="" selected disabled hidden>-- اختاري --</option>
-      <?php foreach ($services as $srv): ?>
+    <label class="form-label"><?php echo $lang['booking_select_service']; ?></label>
+    <select name="service" class="form-select <?php echo ($langKey == 'ar') ? 'text-end' : ''; ?>" required>
+      <option value="" selected disabled hidden>-- <?php echo $lang['choose_service']; ?> --</option>
+      <?php foreach ($services as $srv): 
+        $srvName = $srv['name_' . $langKey] ?? $srv['name'];
+      ?>
         <option value="<?php echo $srv['id']; ?>">
-          <?php echo clean($srv['name']); ?> (<?php echo $srv['price']; ?>₪)
+          <?php echo clean($srvName); ?> (<?php echo $srv['price']; ?>₪)
         </option>
       <?php endforeach; ?>
     </select>
@@ -102,27 +109,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <div class="row mb-3">
     <div class="col-md-6">
-      <label class="form-label">التاريخ</label>
-      <input type="date" id="datePicker" name="date" class="form-control text-end" required min="<?php echo date('Y-m-d'); ?>">
+      <label class="form-label"><?php echo $lang['booking_select_date']; ?></label>
+      <input type="date" id="datePicker" name="date" class="form-control <?php echo ($langKey == 'ar') ? 'text-end' : ''; ?>" required min="<?php echo date('Y-m-d'); ?>">
     </div>
     <div class="col-md-6">
-      <label class="form-label">الوقت</label>
-      <select name="time" id="timeSelect" class="form-select text-end" required disabled>
-        <option value="">يرجى اختيار التاريخ أولاً</option>
+      <label class="form-label"><?php echo $lang['booking_select_time']; ?></label>
+      <select name="time" id="timeSelect" class="form-select <?php echo ($langKey == 'ar') ? 'text-end' : ''; ?>" required disabled>
+        <option value=""><?php echo $lang['booking_select_time_hint']; ?></option>
       </select>
     </div>
   </div>
 
   <div class="mb-3">
-    <label class="form-label">طريقة الإشعار</label>
-    <select name="notify" class="form-select text-end">
-      <option value="email">بريد إلكتروني</option>
-      <option value="whatsapp">واتساب</option>
+    <label class="form-label"><?php echo $lang['booking_notify_method']; ?></label>
+    <select name="notify" class="form-select <?php echo ($langKey == 'ar') ? 'text-end' : ''; ?>">
+      <option value="email"><?php echo $lang['booking_notify_email']; ?></option>
+      <option value="whatsapp"><?php echo $lang['booking_notify_whatsapp']; ?></option>
     </select>
   </div>
 
-  <button type="submit" class="btn btn-primary w-100">تأكيد الموعد</button>
+  <button type="submit" class="btn btn-primary w-100"><?php echo $lang['booking_button_confirm']; ?></button>
 </form>
-
 
 <?php include_once __DIR__ . '/includes/footer.php'; ?>

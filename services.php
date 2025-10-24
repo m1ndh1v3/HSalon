@@ -1,9 +1,11 @@
 <?php
 // ==========================
-// /services.php
+// /services.php — localized version (Arabic/English)
 // ==========================
 require_once __DIR__ . '/config.php';
 include_once __DIR__ . '/includes/header.php';
+
+$langKey = $_SESSION['lang'] ?? 'ar';
 ?>
 
 <h2 class="text-center mb-4"><?php echo $lang['services']; ?></h2>
@@ -16,10 +18,11 @@ try {
 
     if ($services) {
         foreach ($services as $srv) {
+            $srvName = $srv['name_' . $langKey] ?? $srv['name'];
             echo '<div class="col-md-4 col-sm-6 mb-4">';
             echo '<div class="card shadow-sm h-100">';
             echo '<div class="card-body text-center">';
-            echo '<h5 class="card-title fw-bold">' . clean($srv['name']) . '</h5>';
+            echo '<h5 class="card-title fw-bold">' . clean($srvName) . '</h5>';
             echo '<p class="card-text text-muted">' . clean($srv['duration']) . ' ' . $lang['service_duration'] . '</p>';
             echo '<p class="fw-bold mb-3">' . clean($srv['price']) . '₪</p>';
             echo '<a href="booking.php?service=' . $srv['id'] . '" class="btn btn-primary">';
