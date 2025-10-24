@@ -42,47 +42,6 @@ body.dark {
 }
 
 /* ==========================
-   Navbar
-   ========================== */
-.navbar {
-  background: var(--nav-bg) !important;
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  transition: background 0.3s ease;
-}
-.navbar-brand {
-  font-weight: 700;
-  color: var(--rose) !important;
-  font-size: 1.5rem;
-  letter-spacing: 0.5px;
-}
-.navbar .btn {
-  border-radius: 50%;
-  background: transparent;
-  border: none;
-  color: var(--text);
-  transition: color 0.3s;
-}
-.navbar .btn:hover {
-  color: var(--rose);
-}
-
-/* “Book Now” nav button — no oval, subtle highlight */
-.navbar .btn-primary {
-  border-radius: 0.5rem;
-  background: var(--rose);
-  border: none;
-  box-shadow: 0 2px 6px rgba(183,110,121,0.4);
-  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-}
-.navbar .btn-primary:hover {
-  background: var(--rose-dark);
-  box-shadow: 0 0 10px rgba(183,110,121,0.7);
-  transform: translateY(-2px);
-}
-
-/* ==========================
    Cards & Panels
    ========================== */
 .card {
@@ -261,17 +220,6 @@ body.dark input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(1) brightness(1.5);
 }
 
-/* Navbar & dropdowns */
-body.dark .navbar,
-body.dark .dropdown-menu {
-  background: #1e1e1e !important;
-  color: #fff;
-}
-body.dark .navbar .nav-link,
-body.dark .navbar .btn,
-body.dark .navbar .dropdown-toggle {
-  color: #fff !important;
-}
 
 body.dark .dropdown-menu {
   border-color: rgba(255,255,255,0.1);
@@ -304,87 +252,6 @@ body.dark .nav-link .bi-moon,
 body.light .nav-link .bi-sun { display: none; }
 body.dark .nav-link .bi-sun,
 body.light .nav-link .bi-moon { display: inline-block; }
-
-
-/* ==========================
-   UNIFIED ICON BUTTONS + FINAL PERFECT ALIGNMENT
-   ========================== */
-
-/* base size + visual alignment */
-.navbar .nav-item .nav-link.icon-only,
-.navbar .nav-item .dropdown-toggle.icon-only,
-.navbar .btn.btn-outline-light {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  padding: 0 !important;
-  border: none;
-  background: transparent;
-  border-radius: 0.5rem;
-  color: var(--text);
-  position: relative;
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-
-/* icons inside */
-.navbar .nav-item .nav-link.icon-only i,
-.navbar .nav-item .dropdown-toggle.icon-only i,
-.navbar .btn.btn-outline-light i {
-  font-size: 1.25rem;
-  line-height: 1;
-  vertical-align: middle;
-  display: inline-block;
-  position: relative;
-}
-
-/* remove inner underline from <i> */
-.navbar .nav-item .nav-link.icon-only i::after,
-.navbar .nav-item .dropdown-toggle.icon-only i::after,
-.navbar .btn.btn-outline-light i::after {
-  display: none !important;
-}
-
-/* single, clean underline for all */
-.navbar .nav-item .nav-link.icon-only::after,
-.navbar .nav-item .dropdown-toggle.icon-only::after,
-.navbar .btn.btn-outline-light::after {
-  content: "";
-  position: absolute;
-  bottom: -4px; /* visually matches main nav links */
-  left: 8px;
-  right: 8px;
-  height: 2px;
-  background: var(--rose);
-  border-radius: 1px;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.25s ease;
-}
-
-/* hover reveal */
-.navbar .nav-item .nav-link.icon-only:hover::after,
-.navbar .nav-item .dropdown-toggle.icon-only:hover::after,
-.navbar .btn.btn-outline-light:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-/* hover color + lift */
-.navbar .nav-item .nav-link.icon-only:hover,
-.navbar .nav-item .dropdown-toggle.icon-only:hover,
-.navbar .btn.btn-outline-light:hover {
-  color: var(--rose) !important;
-  transform: translateY(-1px);
-}
-
-/* === dropdown positioning + clipping fix === */
-.navbar,
-.navbar .collapse {
-  overflow: visible !important;
-  z-index: 1040;
-}
 
 /* align right for RTL, left for LTR automatically */
 .dropdown-menu {
@@ -456,26 +323,6 @@ body.dark .btn-secondary:hover {
 .navbar .btn-primary:hover,
 .navbar .btn-primary:focus {
   color: #fff !important;
-}
-
-/* Profile toggle (person icon) — same rose button style */
-.navbar .nav-item.dropdown.profile-toggle > .nav-link.icon-only {
-  background: var(--rose);
-  color: #fff !important;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 6px rgba(183,110,121,0.4);
-  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-}
-.navbar .nav-item.dropdown.profile-toggle > .nav-link.icon-only:hover {
-  background: var(--rose-dark);
-  box-shadow: 0 0 10px rgba(183,110,121,0.7);
-  transform: translateY(-2px);
-  color: #fff !important;
-}
-
-/* Remove hover underline on profile toggle */
-.navbar .nav-item.dropdown.profile-toggle > .nav-link.icon-only::after {
-  display: none !important;
 }
 
 section .card * {
@@ -863,4 +710,295 @@ body.dark .calendar-day .card .text-muted {
 }
 body.dark .calendar-day .card .fw-semibold {
   color: #fff !important;
+}
+
+/* ==========================
+   Notifications Modal Styling — Light / Dark
+   ========================== */
+.notif-modal {
+  background: var(--card-bg);
+  color: var(--text);
+  border: none;
+  box-shadow: var(--shadow);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.notif-modal-header {
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+}
+
+.ltr-header {
+  flex-direction: row-reverse;
+}
+.rtl-header {
+  flex-direction: row;
+}
+
+.notif-modal-footer {
+  background: var(--nav-bg);
+  border-top: 1px solid var(--border);
+}
+
+body.dark .notif-modal .btn-close {
+  filter: invert(1) brightness(2);
+  opacity: 0.9;
+}
+body.dark .notif-modal .btn-close:hover {
+  opacity: 1;
+}
+
+/* ==========================
+   Notifications Modal Centering Fix — Stable
+   ========================== */
+#notifModal.show {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#notifModal .modal-dialog.notif-dialog {
+  margin: 0 auto !important;
+  width: 100%;
+  max-width: 720px;
+  transform: none !important;
+}
+
+#notifModal .modal-content {
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+/* ==========================
+   Animated Hamburger & Active Link Highlight
+   ========================== */
+
+/* hamburger animation */
+.navbar-toggler {
+  border: none;
+  outline: none !important;
+  box-shadow: none !important;
+  position: relative;
+  width: 32px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+.navbar-toggler-icon {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background: var(--text);
+  display: block;
+  transition: background 0.3s ease;
+}
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: var(--text);
+  left: 0;
+  transition: transform 0.3s ease, top 0.3s ease;
+}
+.navbar-toggler-icon::before { top: -8px; }
+.navbar-toggler-icon::after { top: 8px; }
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+  background: transparent;
+}
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+  transform: rotate(-45deg);
+  top: 0;
+}
+
+/* active link glow/underline */
+.navbar .nav-link.active {
+  position: relative;
+  color: var(--rose) !important;
+  font-weight: 700;
+}
+.navbar .nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: var(--rose);
+  border-radius: 1px;
+  opacity: 0.9;
+}
+
+/* ==========================
+   Navbar Icon & Toggler Width Fix — Prevent Shrink
+   ========================== */
+
+/* hamburger keeps proper width */
+.navbar-toggler {
+  width: 48px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* restore icon visibility inside */
+.navbar-toggler-icon,
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+  background: var(--text);
+  width: 22px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+/* ========== Simplified Navbar Styles ========== */
+
+#mainNavbar {
+  background: var(--nav-bg);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  z-index: 1040;
+}
+
+/* brand and links */
+#mainNavbar .navbar-brand {
+  font-weight: 700;
+  color: var(--rose);
+  font-size: 1.5rem;
+}
+#mainNavbar .nav-link {
+  color: var(--text);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+#mainNavbar .nav-link:hover { color: var(--rose); }
+#mainNavbar .nav-link.active { color: var(--rose); font-weight: 700; }
+
+/* buttons and icons */
+#mainNavbar .icon-only {
+  width: 42px;
+  height: 42px;
+  border-radius: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  background: transparent;
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+#mainNavbar .icon-only:hover {
+  color: var(--rose);
+  transform: translateY(-2px);
+}
+
+/* profile highlight */
+#mainNavbar .profile-toggle > .nav-link {
+  background: var(--rose);
+  color: #fff !important;
+  box-shadow: 0 2px 6px rgba(183,110,121,0.4);
+}
+#mainNavbar .profile-toggle > .nav-link:hover {
+  background: var(--rose-dark);
+  box-shadow: 0 0 10px rgba(183,110,121,0.7);
+}
+
+/* ========== Responsive Fix ========== */
+@media (max-width: 991.98px) {
+  #mainNavbar .navbar-collapse {
+    background: var(--nav-bg);
+    border-top: 1px solid var(--border);
+    border-radius: 0 0 1rem 1rem;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  #mainNavbar .navbar-nav.mx-auto {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  #mainNavbar .icon-row {
+    border-top: 1px solid var(--border);
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    justify-content: center !important;
+  }
+
+  .navbar-toggler {
+    border: none;
+    width: 40px;
+    height: 30px;
+    position: relative;
+  }
+  .navbar-toggler-icon,
+  .navbar-toggler-icon::before,
+  .navbar-toggler-icon::after {
+    content: "";
+    background: var(--text);
+    width: 22px;
+    height: 2px;
+    position: absolute;
+    left: 9px;
+    transition: all 0.3s;
+  }
+  .navbar-toggler-icon::before { top: -6px; }
+  .navbar-toggler-icon::after { top: 6px; }
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+    background: transparent;
+  }
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+    transform: rotate(45deg);
+    top: 0;
+  }
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+    transform: rotate(-45deg);
+    top: 0;
+  }
+}
+
+/* ========== RTL Alignment ========== */
+[dir="rtl"] #mainNavbar .icon-row {
+  flex-direction: row-reverse;
+}
+[dir="rtl"] #mainNavbar .navbar-brand img {
+  margin-right: 0;
+  margin-left: .5rem;
+}
+
+#langToggle {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: 42px;
+  height: 42px;
+  border-radius: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+#langToggle:hover {
+  color: var(--rose);
+  transform: translateY(-2px);
+}
+@media (min-width: 992px) {
+  .navbar-toggler { 
+    display: none !important;
+  }
 }

@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<h2 class="text-center mb-4">لموعد موعد الآن</h2>
+<h2 class="text-center mb-4">لحجز موعد الآن</h2>
 
 <form method="POST" class="col-md-8 mx-auto card p-4 shadow-sm text-end" dir="rtl">
   <?php if (!empty($cid)): ?>

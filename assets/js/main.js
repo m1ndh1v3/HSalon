@@ -124,3 +124,51 @@ document.querySelectorAll('.theme-toggle').forEach(btn=>{
     localStorage.setItem('theme', document.body.className);
   });
 });
+
+window.showThemedConfirm = (msg, onConfirm) => {
+  const modal = document.createElement("div");
+  modal.className = "modal fade";
+  modal.innerHTML = `
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center p-3">
+        <div class="modal-body"><p class="mb-3 fs-5">${msg}</p></div>
+        <div class="modal-footer border-0 justify-content-center gap-2">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+          <button class="btn btn-danger confirm-btn">تأكيد</button>
+        </div>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+  const bsModal = new bootstrap.Modal(modal);
+  modal.querySelector(".confirm-btn").addEventListener("click", () => {
+    bsModal.hide();
+    onConfirm?.();
+  });
+  modal.addEventListener("hidden.bs.modal", () => modal.remove());
+  bsModal.show();
+};
+
+window.notifAction = (action, id = null) => {
+  const url = `${SITE_URL}/admin/notifications_action.php?action=${action}${id ? `&id=${id}` : ""}`;
+  const run = () => {
+    fetch(url)
+      .then(() => {
+        if (typeof loadRecentNotifications === "function") loadRecentNotifications();
+      })
+      .catch(() => console.error("Failed to perform notification action:", action));
+  };
+
+  if (action === "delete" || action === "clear") {
+    showThemedConfirm("هل أنت متأكد من الحذف؟", run);
+  } else run();
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const langBtn = document.getElementById("langToggle");
+  if (!langBtn) return;
+  langBtn.addEventListener("click", () => {
+    fetch(`${SITE_URL}/includes/lang_switch_action.php`, { cache: "no-store" })
+      .then(() => window.location.reload(true))
+      .catch(() => console.error("Language switch failed"));
+  });
+});

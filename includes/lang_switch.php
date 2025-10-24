@@ -1,14 +1,5 @@
-<?php
-// ==========================
-// /includes/lang_switch.php
-// ==========================
-?>
-<li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle icon-only" href="#" role="button" data-bs-toggle="dropdown">
+<li class="nav-item">
+  <button id="langToggle" class="nav-link icon-only" title="Switch Language">
     <i class="bi bi-translate"></i>
-  </a>
-  <ul class="dropdown-menu dropdown-menu-end">
-    <li><a class="dropdown-item" href="?lang=ar">العربية</a></li>
-    <li><a class="dropdown-item" href="?lang=en">English</a></li>
-  </ul>
+  </button>
 </li>

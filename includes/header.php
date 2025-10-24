@@ -3,30 +3,20 @@
 // /includes/header.php — unified dynamic header (admin + member + guest)
 // ==========================
 
-// Start session safely only if not already active
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+if (session_status() === PHP_SESSION_NONE) session_start();
 
-// === Handle theme toggle ===
 if (isset($_GET['theme'])) {
     $theme = ($_GET['theme'] === 'dark') ? 'dark' : 'light';
     $_SESSION['theme'] = $theme;
-    setcookie('theme', $theme, time() + (86400 * 30), "/"); // store for 30 days
-    header("Location: " . strtok($_SERVER['REQUEST_URI'], '?')); // reload without query
+    setcookie('theme', $theme, time() + (86400 * 30), "/");
+    header("Location: " . strtok($_SERVER['REQUEST_URI'], '?'));
     exit;
 }
 
-// === Default theme ===
 if (!isset($_SESSION['theme'])) {
-    if (isset($_COOKIE['theme'])) {
-        $_SESSION['theme'] = $_COOKIE['theme'];
-    } else {
-        $_SESSION['theme'] = 'light';
-    }
+    $_SESSION['theme'] = $_COOKIE['theme'] ?? 'light';
 }
 $theme = $_SESSION['theme'];
-
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $lang_code; ?>" dir="<?php echo ($lang_code == 'ar' ? 'rtl' : 'ltr'); ?>">
@@ -39,12 +29,9 @@ $theme = $_SESSION['theme'];
   <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/style.css?v=<?php echo time(); ?>">
   <link rel="icon" href="<?php echo SITE_URL; ?>/assets/img/hsalon_logo.png">
 </head>
-<body class="<?php echo ($_SESSION['theme'] ?? 'light'); ?> theme-body">
+<body class="<?php echo $theme; ?> theme-body">
 
 <?php
-// ==========================
-// Notifications (admin only)
-// ==========================
 $unread_count = 0;
 if (isset($_SESSION['admin_id'])) {
   try {
@@ -55,53 +42,28 @@ if (isset($_SESSION['admin_id'])) {
 }
 ?>
 
-<!-- ==========================
-     Main Navbar
-========================== -->
-<nav class="navbar navbar-expand-lg border-bottom shadow-sm py-2 sticky-top" id="mainNavbar">
+<nav id="mainNavbar" class="navbar navbar-expand-lg sticky-top border-bottom shadow-sm">
   <div class="container-fluid px-3">
     <a class="navbar-brand d-flex align-items-center fw-bold" href="<?php echo SITE_URL; ?>/index.php">
-      <img src="<?php echo SITE_URL; ?>/assets/img/hsalon_logo.png" alt="logo" height="45" class="me-2">
+      <img src="<?php echo SITE_URL; ?>/assets/img/hsalon_logo.png" alt="Logo" height="45" class="me-2">
       <span><?php echo SITE_NAME; ?></span>
     </a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
+      aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse justify-content-between" id="mainNav">
-      <ul class="navbar-nav mx-auto">
+    <div class="collapse navbar-collapse" id="navbarMenu">
+      <ul class="navbar-nav mx-auto text-center gap-2">
         <li class="nav-item"><a class="nav-link" href="<?php echo SITE_URL; ?>/index.php"><?php echo $lang['home']; ?></a></li>
         <li class="nav-item"><a class="nav-link" href="<?php echo SITE_URL; ?>/services.php"><?php echo $lang['services']; ?></a></li>
         <li class="nav-item"><a class="nav-link" href="<?php echo SITE_URL; ?>/gallery.php"><?php echo $lang['gallery']; ?></a></li>
-        <li class="nav-item"><a class="btn btn-primary text-white px-3 ms-2" href="<?php echo SITE_URL; ?>/booking.php"><?php echo $lang['book_now']; ?></a></li>
-      </ul>
-
-      <ul class="navbar-nav align-items-center gap-2">
-        <?php include __DIR__ . '/lang_switch.php'; ?>
-
-        <?php if (isset($_SESSION['admin_id'])): ?>
-          <!-- Admin icons -->
-          <li class="nav-item">
-            <button type="button" class="btn btn-outline-light position-relative" id="notifBtn" data-bs-toggle="modal" data-bs-target="#notifModal">
-              <i class="bi bi-bell"></i>
-              <?php if ($unread_count > 0): ?>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  <?php echo $unread_count; ?>
-                </span>
-              <?php endif; ?>
-            </button>
-          </li>
-          <li class="nav-item">
-            <a href="<?php echo SITE_URL; ?>/admin/settings.php" class="btn btn-outline-light">
-              <i class="bi bi-gear"></i>
-            </a>
-          </li>
-        <?php endif; ?>
-
-        <!-- Account dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown profile-toggle" href="#" role="button" data-bs-toggle="dropdown">
+        <li class="nav-item">
+          <a href="<?php echo SITE_URL; ?>/booking.php" class="btn btn-primary px-3"><?php echo $lang['book_now']; ?></a>
+        </li>
+        <li class="nav-item dropdown profile-toggle">
+          <a class="nav-link icon-only" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-person-circle fs-5"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
@@ -117,53 +79,83 @@ if (isset($_SESSION['admin_id'])) {
             <?php endif; ?>
           </ul>
         </li>
+      </ul>
 
-        <!-- Theme toggle -->
+      <ul class="navbar-nav icon-row flex-row justify-content-center gap-3 mt-3 mt-lg-0 <?php echo ($lang_code === 'ar') ? 'flex-row-reverse' : ''; ?>">
         <li class="nav-item">
-          <button id="themeToggle" class="nav-link text-reset icon-only" title="Toggle theme" type="button">
+          <button id="themeToggle" class="nav-link icon-only" type="button" title="Toggle Theme">
             <i class="bi bi-<?php echo ($theme == 'light') ? 'moon' : 'sun'; ?>"></i>
           </button>
         </li>
+        <?php include __DIR__ . '/lang_switch.php'; ?>
+        <?php if (isset($_SESSION['admin_id'])): ?>
+          <li class="nav-item">
+            <a href="<?php echo SITE_URL; ?>/admin/settings.php" class="nav-link icon-only"><i class="bi bi-gear"></i></a>
+          </li>
+          <li class="nav-item">
+            <button id="notifBtn" class="nav-link icon-only position-relative" data-bs-toggle="modal" data-bs-target="#notifModal">
+              <i class="bi bi-bell"></i>
+              <?php if ($unread_count > 0): ?>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo $unread_count; ?></span>
+              <?php endif; ?>
+            </button>
+          </li>
+        <?php endif; ?>
       </ul>
     </div>
   </div>
 </nav>
 
+
 <main class="container mt-4">
 
+
 <?php if (isset($_SESSION['admin_id'])): ?>
+
 <!-- ==========================
-     Notifications Modal (Admin only)
+     Notifications Modal (Admin only) — Final Polished (LTR/RTL + Dark/Light)
 ========================== -->
 <div class="modal fade" id="notifModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-light">
-        <h5 class="modal-title"><i class="bi bi-bell"></i> آخر الإشعارات</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+  <div class="modal-dialog modal-lg modal-dialog-centered notif-dialog">
+    <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden notif-modal">
+
+      <div class="modal-header notif-modal-header px-4 py-3 
+           <?php echo ($lang_code == 'ar') ? 'rtl-header' : 'ltr-header'; ?>">
+        <h5 class="modal-title fw-semibold d-flex align-items-center gap-2 m-0">
+          <i class="bi bi-bell-fill text-danger fs-5"></i>
+          <span>آخر الإشعارات</span>
+        </h5>
+        <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+
       <div class="modal-body p-0" id="notifList">
-        <div class="text-center py-4 text-muted">جارِ تحميل الإشعارات...</div>
+        <div class="text-center py-5 text-muted">جارِ تحميل الإشعارات...</div>
       </div>
-      <div class="modal-footer flex-wrap justify-content-between gap-2">
+
+      <div class="modal-footer notif-modal-footer d-flex flex-wrap justify-content-between gap-2 px-4 py-3">
         <div class="d-flex gap-2">
-          <button id="markAllBtn" class="btn btn-success btn-sm">
+          <button id="markAllBtn" class="btn btn-success btn-sm px-3">
             <i class="bi bi-check2-all"></i> تحديد الكل كمقروء
           </button>
-          <button id="clearAllBtn" class="btn btn-danger btn-sm">
+          <button id="clearAllBtn" class="btn btn-danger btn-sm px-3">
             <i class="bi bi-x-circle"></i> مسح الكل
           </button>
         </div>
-        <a href="<?php echo SITE_URL; ?>/admin/notifications.php" class="btn btn-outline-primary btn-sm">
+        <a href="<?php echo SITE_URL; ?>/admin/notifications.php" class="btn btn-outline-primary btn-sm px-3">
           عرض جميع الإشعارات
         </a>
       </div>
+
     </div>
   </div>
 </div>
+  
 
 <audio id="notifPing" src="<?php echo SITE_URL; ?>/assets/sound/ping-82822.mp3" preload="auto"></audio>
 <script>
+
+const SITE_URL = "<?php echo SITE_URL; ?>";
+
 document.addEventListener("DOMContentLoaded", () => {
   const notifBtn = document.getElementById('notifBtn');
   const bellIcon = notifBtn.querySelector('.bi-bell');
@@ -222,20 +214,26 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   markAllBtn.addEventListener('click', () => {
-    if (!confirm('هل تريد تحديد جميع الإشعارات كمقروءة؟')) return;
-    fetch("<?php echo SITE_URL; ?>/admin/notifications_action.php?action=mark_all")
-      .then(() => loadRecentNotifications())
-      .then(() => updateBadge());
+    showThemedConfirm('هل تريد تحديد جميع الإشعارات كمقروءة؟', () => {
+      fetch("<?php echo SITE_URL; ?>/admin/notifications_action.php?action=mark_all")
+        .then(() => loadRecentNotifications())
+        .then(() => updateBadge());
+    });
   });
+
   clearAllBtn.addEventListener('click', () => {
-    if (!confirm('هل أنت متأكد أنك تريد مسح جميع الإشعارات؟')) return;
-    fetch("<?php echo SITE_URL; ?>/admin/notifications_action.php?action=clear")
-      .then(() => loadRecentNotifications())
-      .then(() => updateBadge());
+    showThemedConfirm('هل أنت متأكد أنك تريد مسح جميع الإشعارات؟', () => {
+      fetch("<?php echo SITE_URL; ?>/admin/notifications_action.php?action=clear")
+        .then(() => loadRecentNotifications())
+        .then(() => updateBadge());
+    });
   });
+
   updateBadge();
   setInterval(updateBadge, 20000);
 });
+
+
 const style = document.createElement('style');
 style.textContent = `@keyframes shakeAnim{0%,100%{transform:rotate(0);}20%{transform:rotate(-15deg);}40%{transform:rotate(10deg);}60%{transform:rotate(-10deg);}80%{transform:rotate(5deg);}}.shake{animation:shakeAnim .6s ease;}`;
 document.head.appendChild(style);
