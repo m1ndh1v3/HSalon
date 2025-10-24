@@ -24,10 +24,15 @@ $theme = $_SESSION['theme'];
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo SITE_NAME; ?></title>
+  <script>
+    const SITE_URL = "<?php echo SITE_URL; ?>";
+  </script>  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
   <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/style.css?v=<?php echo time(); ?>">
   <link rel="icon" href="<?php echo SITE_URL; ?>/assets/img/hsalon_logo.png">
+  <script src="<?php echo SITE_URL; ?>/assets/js/main.js?v=<?php echo time(); ?>"></script>
+
 </head>
 <body class="<?php echo $theme; ?> theme-body">
 
@@ -152,118 +157,5 @@ if (isset($_SESSION['admin_id'])) {
   
 
 <audio id="notifPing" src="<?php echo SITE_URL; ?>/assets/sound/ping-82822.mp3" preload="auto"></audio>
-<script>
-
-const SITE_URL = "<?php echo SITE_URL; ?>";
-
-document.addEventListener("DOMContentLoaded", () => {
-  const notifBtn = document.getElementById('notifBtn');
-  const bellIcon = notifBtn.querySelector('.bi-bell');
-  const pingSound = document.getElementById('notifPing');
-  const notifList = document.getElementById('notifList');
-  const markAllBtn = document.getElementById('markAllBtn');
-  const clearAllBtn = document.getElementById('clearAllBtn');
-  let lastCount = <?php echo (int)$unread_count; ?>;
-  const KEY = 'notif_last_seen';
-
-  if (localStorage.getItem(KEY) === null) localStorage.setItem(KEY, String(lastCount));
-  const lastSeen = parseInt(localStorage.getItem(KEY) || '0', 10);
-  if (lastCount > lastSeen) bellIcon.classList.add('text-warning');
-
-  notifBtn.addEventListener('click', () => {
-    const badgeNow = parseInt((notifBtn.querySelector('.badge')?.textContent || '0'), 10);
-    localStorage.setItem(KEY, String(badgeNow));
-    bellIcon.classList.remove('text-warning');
-    loadRecentNotifications();
-  });
-
-  const updateBadge = () => {
-    fetch("<?php echo SITE_URL; ?>/admin/notifications_count.php")
-      .then(res => res.json())
-      .then(data => {
-        let badge = notifBtn.querySelector('.badge');
-        if (!badge && data.count > 0) {
-          badge = document.createElement('span');
-          badge.className = 'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger';
-          badge.textContent = data.count;
-          notifBtn.appendChild(badge);
-        } else if (badge) {
-          badge.textContent = data.count > 0 ? data.count : '';
-          badge.style.display = data.count > 0 ? 'inline' : 'none';
-        }
-        if (data.count > lastCount) {
-          pingSound.currentTime = 0;
-          pingSound.play().catch(()=>{});
-          bellIcon.classList.add('shake');
-          setTimeout(() => bellIcon.classList.remove('shake'), 1200);
-        }
-        const currentLastSeen = parseInt(localStorage.getItem(KEY) || '0', 10);
-        if (data.count > currentLastSeen) bellIcon.classList.add('text-warning');
-        else bellIcon.classList.remove('text-warning');
-        lastCount = data.count;
-      })
-      .catch(()=>{});
-  };
-
-  const loadRecentNotifications = () => {
-    notifList.innerHTML = '<div class="text-center py-4 text-muted">جارِ التحميل...</div>';
-    fetch("<?php echo SITE_URL; ?>/admin/notifications_recent.php")
-      .then(res => res.text())
-      .then(html => notifList.innerHTML = html)
-      .catch(() => notifList.innerHTML = '<div class="text-center py-4 text-danger">حدث خطأ أثناء تحميل الإشعارات.</div>');
-  };
-
-  markAllBtn.addEventListener('click', () => {
-    showThemedConfirm('هل تريد تحديد جميع الإشعارات كمقروءة؟', () => {
-      fetch("<?php echo SITE_URL; ?>/admin/notifications_action.php?action=mark_all")
-        .then(() => loadRecentNotifications())
-        .then(() => updateBadge());
-    });
-  });
-
-  clearAllBtn.addEventListener('click', () => {
-    showThemedConfirm('هل أنت متأكد أنك تريد مسح جميع الإشعارات؟', () => {
-      fetch("<?php echo SITE_URL; ?>/admin/notifications_action.php?action=clear")
-        .then(() => loadRecentNotifications())
-        .then(() => updateBadge());
-    });
-  });
-
-  updateBadge();
-  setInterval(updateBadge, 20000);
-});
-
-
-const style = document.createElement('style');
-style.textContent = `@keyframes shakeAnim{0%,100%{transform:rotate(0);}20%{transform:rotate(-15deg);}40%{transform:rotate(10deg);}60%{transform:rotate(-10deg);}80%{transform:rotate(5deg);}}.shake{animation:shakeAnim .6s ease;}`;
-document.head.appendChild(style);
-</script>
 
 <?php endif; ?>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const toggleBtn = document.getElementById("themeToggle");
-  const body = document.body;
-  const icon = toggleBtn.querySelector("i");
-
-  // Load from localStorage if available
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme && savedTheme !== body.className) {
-    body.className = savedTheme;
-    icon.className = `bi bi-${savedTheme === "light" ? "moon" : "sun"}`;
-  }
-
-  toggleBtn.addEventListener("click", () => {
-    const current = body.classList.contains("dark") ? "dark" : "light";
-    const next = current === "light" ? "dark" : "light";
-    body.classList.remove(current);
-    body.classList.add(next);
-    icon.className = `bi bi-${next === "light" ? "moon" : "sun"}`;
-    localStorage.setItem("theme", next);
-
-    // Sync with PHP session & cookie silently
-    fetch(`?theme=${next}`).catch(()=>{});
-  });
-});
-</script>

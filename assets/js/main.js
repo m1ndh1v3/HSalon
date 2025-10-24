@@ -172,3 +172,126 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch(() => console.error("Language switch failed"));
   });
 });
+
+// ==========================
+// Admin Notifications + Theme Toggle moved from header
+// ==========================
+
+document.addEventListener("DOMContentLoaded", () => {
+  // --- theme toggle ---
+  const toggleBtn = document.getElementById("themeToggle");
+  if (toggleBtn) {
+    const body = document.body;
+    const icon = toggleBtn.querySelector("i");
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme && savedTheme !== body.className) {
+      body.className = savedTheme;
+      icon.className = `bi bi-${savedTheme === "light" ? "moon" : "sun"}`;
+    }
+    toggleBtn.addEventListener("click", () => {
+      const current = body.classList.contains("dark") ? "dark" : "light";
+      const next = current === "light" ? "dark" : "light";
+      body.classList.remove(current);
+      body.classList.add(next);
+      icon.className = `bi bi-${next === "light" ? "moon" : "sun"}`;
+      localStorage.setItem("theme", next);
+      fetch(`?theme=${next}`).catch(() => {});
+    });
+  }
+
+  // --- admin notifications (if admin) ---
+  const notifBtn = document.getElementById("notifBtn");
+  if (notifBtn) {
+    const bellIcon = notifBtn.querySelector(".bi-bell");
+    const pingSound = document.getElementById("notifPing");
+    const notifList = document.getElementById("notifList");
+    const markAllBtn = document.getElementById("markAllBtn");
+    const clearAllBtn = document.getElementById("clearAllBtn");
+    const KEY = "notif_last_seen";
+    let lastCount = parseInt(notifBtn.dataset.unread || "0", 10);
+    if (localStorage.getItem(KEY) === null)
+      localStorage.setItem(KEY, String(lastCount));
+    const lastSeen = parseInt(localStorage.getItem(KEY) || "0", 10);
+    if (lastCount > lastSeen) bellIcon.classList.add("text-warning");
+
+    const loadRecentNotifications = () => {
+      if (!notifList) return;
+      notifList.innerHTML = '<div class="text-center py-4 text-muted">جارِ التحميل...</div>';
+      fetch(`${SITE_URL}/admin/notifications_recent.php`)
+        .then(r => r.text())
+        .then(html => (notifList.innerHTML = html))
+        .catch(
+          () =>
+            (notifList.innerHTML =
+              '<div class="text-center py-4 text-danger">حدث خطأ أثناء تحميل الإشعارات.</div>')
+        );
+    };
+
+    const updateBadge = () => {
+      fetch(`${SITE_URL}/admin/notifications_count.php`)
+        .then(r => r.json())
+        .then(data => {
+          let badge = notifBtn.querySelector(".badge");
+          if (!badge && data.count > 0) {
+            badge = document.createElement("span");
+            badge.className =
+              "position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger";
+            notifBtn.appendChild(badge);
+          }
+          if (badge) {
+            badge.textContent = data.count > 0 ? data.count : "";
+            badge.style.display = data.count > 0 ? "inline" : "none";
+          }
+          if (data.count > lastCount && pingSound) {
+            pingSound.currentTime = 0;
+            pingSound.play().catch(() => {});
+            bellIcon.classList.add("shake");
+            setTimeout(() => bellIcon.classList.remove("shake"), 1200);
+          }
+          const currentSeen = parseInt(localStorage.getItem(KEY) || "0", 10);
+          if (data.count > currentSeen)
+            bellIcon.classList.add("text-warning");
+          else bellIcon.classList.remove("text-warning");
+          lastCount = data.count;
+        })
+        .catch(() => {});
+    };
+
+    notifBtn.addEventListener("click", () => {
+      const badgeNow = parseInt(
+        (notifBtn.querySelector(".badge")?.textContent || "0"),
+        10
+      );
+      localStorage.setItem(KEY, String(badgeNow));
+      bellIcon.classList.remove("text-warning");
+      loadRecentNotifications();
+    });
+
+    if (markAllBtn)
+      markAllBtn.addEventListener("click", () =>
+        showThemedConfirm("هل تريد تحديد جميع الإشعارات كمقروءة؟", () => {
+          fetch(`${SITE_URL}/admin/notifications_action.php?action=mark_all`)
+            .then(() => loadRecentNotifications())
+            .then(() => updateBadge());
+        })
+      );
+
+    if (clearAllBtn)
+      clearAllBtn.addEventListener("click", () =>
+        showThemedConfirm("هل أنت متأكد أنك تريد مسح جميع الإشعارات؟", () => {
+          fetch(`${SITE_URL}/admin/notifications_action.php?action=clear`)
+            .then(() => loadRecentNotifications())
+            .then(() => updateBadge());
+        })
+      );
+
+    updateBadge();
+    setInterval(updateBadge, 20000);
+
+    // bell shake animation style
+    const style = document.createElement("style");
+    style.textContent =
+      "@keyframes shakeAnim{0%,100%{transform:rotate(0);}20%{transform:rotate(-15deg);}40%{transform:rotate(10deg);}60%{transform:rotate(-10deg);}80%{transform:rotate(5deg);}}.shake{animation:shakeAnim .6s ease;}";
+    document.head.appendChild(style);
+  }
+});
