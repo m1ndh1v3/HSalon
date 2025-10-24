@@ -22,7 +22,13 @@ if (!ob_get_level()) {
 }
 
 // --- Site constants ---
-define('SITE_NAME', 'HAYA Bridal Salon');
+// define('SITE_NAME', 'صالون هيا للعرائس');
+define('SITE_NAME_AR', 'صالون هيا للعرائس');
+define('SITE_NAME_EN', 'Haya Bridal Salon');
+
+$lang_code = $_SESSION['lang'] ?? 'ar'; // or however your language is stored
+define('SITE_NAME', $lang_code === 'en' ? SITE_NAME_EN : SITE_NAME_AR);
+
 define('SITE_EMAIL', 'noreply@hsalon.local');
 define('SITE_URL', 'http://localhost/hsalon');
 define('LANG_DEFAULT', 'ar');

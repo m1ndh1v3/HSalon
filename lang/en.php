@@ -45,7 +45,7 @@ $lang = array(
   'delete' => 'Delete',
 
   // booking.php additions
-  'booking_page_title' => 'Book an Appointment Now',
+  'booking_page_title' => 'Book an Appointment',
   'booking_full_name' => 'Full Name',
   'booking_phone' => 'Phone Number',
   'booking_email_optional' => 'Email (optional)',
@@ -60,8 +60,8 @@ $lang = array(
   'booking_unavailable' => 'The selected time is not available, please choose another slot.',
   'booking_error' => 'An error occurred while creating your appointment, please try again later.',
   'booking_required_fields' => 'Please fill in all required fields to complete your booking.',
-  'booking_success_sent' => 'Your booking request has been sent successfully! We will contact you soon to confirm.',
-  'booking_success_whatsapp' => 'Your booking has been sent successfully! Open WhatsApp to confirm your appointment.',
+  'booking_success_sent' => 'Your booking request has been sent successfully!<br>We will contact you soon to confirm.',
+  'booking_success_whatsapp' => 'Your booking has been sent successfully!<br>For further info contact us via WhatsApp:',
 );
 ?>
 

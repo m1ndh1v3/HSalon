@@ -45,7 +45,7 @@ $lang = array(
   'delete' => 'حذف',
 
   // booking.php additions
-  'booking_page_title' => 'لحجز موعد الآن',
+  'booking_page_title' => 'حجز موعد',
   'booking_full_name' => 'الاسم الكامل',
   'booking_phone' => 'رقم الهاتف',
   'booking_email_optional' => 'البريد الإلكتروني (اختياري)',
@@ -60,8 +60,8 @@ $lang = array(
   'booking_unavailable' => 'الوقت المحدد غير متاح حالياً، يرجى اختيار موعد آخر.',
   'booking_error' => 'حدث خطأ أثناء إنشاء الموعد، يرجى المحاولة لاحقاً.',
   'booking_required_fields' => 'يرجى تعبئة جميع الحقول المطلوبة لإتمام الموعد.',
-  'booking_success_sent' => 'تم إرسال طلب الموعد بنجاح! سيتم التواصل معك قريباً لتأكيد الموعد.',
-  'booking_success_whatsapp' => 'تم إرسال طلب الموعد بنجاح! افتح واتساب لتأكيد الموعد.',
+  'booking_success_sent' => 'تم إرسال طلب الموعد بنجاح!<br>سيتم التواصل معك قريباً لتأكيد الموعد.',
+  'booking_success_whatsapp' => 'تم إرسال طلب الموعد بنجاح!<br>سيتم التواصل معك قريباً لتأكيد الموعد.<br>للتواصل عبر واتساب افتح الرابط:',
 );
 ?>
 

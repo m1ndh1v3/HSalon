@@ -19,10 +19,13 @@ $cancelled      = $pdo->query("SELECT COUNT(*) FROM bookings WHERE status='cance
 
 // === Latest 5 bookings ===
 $stmt = $pdo->query("
-  SELECT b.*, c.name AS client_name, s.name AS service_name
+  SELECT
+    b.*,
+    COALESCE(NULLIF(c.name, ''), NULLIF(b.name, ''), '—')  AS client_name,
+    COALESCE(s.name, '—')                                 AS service_name
   FROM bookings b
-  LEFT JOIN clients c ON b.client_id=c.id
-  LEFT JOIN services s ON b.service_id=s.id
+  LEFT JOIN clients  c ON b.client_id  = c.id
+  LEFT JOIN services s ON b.service_id = s.id
   ORDER BY b.created_at DESC
   LIMIT 5
 ");
