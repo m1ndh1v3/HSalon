@@ -5,7 +5,7 @@
 require_once __DIR__ . '/config.php';
 include_once __DIR__ . '/includes/header.php';
 ?>
-<!-- Hero Section -->
+
 <!-- Hero Section -->
 <section class="hero-landing d-flex align-items-center text-center position-relative">
   <div class="hero-logo-bg">
@@ -34,10 +34,33 @@ include_once __DIR__ . '/includes/header.php';
         <i class="bi <?php echo $btnIcon; ?>"></i> <?php echo $btnLabel; ?>
       </a>
     </div>
+
+    <!-- Contact Methods inside Hero -->
+    <div class="contact-icons mt-5 d-flex justify-content-center flex-wrap gap-3">
+      <a href="tel:+972501234567" class="btn btn-light rounded-circle p-3 fs-3" title="Phone">
+        <!-- <i class="bi bi-telephone-fill text-primary"></i> -->
+         <img src="assets/img/icons/phonecall.svg" alt="Phone" width="30" height="30">
+      </a>
+      <a href="https://wa.me/972501234567" target="_blank" class="btn btn-success rounded-circle p-3 fs-3" title="WhatsApp">
+        <!-- <i class="bi bi-whatsapp"></i> -->
+         <img src="assets/img/icons/whatsapp.svg" alt="WhatsApp" width="30" height="30">
+      </a>
+      <a href="https://www.instagram.com/yourpage" target="_blank" class="btn btn-light rounded-circle p-3 fs-3" title="Instagram">
+        <!-- <i class="bi bi-instagram text-danger"></i> -->
+         <img src="assets/img/icons/instagram2.svg" alt="Instagram" width="30" height="30">
+      </a>
+      <a href="https://maps.google.com/?q=31.771959,35.217018" target="_blank" class="btn btn-light rounded-circle p-3 fs-3" title="Google Maps">
+        <img src="assets/img/icons/google-maps.svg" alt="Google Maps" width="30" height="30">
+      </a>
+      <a href="https://waze.com/ul?ll=31.771959,35.217018&navigate=yes" target="_blank" class="btn btn-light rounded-circle p-3 fs-3" title="Waze">
+        <img src="assets/img/icons/waze3.svg" alt="Waze" width="30" height="30">
+      </a>
+    </div>
   </div>
 
   <div class="hero-overlay"></div>
 </section>
+
 
 
 <!-- About Section -->

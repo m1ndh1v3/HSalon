@@ -1217,6 +1217,15 @@ body.dark .hero-landing .hero-overlay {
   box-shadow: 0 6px 18px rgba(0,0,0,.2);
 }
 
+body.light .icon-wrapper {
+  /* color: #000; */
+  display: none;
+}
+
+body.dark .icon-wrapper {
+  display: none;
+}
+
 /* About / Highlight Sections */
 .about-section,
 .about-highlight {
@@ -1303,7 +1312,7 @@ body.dark #mainNavbar .dropdown-item:hover {
 
 .services-section,
 .services-highlight {
-  background: linear-gradient(135deg, var(--rose-dark), var(--rose));
+  background: linear-gradient(135deg, #b66161, #a66565);
   color: #fff;
 }
 .services-section a.btn,
@@ -1317,44 +1326,88 @@ body.dark #mainNavbar .dropdown-item:hover {
   color: var(--rose-dark);
 }
 
-/* ==========================
-   Gallery + Work Hours Section Background Match (Light/Dark)
-   ========================== */
+/* Dark Mode Variant */
+body.dark .services-section {
+  background: linear-gradient(135deg, #ad6c6c, #a66565);
+  color: #f1f1f1;
+}
 
-.gallery-showcase,
+body.dark .services-section a.btn {
+  border-color: #f1f1f1;
+  color: #f1f1f1;
+}
+
+body.dark .services-section a.btn:hover {
+  background: var(--rose);
+  color: #000;
+}
+
+/* ==========================
+   Gallery Section Background Match (Light/Dark)
+   ========================== */
+.gallery-showcase {
+  background: linear-gradient(135deg, var(--rose-dark), var(--rose));
+  color: #fff;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.gallery-showcase a.btn {
+  border-color: #fff;
+  color: #fff;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.gallery-showcase a.btn:hover {
+  background: #fff;
+  color: var(--rose-dark);
+}
+
+/* Dark Mode Variant */
+body.dark .gallery-showcase {
+  background: linear-gradient(135deg, #ad6c6c, #a66565);
+  color: #f1f1f1;
+}
+
+body.dark .gallery-showcase a.btn {
+  border-color: #f1f1f1;
+  color: #f1f1f1;
+}
+
+body.dark .gallery-showcase a.btn:hover {
+  background: var(--rose);
+  color: #000;
+}
+
+/* Work Hours Section */
+
 .work-hours-section {
   background: linear-gradient(135deg, var(--rose-dark), var(--rose));
   color: #fff;
   transition: background 0.4s ease, color 0.4s ease;
 }
 
-.gallery-showcase a.btn,
 .work-hours-section a.btn {
   border-color: #fff;
   color: #fff;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-.gallery-showcase a.btn:hover,
 .work-hours-section a.btn:hover {
   background: #fff;
   color: var(--rose-dark);
 }
 
 /* Dark Mode Variant */
-body.dark .gallery-showcase,
 body.dark .work-hours-section {
-  background: linear-gradient(135deg, #1b1b1b, #2b2b2b);
+  background: linear-gradient(135deg, #bc8888, #e67676);
   color: #f1f1f1;
 }
 
-body.dark .gallery-showcase a.btn,
 body.dark .work-hours-section a.btn {
   border-color: #f1f1f1;
   color: #f1f1f1;
 }
 
-body.dark .gallery-showcase a.btn:hover,
 body.dark .work-hours-section a.btn:hover {
   background: var(--rose);
   color: #000;
@@ -1440,7 +1493,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.3;
+  opacity: 0.2;
   z-index: 0;
 }
 .hero-logo-bg img {
@@ -1467,73 +1520,156 @@ body {
 }
 
 /* ==========================
-   Reviews Section — Unified Style
+   Hero Contact Icons (larger icons)
    ========================== */
-.reviews-section {
-  background: linear-gradient(135deg, var(--rose-dark), var(--rose));
-  color: #fff;
-  transition: background 0.4s ease, color 0.4s ease;
+.contact-icons {
+  margin-top: 2rem;
+  gap: 1.2rem;
 }
-body.dark .reviews-section {
-  background: linear-gradient(135deg, #1b1b1b, #2b2b2b);
-  color: #f1f1f1;
-}
-.reviews-section .star-rating {
+
+.contact-icons a {
+  width: 64px;
+  height: 64px;
   display: flex;
+  align-items: center;
   justify-content: center;
-  flex-direction: row-reverse;
-  gap: 0.4rem;
+  border-radius: 50%;
+  transition: all 0.25s ease;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  line-height: 0;
 }
-.star-rating input {
-  display: none;
+
+.contact-icons a i,
+.contact-icons a img {
+  display: inline-block;
+  font-size: 2.2rem;
+  color: #fff;
+  width: 34px;
+  height: 34px;
+  vertical-align: middle;
 }
-.star-rating label {
-  font-size: 2rem;
-  color: #ccc;
-  cursor: pointer;
-  transition: color 0.2s;
+
+.contact-icons a:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
 }
-.star-rating input:checked ~ label,
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-  color: #ffd700;
+
+.contact-icons a img {
+  object-fit: contain;
+  filter: none;
+}
+
+/* WhatsApp icon green, transparent background */
+.contact-icons a[href*="wa.me"] i {
+  color: #25D366 !important;
 }
 
 /* ==========================
-   Reviews Section — Unified Yellow Stars (All States, Both Themes)
+   Reviews Section — Polished Modern Theme (Final Fixed Version)
    ========================== */
+.reviews-section {
+  background: linear-gradient(135deg, #f8f4f5 0%, #f1e3e6 100%);
+  color: #222;
+  transition: background 0.4s ease, color 0.4s ease;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+body.dark .reviews-section {
+  background: linear-gradient(135deg, #3a2a2d 0%, #1e1718 100%);
+  color: #f8f8f8;
+}
 
-/* rating input stars */
+/* ==========================
+   Review Cards
+   ========================== */
+.reviews-section .card {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+body.dark .reviews-section .card {
+  background: rgba(30, 30, 30, 0.85);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+.reviews-section .card:hover {
+  transform: translateY(-4px);
+}
+
+/* ==========================
+   Star Rating Input (Interactive — Member Editable)
+   ========================== */
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.6rem 0;
+}
+
+.star-rating input {
+  display: none;
+}
+
 .star-rating label {
-  font-size: 2rem;
-  color: #eab308; /* warm golden yellow */
   cursor: pointer;
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-.star-rating input:checked ~ label,
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-  color: #facc15; /* brighter gold */
-  transform: scale(1.1);
+  font-size: 1.5rem; /* smaller default for clear transition */
+  color: #a0a0a0; /* gray for empty */
+  opacity: 0.75;
+  transform: scale(1);
+  transition: color 0.25s ease, transform 0.2s ease, opacity 0.25s ease;
 }
 
-/* displayed stars (filled + empty) always golden */
+body.dark .star-rating label {
+  color: #555;
+  opacity: 0.65;
+}
+
+/* Hovered or selected (filled) stars */
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input:checked ~ label {
+  color: #ffc107;
+  transform: scale(1.5);
+  opacity: 1;
+  text-shadow: 0 0 10px rgba(255, 193, 7, 0.55);
+}
+
+/* smooth icon transition */
+.star-rating label i {
+  transition: inherit;
+}
+
+/* ==========================
+   Displayed Stars (Read-only — in Reviews List)
+   ========================== */
 .reviews-section .bi-star-fill {
-  color: #facc15 !important;
+  color: #ffc107 !important;
+  text-shadow: 0 0 4px rgba(255,204,51,0.4);
 }
 .reviews-section .bi-star {
-  color: #eab308 !important;
-  opacity: 0.5;
+  color: #999 !important;
+  opacity: 0.8;
+}
+body.dark .reviews-section .bi-star {
+  color: #555 !important;
+  opacity: 0.85;
 }
 
-/* ensure on light theme stars remain gold (not black) */
-body.light .reviews-section .bi-star-fill,
-body.light .reviews-section .bi-star {
-  color: #facc15 !important;
+/* ==========================
+   Review Texts
+   ========================== */
+.reviews-section .text-muted {
+  opacity: 0.85;
 }
-
-/* dark theme service text white */
-body.dark .reviews-section .text-rose,
-body.dark .reviews-section .card .text-rose {
-  color: #fff !important;
+.reviews-section .text-rose {
+  color: #b76e79;
+}
+body.dark .reviews-section .text-rose {
+  color: #ffb6c1;
 }
