@@ -1271,22 +1271,63 @@ body.dark .icon-wrapper {
 @media (max-width:576px){.masonry-grid{column-count:1}}
 
 /* ==========================
-   Navbar Profile Dropdown Fix — Dark Theme
+   Navbar Dropdown — Optimized Fast Version
    ========================== */
 
+/* desktop / universal */
 body.dark #mainNavbar .dropdown-menu {
   background-color: #1f1f1f !important;
   border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 0.6rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.08s ease-out;
+}
+
+body.dark #mainNavbar .dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 body.dark #mainNavbar .dropdown-item {
   color: #f1f1f1 !important;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 body.dark #mainNavbar .dropdown-item:hover {
   background-color: var(--rose);
   color: #000 !important;
+}
+
+/* mobile dropdowns */
+@media (max-width: 991.98px) {
+  body.dark #mainNavbar .navbar-collapse .dropdown-menu {
+    background-color: #1f1f1f !important;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 0.6rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.08s ease-out;
+  }
+
+  body.dark #mainNavbar .navbar-collapse .dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  body.dark #mainNavbar .navbar-collapse .dropdown-item {
+    color: #f1f1f1 !important;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  body.dark #mainNavbar .navbar-collapse .dropdown-item:hover {
+    background-color: var(--rose);
+    color: #000 !important;
+  }
 }
 
 /* ==========================
@@ -1672,4 +1713,59 @@ body.dark .reviews-section .bi-star {
 }
 body.dark .reviews-section .text-rose {
   color: #ffb6c1;
+}
+
+/* ==========================
+   FIX — full-width sections + navbar height compensation + smooth scroll
+   ========================== */
+
+
+/* compensate for fixed navbar height */
+body {
+  padding-top: 50px;
+}
+
+/* make each section stretch horizontally with no side gaps */
+section {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  border: none;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+/* ==========================
+   FIX — spacing between main hero buttons only (not social icons)
+   ========================== */
+
+@media (max-width: 768px) {
+  .hero-landing .mt-4 .btn {
+    display: block;
+    width: 70%;
+    margin: 0 auto 1rem auto !important;
+  }
+  .hero-landing .mt-4 .btn:last-child {
+    margin-bottom: 0 !important;
+  }
+  /* main hero buttons */
+  .hero-landing .mt-4 .btn {
+    display: block;
+    width: 100%;
+    margin: 0 auto 1rem auto !important;
+  }
+  .hero-landing .mt-4 .btn:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* social contact icons */
+  .hero-landing .contact-icons a {
+    width: 52px;
+    height: 52px;
+  }
+  .hero-landing .contact-icons a img {
+    width: 26px;
+    height: 26px;
+  }  
 }
