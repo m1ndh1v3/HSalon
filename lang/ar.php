@@ -70,6 +70,7 @@ $lang = array(
   'cancel' => 'إلغاء',
   'are_you_sure_cancel' => 'هل أنت متأكد من الحذف؟',
   'close' => 'إغلاق',
+  'no_bookings_yet' => 'لا توجد مواعيد حالياً',
 );
 ?>
 

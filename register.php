@@ -1,6 +1,6 @@
 <?php
 // ==========================
-// /register.php
+// /register.php — updated submit block
 // ==========================
 require_once __DIR__ . '/config.php';
 include_once __DIR__ . '/includes/header.php';
@@ -22,20 +22,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $exists = $pdo->prepare("SELECT COUNT(*) FROM clients WHERE email=?");
             $exists->execute([$email]);
             if ($exists->fetchColumn()) {
-                echo '<div class="alert alert-warning text-center">'.$lang['email'].' exists</div>';
+                echo '<div class="alert alert-warning text-center">'.$lang['email'].' '.$lang['exists'].'</div>';
             } else {
                 $hash = password_hash($pass, PASSWORD_DEFAULT);
                 $stmt = $pdo->prepare("INSERT INTO clients (name, phone, email, password, created_at) VALUES (?, ?, ?, ?, NOW())");
                 $stmt->execute([$name, $phone, $email, $hash]);
                 log_debug("New client registered: ".$email);
-                echo '<div class="alert alert-success text-center">'.$lang['register'].' success</div>';
+                header("Location: login.php?registered=1");
+                exit;
             }
         } catch (Exception $e) {
             log_debug("Register failed: ".$e->getMessage());
-            echo '<div class="alert alert-danger text-center">Error registering account</div>';
+            echo '<div class="alert alert-danger text-center">'.$lang['register'].' error</div>';
         }
     } else {
-        echo '<div class="alert alert-warning text-center">Check your inputs</div>';
+        echo '<div class="alert alert-warning text-center">'.$lang['check_inputs'].'</div>';
     }
 }
 ?>

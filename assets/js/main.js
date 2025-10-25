@@ -346,3 +346,31 @@ document.addEventListener("click", function (e) {
     $(target).ekkoLightbox();
   }
 });
+
+
+// --- show signup success toast after redirect ---
+document.addEventListener("DOMContentLoaded", () => {
+  const toastContainer = document.createElement("div");
+  toastContainer.className = "position-fixed bottom-0 end-0 p-3";
+  toastContainer.style.zIndex = "9999";
+  document.body.appendChild(toastContainer);
+  toastContainer.innerHTML = `
+    <div id="signupToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="signupToastMsg">تم إنشاء الحساب بنجاح! الرجاء تسجيل الدخول</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>`;
+  const toastEl = document.getElementById("signupToast");
+  const toast = new bootstrap.Toast(toastEl, { delay: 3500 });
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("registered") === "1") {
+    const lang = localStorage.getItem("lang") || "ar";
+    document.getElementById("signupToastMsg").textContent =
+      lang === "ar" ? "تم إنشاء الحساب بنجاح! الرجاء تسجيل الدخول" : "Account created successfully! Please log in";
+    toast.show();
+    params.delete("registered");
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+});
