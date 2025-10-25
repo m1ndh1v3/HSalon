@@ -1,29 +1,33 @@
 <?php
 // ==========================
-// /gallery.php
+// /gallery.php — compact masonry layout version
 // ==========================
 require_once __DIR__ . '/config.php';
 include_once __DIR__ . '/includes/header.php';
 ?>
 
-<h2 class="text-center mb-4"><?php echo $lang['gallery']; ?></h2>
+<section class="py-5 text-center">
+  <div class="container">
+    <h2 class="fw-bold mb-4"><?php echo $lang['gallery']; ?></h2>
 
-<div class="row justify-content-center">
-<?php
-$images = glob(__DIR__ . '/assets/img/sample*.jpg');
-if ($images) {
-    foreach ($images as $img) {
-        $basename = basename($img);
-        echo '<div class="col-md-3 col-sm-4 mb-4">';
-        echo '<div class="card shadow-sm">';
-        echo '<img src="assets/img/' . $basename . '" class="card-img-top rounded" alt="gallery">';
-        echo '</div>';
-        echo '</div>';
-    }
-} else {
-    echo '<p class="text-center text-muted">(' . $lang['gallery'] . ' ...)</p>';
-}
-?>
-</div>
+    <div class="masonry-grid">
+      <?php
+      $galleryDir = __DIR__ . '/assets/img/gallery/';
+      $images = glob($galleryDir . '*.{jpg,jpeg,png,webp}', GLOB_BRACE);
+
+      if ($images) {
+          foreach ($images as $img) {
+              $basename = basename($img);
+              echo '<a href="assets/img/gallery/' . $basename . '" data-bs-toggle="lightbox" data-gallery="hsalon-gallery">';
+              echo '<img src="assets/img/gallery/' . $basename . '" alt="gallery">';
+              echo '</a>';
+          }
+      } else {
+          echo '<p class="text-center text-muted">(' . $lang['gallery'] . ' ...)</p>';
+      }
+      ?>
+    </div>
+  </div>
+</section>
 
 <?php include_once __DIR__ . '/includes/footer.php'; ?>

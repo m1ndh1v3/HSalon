@@ -295,3 +295,54 @@ document.addEventListener("DOMContentLoaded", () => {
     document.head.appendChild(style);
   }
 });
+
+// ==========================
+// Bookings Page AJAX + Toast Feedback
+// ==========================
+document.addEventListener("DOMContentLoaded", () => {
+  if (!window.initBookingsPage) return;
+
+  const toastEl = document.getElementById("toastAlert");
+  const toastMsg = document.getElementById("toastMsg");
+  const toast = toastEl ? new bootstrap.Toast(toastEl, { delay: 2000 }) : null;
+
+  document.querySelectorAll(".action-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.id;
+      const action = btn.dataset.action;
+      if (!confirm(action === "approve" ? "تأكيد الموافقة؟" : "تأكيد الإلغاء؟")) return;
+
+      fetch(`bookings_action.php?action=${action}&id=${id}`)
+        .then(r => r.json())
+        .then(d => {
+          if (d.success) {
+            const row = document.getElementById(`row-${id}`);
+            const cell = row.querySelector(".status-cell");
+            if (d.status === "approved")
+              cell.innerHTML = '<span class="badge bg-success">تمت الموافقة</span>';
+            else if (d.status === "cancelled")
+              cell.innerHTML = '<span class="badge bg-danger">تم الإلغاء</span>';
+            row.querySelectorAll(".action-btn").forEach(b => b.remove());
+            if (typeof playNotifSound === "function") playNotifSound();
+
+            if (toastEl && toastMsg) {
+              toastEl.classList.remove("bg-success", "bg-danger");
+              toastEl.classList.add(d.status === "approved" ? "bg-success" : "bg-danger");
+              toastMsg.textContent =
+                d.status === "approved" ? "تمت الموافقة بنجاح" : "تم الإلغاء بنجاح";
+              toast.show();
+            }
+          } else alert(d.msg);
+        })
+        .catch(e => alert("حدث خطأ: " + e));
+    });
+  });
+});
+
+document.addEventListener("click", function (e) {
+  const target = e.target.closest('[data-bs-toggle="lightbox"]');
+  if (target) {
+    e.preventDefault();
+    $(target).ekkoLightbox();
+  }
+});

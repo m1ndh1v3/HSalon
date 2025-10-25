@@ -38,7 +38,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 <form method="POST" class="col-md-6 mx-auto card p-4 shadow-sm">
   <div class="mb-3">
     <label class="form-label"><?php echo $lang['name']; ?></label>
-    <input type="text" name="name" class="form-control" required value="<?php echo clean($user['name']); ?>">
+    <input type="text" name="name" class="form-control" disabled value="<?php echo clean($user['name']); ?>">
   </div>
   <div class="mb-3">
     <label class="form-label"><?php echo $lang['phone']; ?></label>

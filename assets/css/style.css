@@ -318,13 +318,6 @@ body.dark .btn-secondary:hover {
    BOOKING + PROFILE SPECIAL STYLING — Unified Rose Buttons
    ========================== */
 
-/* Keep “Book Now” text always white */
-.navbar .btn-primary,
-.navbar .btn-primary:hover,
-.navbar .btn-primary:focus {
-  color: #fff !important;
-}
-
 section .card * {
   pointer-events: none;
 }
@@ -822,6 +815,7 @@ body.dark .notif-modal .btn-close:hover {
   top: 0;
 }
 
+
 /* active link glow/underline */
 .navbar .nav-link.active {
   position: relative;
@@ -889,16 +883,25 @@ body.dark .notif-modal .btn-close:hover {
 
 /* buttons and icons */
 #mainNavbar .icon-only {
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   border-radius: 0.5rem;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
+  margin: 0 2px;
   color: var(--text);
   background: transparent;
   transition: background 0.3s, color 0.3s, transform 0.2s;
+  vertical-align: middle;
 }
+
+#mainNavbar .icon-only i {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
 #mainNavbar .icon-only:hover {
   color: var(--rose);
   transform: translateY(-2px);
@@ -937,7 +940,7 @@ body.dark .notif-modal .btn-close:hover {
     padding-top: 0.8rem;
     justify-content: center !important;
   }
-
+  
   .navbar-toggler {
     border: none;
     width: 40px;
@@ -1001,4 +1004,464 @@ body.dark .notif-modal .btn-close:hover {
   .navbar-toggler { 
     display: none !important;
   }
+}
+
+/* ==========================
+   Neutral Modals & Buttons — Unified Header/Footer (No Blue)
+   ========================== */
+.modal-content {
+  border: none !important;
+  border-radius: 1rem !important;
+  background-color: #fff !important;
+  color: #222 !important;
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.3) !important;
+  transition: transform 0.25s ease-out, opacity 0.25s ease-out;
+}
+
+body.dark .modal-content {
+  background-color: #1a1a1a !important;
+  color: #eee !important;
+}
+
+/* --- Unified Modal Header/Footer --- */
+.modal-header,
+.modal-footer {
+  border: none !important;
+  background-color: #f5f5f5 !important;
+  color: #222 !important;
+}
+
+.modal-header {
+  border-top-left-radius: 1rem !important;
+  border-top-right-radius: 1rem !important;
+}
+
+.modal-footer {
+  border-bottom-left-radius: 1rem !important;
+  border-bottom-right-radius: 1rem !important;
+}
+
+body.dark .modal-header,
+body.dark .modal-footer {
+  background-color: #2a2a2a !important;
+  color: #eee !important;
+}
+
+/* --- Remove any blue-tinted Bootstrap classes --- */
+.modal-header[class*="bg-"],
+.modal-footer[class*="bg-"],
+.modal-header[class*="text-"],
+.modal-footer[class*="text-"] {
+  background-color: inherit !important;
+  color: inherit !important;
+}
+
+/* --- Close button (RTL aware) --- */
+.btn-close {
+  filter: none !important;
+  opacity: 0.8 !important;
+}
+body.dark .btn-close {
+  filter: invert(1) brightness(1.2) !important;
+}
+html[dir="rtl"] .modal-header .btn-close {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+/* --- Smooth entry animation --- */
+.modal.fade .modal-dialog { transform: translateY(-10px); }
+.modal.show .modal-dialog { transform: translateY(0); }
+
+/* --- Footer Buttons --- */
+.modal-footer .btn {
+  min-width: 100px;
+  border-radius: 0.5rem;
+}
+
+/* --- Kill blue borders, shadows, hover from .btn-outline-primary etc. --- */
+.btn-outline-primary,
+.btn-primary,
+.btn-link {
+  border-color: #888 ;
+  text-decoration: none ;
+}
+body.dark .btn-outline-primary,
+body.dark .btn-primary,
+body.dark .btn-link {
+  border-color: #888 ;
+}
+.btn-outline-primary:hover,
+.btn-primary:hover,
+.btn-link:hover {
+  border-color: #888;
+  background-color: var(--rose-dark);
+}
+body.dark .btn-outline-primary:hover,
+body.dark .btn-primary:hover,
+body.dark .btn-link:hover {
+  border-color: #888;
+  background-color: var(--rose-dark);
+}
+
+/* --- Secondary Buttons --- */
+.modal-footer .btn-outline-secondary {
+  color: inherit;
+  border-color: rgba(0, 0, 0, 0.2) ;
+}
+body.dark .modal-footer .btn-outline-secondary {
+  border-color: rgba(255, 255, 255, 0.3) ;
+}
+.modal-footer .btn-outline-secondary:hover {
+  background-color: rgba(0, 0, 0, 0.05) ;
+}
+body.dark .modal-footer .btn-outline-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1) ;
+}
+
+/* ==========================
+   Unified Landing Page Styles (Final Compact Version)
+   ========================== */
+.hero-landing {
+  position: relative;
+  min-height: 95vh;
+  background: linear-gradient(135deg, var(--rose-dark), var(--rose));
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0,0,0,.5);
+  transition: background .4s ease, color .4s ease;
+  z-index: 0;
+}
+.hero-landing .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  transition: background .4s ease;
+  z-index: 0;
+}
+.hero-landing .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Light mode variant */
+body.light .hero-landing {
+  background: linear-gradient(135deg, #d59393, #e6cece);
+  color: #222;
+  text-shadow: none;
+}
+body.light .hero-landing .hero-overlay {
+  background: rgba(255,255,255,0.3);
+}
+body.light .hero-landing h1,
+body.light .hero-landing p {
+  color: #333 !important;
+}
+body.light .hero-landing a.btn-primary {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: #fff;
+}
+body.light .hero-landing a.btn-primary:hover {
+  background: var(--rose-dark);
+  color: #fff;
+  border-color: var(--rose-dark);
+}
+
+/* Dark mode variant */
+body.dark .hero-landing {
+  background: linear-gradient(135deg, var(--rose-dark), var(--rose));
+  color: #333;
+}
+body.dark .hero-landing .hero-overlay {
+  background: rgba(0,0,0,0.35);
+}
+
+.hero-landing .btn-outline-light {
+  border-color: var(--rose-dark);
+  color: #fff;
+  background-color: var(--rose);
+  
+}
+.hero-landing .btn-outline-light:hover {
+  color: #fff;
+  background: var(--rose-dark);
+}
+
+/* Fade-in Animation */
+.fade-in { animation: fadeIn 1.2s ease; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Work Hours */
+.work-hours-section .hour-card {
+  background: var(--rose-light);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.work-hours-section .hour-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+/* Services */
+.services-preview .icon-wrapper {
+  font-size: 2rem;
+  color: var(--rose-dark);
+}
+.services-preview .service-card {
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.services-preview .service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.2);
+}
+
+/* About / Highlight Sections */
+.about-section,
+.about-highlight {
+  background: linear-gradient(135deg, var(--rose-dark), var(--rose));
+  color: #fff;
+}
+.about-section a.btn,
+.about-highlight a.btn {
+  border-color: #fff;
+  color: #fff;
+}
+.about-section a.btn:hover,
+.about-highlight a.btn:hover {
+  background: #fff;
+  color: var(--rose-dark);
+}
+
+/* Gallery / Masonry Grid */
+.masonry-grid {
+  column-count: 4;
+  column-gap: 1rem;
+}
+.masonry-grid a {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.masonry-grid img {
+  width: 100%;
+  border-radius: 1rem;
+  display: block;
+  transition: transform .3s ease;
+}
+.masonry-grid a:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+}
+@media (max-width:992px){.masonry-grid{column-count:3}}
+@media (max-width:768px){.masonry-grid{column-count:2}}
+@media (max-width:576px){.masonry-grid{column-count:1}}
+
+/* ==========================
+   Navbar Profile Dropdown Fix — Dark Theme
+   ========================== */
+
+body.dark #mainNavbar .dropdown-menu {
+  background-color: #1f1f1f !important;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+body.dark #mainNavbar .dropdown-item {
+  color: #f1f1f1 !important;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+body.dark #mainNavbar .dropdown-item:hover {
+  background-color: var(--rose);
+  color: #000 !important;
+}
+
+/* ==========================
+   Mobile Dropdown Fix — Dark Theme
+   ========================== */
+
+@media (max-width: 991.98px) {
+  body.dark #mainNavbar .navbar-collapse .dropdown-menu {
+    background-color: #1f1f1f !important;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  body.dark #mainNavbar .navbar-collapse .dropdown-item {
+    color: #f1f1f1 !important;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  body.dark #mainNavbar .navbar-collapse .dropdown-item:hover {
+    background-color: var(--rose);
+    color: #000 !important;
+  }
+}
+
+.services-section,
+.services-highlight {
+  background: linear-gradient(135deg, var(--rose-dark), var(--rose));
+  color: #fff;
+}
+.services-section a.btn,
+.services-highlight a.btn {
+  border-color: #fff;
+  color: #fff;
+}
+.services-section a.btn:hover,
+.services-highlight a.btn:hover {
+  background: #fff;
+  color: var(--rose-dark);
+}
+
+/* ==========================
+   Gallery + Work Hours Section Background Match (Light/Dark)
+   ========================== */
+
+.gallery-showcase,
+.work-hours-section {
+  background: linear-gradient(135deg, var(--rose-dark), var(--rose));
+  color: #fff;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.gallery-showcase a.btn,
+.work-hours-section a.btn {
+  border-color: #fff;
+  color: #fff;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.gallery-showcase a.btn:hover,
+.work-hours-section a.btn:hover {
+  background: #fff;
+  color: var(--rose-dark);
+}
+
+/* Dark Mode Variant */
+body.dark .gallery-showcase,
+body.dark .work-hours-section {
+  background: linear-gradient(135deg, #1b1b1b, #2b2b2b);
+  color: #f1f1f1;
+}
+
+body.dark .gallery-showcase a.btn,
+body.dark .work-hours-section a.btn {
+  border-color: #f1f1f1;
+  color: #f1f1f1;
+}
+
+body.dark .gallery-showcase a.btn:hover,
+body.dark .work-hours-section a.btn:hover {
+  background: var(--rose);
+  color: #000;
+}
+
+/* ==========================
+   FINAL FIX — FORCE NAVBAR FIXED TO TOP
+   ========================== */
+#mainNavbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 9999 !important;
+  background: var(--nav-bg) !important;
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: var(--shadow) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+/* ==========================
+   Fix Profile Dropdown Shift on Mobile
+   ========================== */
+@media (max-width: 991.98px) {
+  #mainNavbar .profile-toggle {
+    position: relative;
+  }
+
+  #mainNavbar .profile-toggle .dropdown-menu {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(10px) !important;
+    min-width: 180px;
+    text-align: center;
+    border-radius: 0.75rem;
+  }
+
+  #mainNavbar .profile-toggle .dropdown-menu.show {
+    display: block;
+  }
+
+  /* keep profile icon fixed and prevent shifting */
+  #mainNavbar .profile-toggle > .nav-link {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  #mainNavbar .profile-toggle.open,
+  #mainNavbar .profile-toggle.show {
+    transform: none !important;
+  }
+}
+
+
+/* ===== Fix: allow fixed navbar to stick (ancestors must not be transformed) ===== */
+html, body {
+  transform: none !important;
+  backface-visibility: visible !important;
+}
+
+/* optional: also undo transforms on common wrappers to be extra safe */
+.navbar,
+.card,
+footer {
+  transform: none !important;
+  will-change: auto !important;
+}
+
+/* prevent content from sitting under the fixed bar */
+body {
+  padding-top: 80px;
+}
+
+.hero-logo-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.3;
+  z-index: 0;
+}
+.hero-logo-bg img {
+  width: 90%;
+  height: auto;
+  max-height: 85vh;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(1.4);
+  pointer-events: none;
+  user-select: none;
+}
+.hero-landing .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* reset hamburger alignment to perfectly centered (LTR + RTL) */
+.navbar-toggler-icon,
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+  left: 0 !important;
+  right: 0 !important;
+  margin: auto !important;
 }

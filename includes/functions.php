@@ -1,6 +1,6 @@
 <?php
 // ==========================
-// Global Helper Functions
+// /includes/functions.php — unified helper utilities
 // ==========================
 
 function log_debug($message) {
@@ -9,10 +9,23 @@ function log_debug($message) {
     file_put_contents($file, $timestamp . $message . "\n", FILE_APPEND);
 }
 
+// --- Core Notification ---
+// function add_notification($type, $message) {
+//     global $pdo;
+//     try {
+//         $stmt = $pdo->prepare("INSERT INTO notifications (type, message, created_at, is_read) VALUES (?, ?, NOW(), 0)");
+//         $stmt->execute([$type, $message]);
+//         log_debug("Notification added [$type]: $message");
+//     } catch (Exception $e) {
+//         log_debug("Failed to add notification: " . $e->getMessage());
+//     }
+// }
+
+// --- WhatsApp & Email ---
 function send_whatsapp_message($phone, $message) {
     $encoded = urlencode($message);
     $link = "https://wa.me/$phone?text=$encoded";
-    log_debug("WhatsApp Message simulated to $phone: $message");
+    log_debug("Simulated WhatsApp to $phone: $message");
     return $link;
 }
 
@@ -24,12 +37,13 @@ function send_email($to, $subject, $body) {
     return $result;
 }
 
+// --- Sanitization & Formatting ---
 function safe_trim($v) {
     return trim((string)($v ?? ''));
 }
 
-function clean($value) {
-    return htmlspecialchars(safe_trim($value), ENT_QUOTES, 'UTF-8');
+function clean($v) {
+    return htmlspecialchars(safe_trim($v), ENT_QUOTES, 'UTF-8');
 }
 
 function format_date($datetime, $with_time = false) {

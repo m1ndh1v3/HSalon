@@ -47,7 +47,7 @@ if (isset($_SESSION['admin_id'])) {
 }
 ?>
 
-<nav id="mainNavbar" class="navbar navbar-expand-lg sticky-top border-bottom shadow-sm">
+<nav id="mainNavbar" class="navbar navbar-expand-lg border-bottom shadow-sm fixed-top">
   <div class="container-fluid px-3">
     <a class="navbar-brand d-flex align-items-center fw-bold" href="<?php echo SITE_URL; ?>/index.php">
       <img src="<?php echo SITE_URL; ?>/assets/img/hsalon_logo.png" alt="Logo" height="45" class="me-2">
