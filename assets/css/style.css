@@ -1465,3 +1465,75 @@ body {
   right: 0 !important;
   margin: auto !important;
 }
+
+/* ==========================
+   Reviews Section — Unified Style
+   ========================== */
+.reviews-section {
+  background: linear-gradient(135deg, var(--rose-dark), var(--rose));
+  color: #fff;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+body.dark .reviews-section {
+  background: linear-gradient(135deg, #1b1b1b, #2b2b2b);
+  color: #f1f1f1;
+}
+.reviews-section .star-rating {
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+  gap: 0.4rem;
+}
+.star-rating input {
+  display: none;
+}
+.star-rating label {
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #ffd700;
+}
+
+/* ==========================
+   Reviews Section — Unified Yellow Stars (All States, Both Themes)
+   ========================== */
+
+/* rating input stars */
+.star-rating label {
+  font-size: 2rem;
+  color: #eab308; /* warm golden yellow */
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #facc15; /* brighter gold */
+  transform: scale(1.1);
+}
+
+/* displayed stars (filled + empty) always golden */
+.reviews-section .bi-star-fill {
+  color: #facc15 !important;
+}
+.reviews-section .bi-star {
+  color: #eab308 !important;
+  opacity: 0.5;
+}
+
+/* ensure on light theme stars remain gold (not black) */
+body.light .reviews-section .bi-star-fill,
+body.light .reviews-section .bi-star {
+  color: #facc15 !important;
+}
+
+/* dark theme service text white */
+body.dark .reviews-section .text-rose,
+body.dark .reviews-section .card .text-rose {
+  color: #fff !important;
+}

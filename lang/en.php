@@ -62,6 +62,14 @@ $lang = array(
   'booking_required_fields' => 'Please fill in all required fields to complete your booking.',
   'booking_success_sent' => 'Your booking request has been sent successfully!<br>We will contact you soon to confirm.',
   'booking_success_whatsapp' => 'Your booking has been sent successfully!<br>For further info contact us via WhatsApp:',
+  'upcoming_only' => 'Upcoming only',
+  'all' => 'All',
+  'status' => 'Status',
+  'actions' => 'Actions',
+  'view' => 'View',
+  'cancel' => 'Cancel',
+  'are_you_sure_cancel' => 'Are you sure you want to cancel this booking?',
+  'close' => 'Close',
 );
 ?>
 
@@ -75,6 +83,7 @@ $lang['open_from_to'] = 'From %s to %s';
 $lang['break_time'] = 'Break from %s to %s';
 $lang['view_more_services'] = 'View All Services';
 $lang['view_more_gallery'] = 'View More Photos';
+$lang['dashboard'] = 'Dashboard';
 
 $lang['sunday'] = 'Sunday';
 $lang['monday'] = 'Monday';
@@ -106,4 +115,13 @@ $lang['service_not_found'] = 'No services found at the moment.';
 $lang['service_price_label'] = 'Price';
 $lang['service_duration_label'] = 'Duration';
 $lang['service_book_now'] = 'Book Now';
+
+$lang['client_reviews'] = 'Client Reviews';
+$lang['write_review'] = 'Write your review...';
+$lang['submit_review'] = 'Submit Review';
+$lang['update_review'] = 'Update Review';
+$lang['select_service'] = 'Select Service (optional)';
+$lang['no_reviews'] = 'No reviews yet';
+$lang['service_label'] = 'Service: ';
+
 ?>

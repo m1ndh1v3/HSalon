@@ -149,4 +149,110 @@ if ($hours):
 </section>
 <?php endif; ?>
 
+<!-- Reviews Section -->
+<section class="reviews-section py-5 text-center">
+  <div class="container">
+    <h2 class="fw-bold mb-4"><?php echo $lang['client_reviews'] ?? 'تقييمات الزبائن'; ?></h2>
+
+    <?php if (isset($_SESSION['client_id'])): ?>
+      <?php
+      $clientId = $_SESSION['client_id'];
+      $existing = $pdo->prepare("SELECT * FROM reviews WHERE client_id=? LIMIT 1");
+      $existing->execute([$clientId]);
+      $review = $existing->fetch(PDO::FETCH_ASSOC);
+      ?>
+
+      <?php if ($review): ?>
+        <form action="submit_review.php" method="POST" class="mb-5">
+          <input type="hidden" name="review_id" value="<?php echo $review['id']; ?>">
+          <div class="star-rating mb-3">
+            <?php for ($i = 5; $i >= 1; $i--): ?>
+              <input type="radio" id="star<?php echo $i; ?>" name="rating" value="<?php echo $i; ?>" <?php echo ($review['rating'] == $i) ? 'checked' : ''; ?>>
+              <label for="star<?php echo $i; ?>"><i class="bi bi-star-fill"></i></label>
+            <?php endfor; ?>
+          </div>
+
+          <?php
+          $srvStmt = $pdo->prepare("SELECT DISTINCT s.id, s.name FROM bookings b JOIN services s ON b.service_id=s.id WHERE b.client_id=? AND b.status='approved'");
+          $srvStmt->execute([$clientId]);
+          $userServices = $srvStmt->fetchAll(PDO::FETCH_ASSOC);
+          ?>
+          <?php if ($userServices): ?>
+            <select name="service_id" class="form-select mb-3">
+              <option value=""><?php echo $lang['select_service'] ?? 'الخدمة (اختياري)'; ?></option>
+              <?php foreach ($userServices as $s): ?>
+                <option value="<?php echo $s['id']; ?>" <?php echo ($review['service_id'] == $s['id']) ? 'selected' : ''; ?>>
+                  <?php echo clean($s['name']); ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+          <?php endif; ?>
+
+          <textarea name="comment" class="form-control mb-3" rows="3"><?php echo clean($review['comment']); ?></textarea>
+          <button type="submit" class="btn btn-primary rounded-pill px-5"><?php echo $lang['update_review'] ?? 'تحديث التقييم'; ?></button>
+        </form>
+      <?php else: ?>
+        <form action="submit_review.php" method="POST" class="mb-5">
+          <div class="star-rating mb-3">
+            <?php for ($i = 5; $i >= 1; $i--): ?>
+              <input type="radio" id="star<?php echo $i; ?>" name="rating" value="<?php echo $i; ?>" required>
+              <label for="star<?php echo $i; ?>"><i class="bi bi-star-fill"></i></label>
+            <?php endfor; ?>
+          </div>
+
+          <?php
+          $srvStmt = $pdo->prepare("SELECT DISTINCT s.id, s.name FROM bookings b JOIN services s ON b.service_id=s.id WHERE b.client_id=? AND b.status='approved'");
+          $srvStmt->execute([$clientId]);
+          $userServices = $srvStmt->fetchAll(PDO::FETCH_ASSOC);
+          ?>
+          <?php if ($userServices): ?>
+            <select name="service_id" class="form-select mb-3">
+              <option value=""><?php echo $lang['select_service'] ?? 'اختر الخدمة (اختياري)'; ?></option>
+              <?php foreach ($userServices as $s): ?>
+                <option value="<?php echo $s['id']; ?>"><?php echo clean($s['name']); ?></option>
+              <?php endforeach; ?>
+            </select>
+          <?php endif; ?>
+
+          <textarea name="comment" class="form-control mb-3" rows="3" placeholder="<?php echo $lang['write_review'] ?? 'اكتب رأيك هنا...'; ?>"></textarea>
+          <button type="submit" class="btn btn-primary rounded-pill px-5"><?php echo $lang['submit_review'] ?? 'إرسال التقييم'; ?></button>
+        </form>
+      <?php endif; ?>
+    <?php else: ?>
+      <div class="reviews-display">
+        <?php
+        try {
+          $stmt = $pdo->query("SELECT r.rating, r.comment, c.name, s.name AS service_name FROM reviews r LEFT JOIN clients c ON r.client_id=c.id LEFT JOIN services s ON r.service_id=s.id ORDER BY r.created_at DESC LIMIT 6");
+          $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
+          if ($reviews) {
+            echo '<div class="row justify-content-center">';
+            foreach ($reviews as $rev) {
+              echo '<div class="col-md-4 mb-4">';
+              echo '<div class="card border-0 shadow-sm rounded-4 h-100">';
+              echo '<div class="card-body">';
+              echo '<div class="mb-2 text-warning">';
+              for ($i = 1; $i <= 5; $i++) echo $i <= $rev['rating'] ? '<i class="bi bi-star-fill"></i>' : '<i class="bi bi-star"></i>';
+              echo '</div>';
+              echo '<p class="text-muted small mb-2">"' . clean($rev['comment']) . '"</p>';
+              if (!empty($rev['service_name'])) echo '<div class="small text-rose">' . ($lang['service_label'] ?? 'الخدمة: ') . clean($rev['service_name']) . '</div>';
+              echo '<div class="fw-semibold mt-2">' . clean($rev['name']) . '</div>';
+              echo '</div></div></div>';
+            }
+            echo '</div>';
+          } else {
+            echo '<p class="text-muted">(' . ($lang['no_reviews'] ?? 'لا توجد تقييمات بعد') . ')</p>';
+          }
+        } catch (Exception $e) {
+          echo '<p class="text-danger text-center">Error loading reviews.</p>';
+        }
+        ?>
+      </div>
+    <?php endif; ?>
+  </div>
+</section>
+
+
+
+
+
 <?php include_once __DIR__ . '/includes/footer.php'; ?>
