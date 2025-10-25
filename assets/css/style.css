@@ -60,7 +60,12 @@ body.dark {
   color: var(--text);
 }
 .card i {
-  color: var(--rose);
+  /* color: var(--rose); */
+  color: #fff;
+}
+
+body.dark .card i {
+  color: #fff;
 }
 
 /* Summary Cards */
@@ -353,11 +358,6 @@ body.light .page-link:hover {
   color: #fff;
   border-color: var(--rose-dark);
   box-shadow: 0 0 6px rgba(183,110,121,0.4);
-}
-
-/* icons inside dashboard cards become black for contrast */
-body.light .card i {
-  color: #000 !important;
 }
 
 

@@ -6,6 +6,7 @@ require_once __DIR__ . '/config.php';
 include_once __DIR__ . '/includes/header.php';
 ?>
 <!-- Hero Section -->
+<!-- Hero Section -->
 <section class="hero-landing d-flex align-items-center text-center position-relative">
   <div class="hero-logo-bg">
     <img src="assets/img/hsalon_logo.png" alt="Logo Watermark">
@@ -22,19 +23,22 @@ include_once __DIR__ . '/includes/header.php';
       if (isset($_SESSION['admin_id']) || isset($_SESSION['client_id'])) {
         $btnHref = isset($_SESSION['admin_id']) ? SITE_URL . '/admin/dashboard.php' : SITE_URL . '/member/index.php';
         $btnLabel = $lang['dashboard'] ?? 'جدول المواعيد';
+        $btnIcon = 'bi-person-circle';
       } else {
         $btnHref = SITE_URL . '/login.php';
         $btnLabel = $lang['login_signup'] ?? 'تسجيل / إنشاء حساب';
+        $btnIcon = 'bi-person-plus';
       }
       ?>
       <a href="<?php echo $btnHref; ?>" class="btn btn-lg btn-outline-light px-5 py-3 rounded-pill">
-        <?php echo $btnLabel; ?>
+        <i class="bi <?php echo $btnIcon; ?>"></i> <?php echo $btnLabel; ?>
       </a>
     </div>
   </div>
 
   <div class="hero-overlay"></div>
 </section>
+
 
 <!-- About Section -->
 <!-- <section class="about-highlight py-5 text-center">
