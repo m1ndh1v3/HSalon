@@ -25,7 +25,7 @@ $alert = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name    = clean($_POST['name'] ?? $cname);
-    $phone   = clean($_POST['phone'] ?? $cphone);
+    $phone = normalize_phone(clean($_POST['phone'] ?? $cphone));
     $email   = clean($_POST['email'] ?? $cemail);
     $service = intval($_POST['service'] ?? 0);
     $date    = clean($_POST['date'] ?? '');
@@ -43,66 +43,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $alert = '<div class="alert alert-danger text-center">'.$lang['booking_unavailable'].'</div>';
             } else {
                 $stmt = $pdo->prepare("INSERT INTO bookings (client_id, name, phone, email, service_id, date, time, notify_method, status, created_at)
-                                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
-                $stmt->execute([$cid, $name, $phone, $email, $service, $date, $time, $notify, $status]);
+                                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
+                $stmt->execute([$cid, $name, $phone, $email, $service, $date, $time, $notify, 'pending']);
                 $bookId = $pdo->lastInsertId();
 
                 $serviceName = $pdo->prepare("SELECT name FROM services WHERE id=?");
                 $serviceName->execute([$service]);
                 $serviceName = $serviceName->fetchColumn() ?: 'غير محددة';
 
-                $msg = "تم استلام طلب الموعد الخاص بك وهو الآن قيد المراجعة.\nالخدمة: $serviceName\nالتاريخ: $date $time";
+                $msg = "تم إرسال طلب الحجز بنجاح!
+                \nيرجى انتظار تأكيد الموعد من قبل الصالون.
+                \nالاسم: $name\nالهاتف: $phone
+                \nالخدمة: $serviceName\nالتاريخ: $date $time";
 
                 add_notification('booking', "طلب موعد جديد من $name لخدمة $serviceName بتاريخ $date $time");
 
+                $wa = null;
                 if ($notify === 'whatsapp') {
                     $wa = send_whatsapp_message($phone, $msg);
-                    $alert = '
-                    <div class="alert alert-success text-center">
-                      '.$lang['booking_success_whatsapp'].'<br>
-                      <a href="'.$wa.'" target="_blank" class="btn btn-success mt-2"><i class="bi bi-whatsapp"></i> WhatsApp</a>
-                    </div>';
                 } else {
                     send_email($email, "تأكيد موعد - ".SITE_NAME, nl2br($msg));
-                    $alert = '<div class="alert alert-success text-center">'.$lang['booking_success_sent'].'</div>';
                 }
 
-                echo "
-                <script>
-                document.addEventListener('DOMContentLoaded',()=>{
-                  const modal=document.createElement('div');
-                  modal.className='modal fade';
-                  modal.innerHTML=`
-                    <div class='modal-dialog modal-dialog-centered'>
-                      <div class='modal-content text-center'>
-                        <div class='modal-header bg-success text-white'>
-                          <h5 class='modal-title'>تم حجز الموعد بنجاح</h5>
-                          <button type='button' class='btn-close' data-bs-dismiss='modal'></button>
-                        </div>
-                        <div class='modal-body'>
-                          <p><strong>الخدمة:</strong> $serviceName</p>
-                          <p><strong>التاريخ:</strong> $date $time</p>
-                          <p><strong>الاسم:</strong> $name</p>
-                          <p><strong>الهاتف:</strong> $phone</p>
-                        </div>
-                        <div class='modal-footer justify-content-center'>
-                          <button class='btn btn-success' data-bs-dismiss='modal'>حسناً</button>
-                        </div>
-                      </div>
-                    </div>`;
-                  document.body.appendChild(modal);
-                  const bsModal=new bootstrap.Modal(modal);
-                  bsModal.show();
-                });
-                </script>";
+                $_SESSION['last_booking'] = [
+                    'service' => $serviceName,
+                    'date'    => $date,
+                    'time'    => $time,
+                    'name'    => $name,
+                    'phone'   => $phone,
+                    'notify'  => $notify,
+                    'wa'      => $wa
+                ];
+                header("Location: booking_success.php");
+                exit;
             }
         } catch (Exception $e) {
             log_debug("Booking insert failed: ".$e->getMessage());
             $alert = '<div class="alert alert-danger text-center">'.$lang['booking_error'].'</div>';
         }
-    } else {
-        $alert = '<div class="alert alert-warning text-center">'.$lang['booking_required_fields'].'</div>';
     }
+
 }
 ?>
 
@@ -162,8 +142,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="mb-3">
       <label class="form-label"><?php echo $lang['booking_notify_method']; ?></label>
       <select name="notify" class="form-select">
-        <option value="email"><?php echo $lang['booking_notify_email']; ?></option>
         <option value="whatsapp"><?php echo $lang['booking_notify_whatsapp']; ?></option>
+        <option value="email"><?php echo $lang['booking_notify_email']; ?></option>
       </select>
     </div>
 

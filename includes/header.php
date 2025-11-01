@@ -61,29 +61,29 @@ if (isset($_SESSION['admin_id'])) {
 
     <div class="collapse navbar-collapse" id="navbarMenu">
       <ul class="navbar-nav mx-auto text-center gap-2">
-        <li class="nav-item"><a class="nav-link" href="<?php echo SITE_URL; ?>/index.php"><?php echo $lang['home']; ?></a></li>
-        <li class="nav-item"><a class="nav-link" href="<?php echo SITE_URL; ?>/services.php"><?php echo $lang['services']; ?></a></li>
-        <li class="nav-item"><a class="nav-link" href="<?php echo SITE_URL; ?>/gallery.php"><?php echo $lang['gallery']; ?></a></li>
         <li class="nav-item">
-          <a href="<?php echo SITE_URL; ?>/booking.php" class="btn btn-primary px-3"><?php echo $lang['book_now']; ?></a>
-        </li>
-        <li class="nav-item dropdown profile-toggle">
-          <a class="nav-link icon-only" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-person-circle fs-5"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <?php if (isset($_SESSION['admin_id'])): ?>
-              <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/admin/dashboard.php">لوحة الإدارة</a></li>
-              <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/logout.php">تسجيل الخروج</a></li>
-            <?php elseif (isset($_SESSION['client_id'])): ?>
-              <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/member/index.php"><?php echo $lang['my_account']; ?></a></li>
-              <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/logout.php"><?php echo $lang['logout']; ?></a></li>
-            <?php else: ?>
-              <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/login.php"><?php echo $lang['login']; ?></a></li>
-              <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/register.php"><?php echo $lang['register']; ?></a></li>
-            <?php endif; ?>
-          </ul>
-        </li>
+          <li class="nav-item dropdown profile-toggle">
+            <a class="nav-link icon-only" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle fs-5"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <?php if (isset($_SESSION['admin_id'])): ?>
+                <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/admin/dashboard.php">لوحة الإدارة</a></li>
+                <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/logout.php">تسجيل الخروج</a></li>
+                <?php elseif (isset($_SESSION['client_id'])): ?>
+                  <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/member/index.php"><?php echo $lang['my_account']; ?></a></li>
+                  <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/logout.php"><?php echo $lang['logout']; ?></a></li>
+                  <?php else: ?>
+                    <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/login.php"><?php echo $lang['login']; ?></a></li>
+                    <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/register.php"><?php echo $lang['register']; ?></a></li>
+                    <?php endif; ?>
+                  </ul>
+                </li>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo SITE_URL; ?>/index.php"><?php echo $lang['home']; ?></a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo SITE_URL; ?>/services.php"><?php echo $lang['services']; ?></a></li>
+              <li class="nav-item"><a class="nav-link" href="<?php echo SITE_URL; ?>/gallery.php"><?php echo $lang['gallery']; ?></a></li>
+              <a href="<?php echo SITE_URL; ?>/booking.php" class="btn btn-primary px-3"><?php echo $lang['book_now']; ?></a>
       </ul>
 
       <ul class="navbar-nav icon-row flex-row justify-content-center gap-3 mt-3 mt-lg-0 <?php echo ($lang_code === 'ar') ? 'flex-row-reverse' : ''; ?>">

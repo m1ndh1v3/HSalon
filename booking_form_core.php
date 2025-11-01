@@ -23,7 +23,7 @@ $cemail = $_SESSION['client_email'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name    = clean($_POST['name'] ?? $cname);
-  $phone   = clean($_POST['phone'] ?? $cphone);
+  $phone = normalize_phone($_POST['phone'] ?? $cphone);
   $email   = clean($_POST['email'] ?? $cemail);
   $service = intval($_POST['service'] ?? 0);
   $date    = clean($_POST['date'] ?? '');
@@ -49,7 +49,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $serviceName->execute([$service]);
         $serviceName = $serviceName->fetchColumn() ?: 'غير محددة';
 
-        $msg = "تم استلام طلب الموعد الخاص بك وهو الآن قيد المراجعة.\nالخدمة: $serviceName\nالتاريخ: $date $time";
+        if ($langKey === 'ar') {
+            $msg = "مرحباً، أرغب بتأكيد موعد في الصالون:%0A%0A"
+                . "الاسم: $name%0A"
+                . "رقم الهاتف: $normalizedPhone%0A"
+                . "الخدمة المطلوبة: $serviceName%0A"
+                . "التاريخ: $date%0A"
+                . "الوقت: $time%0A%0A"
+                . "يرجى تأكيد توفر الموعد، وشكراً 🌸";
+        } else {
+            $msg = "Hello, I'd like to confirm my appointment at the salon:%0A%0A"
+                . "Name: $name%0A"
+                . "Phone: $normalizedPhone%0A"
+                . "Service: $serviceName%0A"
+                . "Date: $date%0A"
+                . "Time: $time%0A%0A"
+                . "Please confirm the availability. Thank you 🌸";
+        }
 
         echo '<div class="alert alert-success text-center">'.nl2br($msg).'</div>';
 
@@ -117,10 +133,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 
   <div class="mb-3">
-    <label class="form-label"><?php echo t('booking_notify_method','طريقة الإشعار'); ?></label>
+    <label class="form-label"><?php echo t('booking_notify_method','طريقة التواصل'); ?></label>
     <select name="notify" class="form-select text-end">
-      <option value="email"><?php echo t('booking_notify_email','البريد الإلكتروني'); ?></option>
       <option value="whatsapp"><?php echo t('booking_notify_whatsapp','واتساب'); ?></option>
+      <option value="email"><?php echo t('booking_notify_email','البريد الإلكتروني'); ?></option>
     </select>
   </div>
 

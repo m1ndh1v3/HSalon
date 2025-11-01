@@ -13,7 +13,7 @@ include_once __DIR__ . '/../includes/header.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
     $name = clean($_POST['name'] ?? '');
-    $phone = clean($_POST['phone'] ?? '');
+    $phone = normalize_phone($_POST['phone'] ?? $cphone);
     $email = clean($_POST['email'] ?? '');
 
     if ($action === 'add' && $name && $email) {

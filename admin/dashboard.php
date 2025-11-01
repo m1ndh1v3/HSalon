@@ -42,7 +42,7 @@ $isDark = ($_SESSION['theme'] ?? 'light') === 'dark';
   $cards = [
     ['bi-people',         'الزبائن',    $totalClients],
     ['bi-calendar2-check','المواعيد',   $totalBookings],
-    ['bi-scissors',       'الخدمات',    $totalServices],
+    ['bi-scissors',       'الجلسات',    $totalServices],
     ['bi-bar-chart',      'الإحصائيات', $approved + $pending + $cancelled]
   ];
   foreach ($cards as [$icon,$label,$value]):
@@ -127,7 +127,7 @@ $isDark = ($_SESSION['theme'] ?? 'light') === 'dark';
   <div class="col-md-3 mb-3">
     <a href="services.php" class="card p-3 text-decoration-none shadow-sm hover-card quick-nav-card">
       <i class="bi bi-scissors fs-1"></i>
-      <h5>إدارة الخدمات</h5>
+      <h5>إدارة الجلسات</h5>
     </a>
   </div>
   <div class="col-md-3 mb-3">

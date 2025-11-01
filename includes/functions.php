@@ -22,6 +22,14 @@ function log_debug($message) {
 // }
 
 // --- WhatsApp & Email ---
+function normalize_phone($phone) {
+    $phone = preg_replace('/\D/', '', $phone); // remove any non-digit chars
+    if (preg_match('/^0?5\d{7,8}$/', $phone)) {
+        return '+972' . ltrim($phone, '0');
+    }
+    return $phone;
+}
+
 function send_whatsapp_message($phone, $message) {
     $encoded = urlencode($message);
     $link = "https://wa.me/$phone?text=$encoded";

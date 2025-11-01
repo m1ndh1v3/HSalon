@@ -15,7 +15,7 @@ $cid = $_SESSION['client_id'];
 // Update profile
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name  = clean($_POST['name'] ?? '');
-    $phone = clean($_POST['phone'] ?? '');
+    $phone = normalize_phone($_POST['phone'] ?? '');
     $email = clean($_POST['email'] ?? '');
 
     if ($name && $email) {

@@ -139,7 +139,37 @@ a {
 }
 a:hover { color: var(--rose-dark); }
 
+/* Hover cards for dashboard quick links */
+.hover-card {
+  transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
+  border-radius: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+}
+.hover-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  background: rgba(255,255,255,0.9);
+}
 
+/* ==========================
+   Animations & Effects
+   ========================== */
+@keyframes floatUp {
+  0% { transform: translateY(8px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+.fade-in { animation: floatUp .6s ease forwards; }
+
+/* Shake animation for bell */
+@keyframes shakeAnim {
+  0%,100% { transform: rotate(0); }
+  20% { transform: rotate(-15deg); }
+  40% { transform: rotate(10deg); }
+  60% { transform: rotate(-10deg); }
+  80% { transform: rotate(5deg); }
+}
+.shake { animation: shakeAnim 0.6s ease; }
 
 /* ==========================
    Responsive Adjustments
@@ -941,97 +971,17 @@ body.light #mainNavbar .icon-only {
 #mainNavbar .icon-only {
   transition: background 0.3s ease, color 0.3s ease, box-shadow 0.4s ease;
 }
-
-
-/* ==========================
-   Navbar Icon Hover — Individual Behaviors (Final Polished)
-   ========================== */
-
-/* keep profile icon rotation + ring pulse */
-#mainNavbar .profile-toggle > .nav-link.icon-only {
-  position: relative;
-  overflow: visible;
-}
-#mainNavbar .profile-toggle > .nav-link.icon-only:hover i {
-  transform: rotate(20deg);
-  transition: transform 0.25s ease;
-}
 #mainNavbar .profile-toggle > .nav-link.icon-only:hover::after {
   content: "";
   position: absolute;
-  inset: -5px;
+  inset: -4px;
   border-radius: 50%;
-  border: 2px solid rgba(183,110,121,0.5);
-  animation: ringPulseLoop 1.2s ease-out infinite;
+  border: 2px solid rgba(183,110,121,0.4);
+  animation: ringPulse 0.6s ease-out;
 }
-@keyframes ringPulseLoop {
-  0% { transform: scale(0.8); opacity: 0.8; }
-  70% { transform: scale(1.4); opacity: 0; }
-  100% { transform: scale(1.4); opacity: 0; }
-}
-
-#mainNavbar .profile-toggle > .nav-link.icon-only:hover i {
-  transform: rotate(20deg) !important;
-}
-
-
-/* ========== THEME TOGGLE ========== */
-#themeToggle i {
-  transition: transform 0.6s ease, color 0.3s ease, opacity 0.3s ease;
-}
-body.light #themeToggle:hover i.bi-moon {
-  transform: rotate(360deg);
-  color: var(--rose-dark);
-}
-body.dark #themeToggle:hover i.bi-sun {
-  transform: rotate(-360deg);
-  color: var(--rose);
-}
-body.light #themeToggle i.bi-sun { display: none; }
-body.dark #themeToggle i.bi-moon { display: none; }
-
-/* ========== LANGUAGE TOGGLE ========== */
-#langToggle {
-  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
-}
-
-/* light mode — always black icon */
-body.light #langToggle,
-body.light #langToggle i {
-  color: #000 !important;
-}
-body.light #langToggle:hover {
-  background: var(--rose);
-  box-shadow: 0 0 8px rgba(183,110,121,0.4);
-  color: #000 !important; /* stays black even on hover */
-}
-body.light #langToggle:hover i {
-  color: var(--rose)!important;
-}
-
-/* dark mode — add same hover color (rose) */
-body.dark #langToggle {
-  color: #f1f1f1;
-}
-body.dark #langToggle:hover {
-  background: rgba(245,162,176,0.15);
-  color: var(--rose);
-  box-shadow: 0 0 10px rgba(245,162,176,0.5);
-}
-body.dark #langToggle:hover i {
-  color: var(--rose);
-}
-
-/* ========== OTHER NAVBAR ICONS ========== */
-#mainNavbar .icon-only:not(.profile-toggle):hover {
-  background: rgba(183,110,121,0.1);
-  color: var(--rose);
-  box-shadow: 0 0 8px rgba(183,110,121,0.3);
-}
-body.dark #mainNavbar .icon-only:not(.profile-toggle):hover {
-  background: rgba(245,162,176,0.15);
-  color: var(--rose);
-  box-shadow: 0 0 10px rgba(245,162,176,0.4);
+@keyframes ringPulse {
+  from { transform: scale(0.8); opacity: 0.8; }
+  to { transform: scale(1.3); opacity: 0; }
 }
 
 
@@ -1115,6 +1065,7 @@ body.dark #mainNavbar .icon-only:not(.profile-toggle):hover {
 }
 #langToggle:hover {
   color: var(--rose);
+  transform: translateY(-2px);
 }
 @media (min-width: 992px) {
   .navbar-toggler { 
@@ -1254,6 +1205,10 @@ body.dark .modal-footer .btn-outline-secondary:hover {
   transition: background .4s ease;
   z-index: 0;
 }
+.hero-landing .container {
+  position: relative;
+  z-index: 1;
+}
 
 /* Light mode variant */
 body.light .hero-landing {
@@ -1297,6 +1252,13 @@ body.dark .hero-landing .hero-overlay {
 .hero-landing .btn-outline-light:hover {
   color: #fff;
   background: var(--rose-dark);
+}
+
+/* Fade-in Animation */
+.fade-in { animation: fadeIn 1.2s ease; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Work Hours */
@@ -1613,10 +1575,6 @@ body.dark .work-hours-section a.btn:hover {
   }
 }
 
-#mainNavbar .profile-toggle > .nav-link.icon-only:hover i {
-  transform: rotate(20deg);
-}
-
 
 /* ===== Fix: allow fixed navbar to stick (ancestors must not be transformed) ===== */
 html, body {
@@ -1828,6 +1786,12 @@ body.dark .reviews-section .text-rose {
    FIX — full-width sections + navbar height compensation + smooth scroll
    ========================== */
 
+
+/* compensate for fixed navbar height */
+body {
+  padding-top: 50px;
+}
+
 /* make each section stretch horizontally with no side gaps */
 section {
   position: relative;
@@ -1997,28 +1961,4 @@ body.dark .dashboard-card .icon {
 @keyframes galleryScrollRTL {
   0% { transform: translateX(0); }
   100% { transform: translateX(50%); }
-}
-
-/* consistent navbar hover across themes */
-#mainNavbar .nav-link:hover,
-body.dark #mainNavbar .nav-link:hover {
-  color: var(--rose) !important;
-}
-#mainNavbar .nav-link.active,
-body.dark #mainNavbar .nav-link.active {
-  color: var(--rose);
-  font-weight: 700;
-}
-
-/* subtle rotation for profile icon */
-#mainNavbar .profile-toggle > .nav-link.icon-only i {
-  transition: transform 0.25s ease;
-}
-#mainNavbar .profile-toggle > .nav-link.icon-only:hover i {
-  transform: rotate(20deg);
-}
-#mainNavbar .navbar-brand img {
-  height: 80px;
-  width: auto;
-  object-fit: contain;
 }

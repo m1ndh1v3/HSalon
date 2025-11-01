@@ -374,3 +374,42 @@ document.addEventListener("DOMContentLoaded", () => {
     window.history.replaceState({}, document.title, window.location.pathname);
   }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.querySelector('.gallery-track');
+  const lang = document.documentElement.lang || 'en';
+  const isRTL = lang.startsWith('ar');
+  const speed = 60; // slower movement
+  const resumeDelay = 500; // 0.5s after leaving
+
+  const anim = isRTL ? 'galleryScrollRTL' : 'galleryScrollLTR';
+  track.style.animation = `${anim} ${speed}s linear infinite`;
+
+  let paused = false;
+  let timeout;
+
+  const pause = () => {
+    if (!paused) {
+      track.style.animationPlayState = 'paused';
+      paused = true;
+    }
+  };
+  const resume = () => {
+    if (paused) {
+      track.style.animationPlayState = 'running';
+      paused = false;
+    }
+  };
+
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      clearTimeout(timeout);
+      pause();
+    });
+    item.addEventListener('mouseleave', () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(resume, resumeDelay);
+    });
+    item.addEventListener('click', pause);
+  });
+});

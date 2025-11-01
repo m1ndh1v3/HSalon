@@ -91,7 +91,7 @@ $stmt->execute($params);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<h2 class="text-center mb-4">إدارة الخدمات</h2>
+<h2 class="text-center mb-4">إدارة الجلسات</h2>
 
 <!-- Add Service Button -->
 <div class="text-end mb-3">

@@ -4,8 +4,8 @@
 // ==========================
 $lang = array(
   'home' => 'الرئيسية',
-  'services' => 'الخدمات',
-  'gallery' => 'المعرض',
+  'services' => 'الجلسات',
+  'gallery' => 'معرض الصور',
   'book_now' => 'حجز موعد',
   'login' => 'تسجيل الدخول',
   'logout' => 'تسجيل الخروج',
@@ -32,7 +32,7 @@ $lang = array(
   'status_cancelled' => 'تم الإلغاء',
   'admin_panel' => 'لوحة التحكم',
   'manage_bookings' => 'إدارة المواعيد',
-  'manage_services' => 'إدارة الخدمات',
+  'manage_services' => 'إدارة الجلسات',
   'manage_schedule' => 'إدارة المواعيد اليومية',
   'manage_settings' => 'إعدادات النظام',
   'service_name' => 'اسم الخدمة',
@@ -53,9 +53,10 @@ $lang = array(
   'booking_select_date' => 'التاريخ',
   'booking_select_time' => 'الوقت',
   'booking_select_time_hint' => 'يرجى اختيار التاريخ أولاً',
-  'booking_notify_method' => 'طريقة الإشعار',
-  'booking_notify_email' => 'بريد إلكتروني',
+  'booking_notify_method' => 'طريقة التواصل',
   'booking_notify_whatsapp' => 'واتساب',
+  'booking_notify_email' => 'بريد إلكتروني',
+  'booking_notify_sms' => 'رسالة نصية/SMS',
   'booking_button_confirm' => 'تأكيد الموعد',
   'booking_unavailable' => 'الوقت المحدد غير متاح حالياً، يرجى اختيار موعد آخر.',
   'booking_error' => 'حدث خطأ أثناء إنشاء الموعد، يرجى المحاولة لاحقاً.',
@@ -71,6 +72,14 @@ $lang = array(
   'are_you_sure_cancel' => 'هل أنت متأكد من الحذف؟',
   'close' => 'إغلاق',
   'no_bookings_yet' => 'لا توجد مواعيد حالياً',
+  'booking_success_title' => 'تم إرسال طلبك بنجاح!',
+  'booking_pending_msg' => 'طلب الموعد قيد المراجعة وسيتم تأكيده قريباً.',
+  'booking_service' => 'الخدمة',
+  'booking_time' => 'الموعد',
+  'booking_contact_whatsapp' => 'Whatsapp/واتساب',
+  'book_another' => 'لحجز موعد آخر',
+  'back_home' => 'الصفحة الرئيسية',
+
 );
 ?>
 
@@ -82,7 +91,7 @@ $lang['working_hours'] = 'أوقات العمل';
 $lang['closed'] = 'مغلق';
 $lang['open_from_to'] = 'من %s إلى %s';
 $lang['break_time'] = 'استراحة من %s إلى %s';
-$lang['view_more_services'] = 'عرض جميع الخدمات';
+$lang['view_more_services'] = 'عرض جميع الجلسات';
 $lang['view_more_gallery'] = 'عرض المزيد من الصور';
 $lang['dashboard'] = 'الملف الشخصي';
 
@@ -104,7 +113,7 @@ $lang['service_details'] = 'تفاصيل الخدمة';
 $lang['service_not_found'] = 'لم يتم العثور على خدمات حالياً.';
 $lang['service_price_label'] = 'السعر';
 $lang['service_duration_label'] = 'المدة';
-$lang['service_book_now'] = 'احجزي الآن';
+$lang['service_book_now'] = 'حجز موعد';
 ?>
 
 <?php
@@ -115,7 +124,7 @@ $lang['service_details'] = 'تفاصيل الخدمة';
 $lang['service_not_found'] = 'لم يتم العثور على خدمات حالياً.';
 $lang['service_price_label'] = 'السعر';
 $lang['service_duration_label'] = 'المدة';
-$lang['service_book_now'] = 'احجزي الآن';
+$lang['service_book_now'] = 'حجز موعد';
 
 
 $lang['client_reviews'] = 'تقييمات الزبائن';

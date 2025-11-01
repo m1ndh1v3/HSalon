@@ -54,8 +54,9 @@ $lang = array(
   'booking_select_time' => 'Time',
   'booking_select_time_hint' => 'Please choose a date first',
   'booking_notify_method' => 'Notification Method',
-  'booking_notify_email' => 'Email',
   'booking_notify_whatsapp' => 'WhatsApp',
+  'booking_notify_email' => 'Email',
+  'booking_notify_sms' => 'SMS',
   'booking_button_confirm' => 'Confirm Appointment',
   'booking_unavailable' => 'The selected time is not available, please choose another slot.',
   'booking_error' => 'An error occurred while creating your appointment, please try again later.',
@@ -71,6 +72,14 @@ $lang = array(
   'are_you_sure_cancel' => 'Are you sure you want to cancel this booking?',
   'close' => 'Close',
   'no_bookings_yet' => 'No bookings yet',
+  'booking_success_title' => 'Your booking request has been submitted!',
+  'booking_pending_msg' => 'Your appointment is pending confirmation and will be reviewed shortly.',
+  'booking_service' => 'Service',
+  'booking_time' => 'Appointment Time',
+  'booking_contact_whatsapp' => 'Contact via WhatsApp',
+  'book_another' => 'Book Another Appointment',
+  'back_home' => 'Back to Home',
+
 );
 ?>
 
