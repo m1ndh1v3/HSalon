@@ -60,7 +60,7 @@ if (isset($_SESSION['admin_id'])) {
     </button>
 
     <div class="collapse navbar-collapse" id="navbarMenu">
-      <ul class="navbar-nav mx-auto text-center gap-2">
+      <ul class="navbar-nav mx-auto text-center gap-2 justify-content-center flex-grow-1" style="min-width:0; flex-basis:auto;">      
         <li class="nav-item">
           <li class="nav-item dropdown profile-toggle">
             <a class="nav-link icon-only" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

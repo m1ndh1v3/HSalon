@@ -1634,7 +1634,7 @@ footer {
 
 /* prevent content from sitting under the fixed bar */
 body {
-  padding-top: 80px;
+  padding-top: 40px;
 }
 
 .hero-logo-bg {
@@ -2017,8 +2017,18 @@ body.dark #mainNavbar .nav-link.active {
 #mainNavbar .profile-toggle > .nav-link.icon-only:hover i {
   transform: rotate(20deg);
 }
+
 #mainNavbar .navbar-brand img {
-  height: 80px;
+  height: 56px;
   width: auto;
-  object-fit: contain;
+}
+#mainNavbar .navbar-brand span {
+  font-size: 1.4rem;
+}
+#mainNavbar .nav-link,
+#mainNavbar .btn {
+  font-weight: 500;
+}
+#mainNavbar .nav-link:hover {
+  color: var(--rose);
 }
