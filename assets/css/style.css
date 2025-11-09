@@ -2033,3 +2033,86 @@ body.dark #mainNavbar .nav-link.active {
 #mainNavbar .nav-link:hover {
   color: var(--rose);
 }
+
+/* ==========================
+   BOOKING FORM FINAL FIX
+   ========================== */
+
+/* Remove Bootstrap default dropdown arrow */
+.form-select {
+  background-image: none !important;
+}
+
+/* Custom Chevron */
+.select-wrapper {
+  position: relative;
+}
+.select-chevron {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%) rotate(0deg);
+  pointer-events: none;
+  color: var(--rose);
+  transition: transform 0.25s ease;
+}
+html[dir="rtl"] .select-chevron {
+  right: auto;
+  left: 1rem;
+}
+.select-chevron.rotate-up {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Dropdown option backgrounds */
+body.light .form-select option {
+  background-color: #fff;
+  color: #212529;
+}
+body.dark .form-select option {
+  background-color: #2a2a2a;
+  color: #f1f1f1;
+}
+
+/* Flatpickr themed fix */
+.flatpickr-calendar {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow) !important;
+  opacity: 1 !important;
+}
+body.light .flatpickr-calendar {
+  background: #fff !important;
+  color: #212529 !important;
+}
+body.dark .flatpickr-calendar {
+  background: #1e1e1e !important;
+  color: #f1f1f1 !important;
+}
+body.light .flatpickr-months,
+body.light .flatpickr-weekdays {
+  background: #f8f9fa !important;
+  color: #212529 !important;
+}
+body.dark .flatpickr-months,
+body.dark .flatpickr-weekdays {
+  background: #2a2a2a !important;
+  color: #ffffff !important; /* fixed: white top text */
+}
+.flatpickr-day {
+  color: inherit !important;
+  border-radius: 0.5rem;
+}
+.flatpickr-day:hover {
+  background: var(--rose-light) !important;
+}
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange {
+  background: var(--rose) !important;
+  color: #fff !important;
+}
+
+.body.dark .flatpickr-current-month {
+  color: #f1f1f1 !important;
+}

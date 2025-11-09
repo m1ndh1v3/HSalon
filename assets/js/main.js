@@ -413,3 +413,63 @@ document.addEventListener('DOMContentLoaded', () => {
     item.addEventListener('click', pause);
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  // ===== FIXED SELECT CHEVRONS =====
+  document.querySelectorAll('.form-select').forEach(select => {
+    const wrap = document.createElement('div');
+    wrap.className = 'select-wrapper position-relative';
+    select.parentNode.insertBefore(wrap, select);
+    wrap.appendChild(select);
+
+    const chevron = document.createElement('i');
+    chevron.className = 'bi bi-chevron-down select-chevron';
+    wrap.appendChild(chevron);
+
+    let open = false;
+    select.addEventListener('focus', () => {
+      open = true;
+      chevron.classList.add('rotate-up');
+    });
+    select.addEventListener('blur', () => {
+      open = false;
+      chevron.classList.remove('rotate-up');
+    });
+    select.addEventListener('click', () => {
+      open = !open;
+      chevron.classList.toggle('rotate-up', open);
+    });
+  });
+
+  // ===== FLATPICKR =====
+  if (window.flatpickr) {
+    flatpickr("#datePicker", {
+      altInput: true,
+      altFormat: "d/m/Y",
+      dateFormat: "Y-m-d",
+      minDate: "today",
+      disableMobile: true,
+      locale: document.documentElement.lang === 'ar' ? "ar" : "default",
+      onChange: () => {
+        const timeSel = document.getElementById("timeSelect");
+        if (timeSel) timeSel.disabled = false;
+      }
+    });
+  }
+
+  // ===== TIME SELECT =====
+  const timeSelect = document.getElementById("timeSelect");
+  if (timeSelect) {
+    timeSelect.addEventListener("focus", function () {
+      this.size = Math.min(this.options.length, 6);
+    });
+    timeSelect.addEventListener("blur", function () {
+      this.size = 0;
+    });
+    timeSelect.addEventListener("change", function () {
+      this.blur();
+    });
+  }
+
+});
