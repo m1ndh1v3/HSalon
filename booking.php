@@ -25,7 +25,7 @@ $alert = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name    = clean($_POST['name'] ?? $cname);
-    $phone = normalize_phone(clean($_POST['phone'] ?? $cphone));
+    $phone   = normalize_phone(clean($_POST['phone'] ?? $cphone));
     $email   = clean($_POST['email'] ?? $cemail);
     $service = intval($_POST['service'] ?? 0);
     $date    = clean($_POST['date'] ?? '');
@@ -84,71 +84,163 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 }
+
+$isRtl  = ($langKey === 'ar');
+$textDir = $isRtl ? 'rtl' : 'ltr';
+$textAlign = $isRtl ? 'text-end' : 'text-start';
 ?>
 
-<h2 class="text-center mb-4"><?php echo $lang['booking_page_title']; ?></h2>
+<div class="container my-4">
+  <h2 class="text-center mb-4"><?php echo $lang['booking_page_title']; ?></h2>
 
-<div class="col-md-8 mx-auto card p-4 shadow-sm <?php echo ($langKey == 'ar') ? 'text-end' : 'text-start'; ?>" dir="<?php echo ($langKey == 'ar') ? 'rtl' : 'ltr'; ?>">
-  <?php echo $alert; ?>
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
 
-  <form method="POST">
-    <?php if (!empty($cid)): ?>
-      <input type="hidden" name="name" value="<?php echo clean($cname); ?>">
-      <input type="hidden" name="phone" value="<?php echo clean($cphone); ?>">
-      <input type="hidden" name="email" value="<?php echo clean($cemail); ?>">
-      <p class="text-center mb-3">
-        <?php echo ($langKey == 'ar') ? "يتم حجز الموعد باسم" : "Booking appointment for"; ?>
-        <strong><?php echo clean($cname); ?></strong>
-        <?php if ($cemail): ?>(<?php echo clean($cemail); ?>)<?php endif; ?>
-      </p>
-    <?php else: ?>
-      <div class="mb-3">
-        <label class="form-label"><?php echo $lang['booking_full_name']; ?></label>
-        <input type="text" name="name" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label class="form-label"><?php echo $lang['booking_phone']; ?></label>
-        <input type="text" name="phone" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label class="form-label"><?php echo $lang['booking_email_optional']; ?></label>
-        <input type="email" name="email" class="form-control">
-      </div>
-    <?php endif; ?>
+      <?php echo $alert; ?>
 
-    <div class="mb-3">
-      <label class="form-label"><?php echo $lang['booking_select_service']; ?></label>
-      <select name="service" class="form-select" required>
-        <option value="" selected disabled hidden>-- <?php echo $lang['choose_service']; ?> --</option>
-        <?php foreach ($services as $srv): ?>
-          <option value="<?php echo $srv['id']; ?>"><?php echo clean($srv['name']); ?> (<?php echo $srv['price']; ?>₪)</option>
-        <?php endforeach; ?>
-      </select>
+      <div class="card mb-3 p-3 booking-card-main">
+        <div class="d-flex align-items-center gap-2 mb-2 <?php echo $textAlign; ?>">
+          <span class="rounded-circle d-inline-flex align-items-center justify-content-center" style="width:32px;height:32px;background:linear-gradient(135deg,#b76e79,#d68d9b);color:#fff;">
+            <i class="bi bi-person-heart"></i>
+          </span>
+          <div>
+            <h5 class="mb-0"><?php echo $lang['booking_step_client'] ?? ($isRtl ? 'تأكيد البيانات' : 'Your details'); ?></h5>
+            <small class="text-muted"><?php echo $lang['booking_step_client_hint'] ?? ($isRtl ? 'تأكد من صحة بيانات التواصل' : 'Make sure we can reach you.'); ?></small>
+          </div>
+        </div>
+
+        <div class="<?php echo $textAlign; ?>" dir="<?php echo $textDir; ?>">
+          <?php if (!empty($cid)): ?>
+            <input type="hidden" name="name" form="bookingForm" value="<?php echo clean($cname); ?>">
+            <input type="hidden" name="phone" form="bookingForm" value="<?php echo clean($cphone); ?>">
+            <input type="hidden" name="email" form="bookingForm" value="<?php echo clean($cemail); ?>">
+            <div class="booking-info-box rounded-3 p-3 mb-0">
+              <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2">
+                <div>
+                  <div class="fw-semibold"><?php echo $isRtl ? 'سيتم حجز الموعد باسم:' : 'Booking for:'; ?></div>
+                  <div><?php echo clean($cname); ?><?php if ($cemail): ?> (<?php echo clean($cemail); ?>)<?php endif; ?></div>
+                  <?php if ($cphone): ?>
+                    <div class="small text-muted"><?php echo $isRtl ? 'هاتف:' : 'Phone:'; ?> <?php echo clean($cphone); ?></div>
+                  <?php endif; ?>
+                </div>
+                <div class="small text-muted">
+                  <i class="bi bi-info-circle"></i>
+                  <?php echo $lang['booking_logged_in_hint'] ?? ($isRtl ? 'يمكنك تغيير بياناتك من صفحة الحساب.' : 'Update details from your profile page.'); ?>
+                </div>
+              </div>
+            </div>
+          <?php endif; ?>
+        </div>
+      </div>
+
+      <form method="POST" id="bookingForm" class="<?php echo $textAlign; ?>" dir="<?php echo $textDir; ?>">
+
+        <?php if (empty($cid)): ?>
+          <div class="card mb-3 p-3 booking-card-section">
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <span class="rounded-circle d-inline-flex align-items-center justify-content-center" style="width:32px;height:32px;background:linear-gradient(135deg,#b76e79,#d68d9b);color:#fff;">
+                <i class="bi bi-person-vcard"></i>
+              </span>
+              <div>
+                <h5 class="mb-0"><?php echo $lang['booking_step_client'] ?? ($isRtl ? 'بياناتك' : 'Your details'); ?></h5>
+                <small class="text-muted"><?php echo $lang['booking_step_client_hint'] ?? ($isRtl ? 'املأ بيانات الاتصال الأساسية' : 'Fill in your contact details.'); ?></small>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label"><?php echo $lang['booking_full_name']; ?></label>
+              <input type="text" name="name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label"><?php echo $lang['booking_phone']; ?></label>
+              <input type="text" name="phone" class="form-control" required>
+            </div>
+            <div class="mb-0">
+              <label class="form-label"><?php echo $lang['booking_email_optional']; ?></label>
+              <input type="email" name="email" class="form-control">
+            </div>
+          </div>
+        <?php endif; ?>
+
+        <div class="card mb-3 p-3 booking-card-section">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <span class="rounded-circle d-inline-flex align-items-center justify-content-center" style="width:32px;height:32px;background:linear-gradient(135deg,#b76e79,#d68d9b);color:#fff;">
+              <i class="bi bi-scissors"></i>
+            </span>
+            <div>
+              <h5 class="mb-0"><?php echo $lang['booking_select_service']; ?></h5>
+              <small class="text-muted"><?php echo $lang['booking_select_service_hint'] ?? ($isRtl ? 'اختاري الخدمة المطلوبة' : 'Choose the service you want.'); ?></small>
+            </div>
+          </div>
+
+          <div class="mb-0">
+            <select name="service" class="form-select" required>
+              <option value="" selected disabled hidden>-- <?php echo $lang['choose_service']; ?> --</option>
+              <?php foreach ($services as $srv): ?>
+                <option value="<?php echo $srv['id']; ?>">
+                  <?php echo clean($srv['name']); ?> (<?php echo $srv['price']; ?>₪)
+                </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+
+        <div class="card mb-3 p-3 booking-card-section">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <span class="rounded-circle d-inline-flex align-items-center justify-content-center" style="width:32px;height:32px;background:linear-gradient(135deg,#b76e79,#d68d9b);color:#fff;">
+              <i class="bi bi-calendar-event"></i>
+            </span>
+            <div>
+              <h5 class="mb-0"><?php echo $lang['booking_step_datetime'] ?? ($isRtl ? 'التاريخ والوقت' : 'Date & time'); ?></h5>
+              <small class="text-muted">
+                <?php echo $lang['booking_step_datetime_hint'] ?? ($isRtl ? 'اختاري موعداً متاحاً حسب جدول العمل.' : 'Pick an available slot matching our working hours.'); ?>
+              </small>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label"><?php echo $lang['booking_select_date']; ?></label>
+              <input type="date" id="datePicker" name="date" class="form-control" required min="<?php echo date('Y-m-d'); ?>">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label"><?php echo $lang['booking_select_time']; ?></label>
+              <select name="time" id="timeSelect" class="form-select" required disabled>
+                <option value=""><?php echo $lang['booking_select_time_hint']; ?></option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-3 p-3 booking-card-section">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <span class="rounded-circle d-inline-flex align-items-center justify-content-center" style="width:32px;height:32px;background:linear-gradient(135deg,#b76e79,#d68d9b);color:#fff;">
+              <i class="bi bi-bell"></i>
+            </span>
+            <div>
+              <h5 class="mb-0"><?php echo $lang['booking_notify_method']; ?></h5>
+              <small class="text-muted"><?php echo $lang['booking_notify_hint'] ?? ($isRtl ? 'اختاري طريقة استلام تأكيد أو تذكير بالموعد.' : 'How would you like to receive confirmation or reminders?'); ?></small>
+            </div>
+          </div>
+
+          <div class="mb-0">
+            <select name="notify" class="form-select">
+              <option value="whatsapp"><?php echo $lang['booking_notify_whatsapp']; ?></option>
+              <!-- <option value="email"><?php echo $lang['booking_notify_email']; ?></option> -->
+            </select>
+          </div>
+        </div>
+
+        <div class="card p-3 booking-card-submit mb-5">
+          <button type="submit" class="btn btn-primary w-100 py-2">
+            <i class="bi bi-check2-circle"></i>
+            <span class="ms-2"><?php echo $lang['booking_button_confirm']; ?></span>
+          </button>
+        </div>
+
+      </form>
     </div>
-
-    <div class="row mb-3">
-      <div class="col-md-6">
-        <label class="form-label"><?php echo $lang['booking_select_date']; ?></label>
-        <input type="date" id="datePicker" name="date" class="form-control" required min="<?php echo date('Y-m-d'); ?>">
-      </div>
-      <div class="col-md-6">
-        <label class="form-label"><?php echo $lang['booking_select_time']; ?></label>
-        <select name="time" id="timeSelect" class="form-select" required disabled>
-          <option value=""><?php echo $lang['booking_select_time_hint']; ?></option>
-        </select>
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label"><?php echo $lang['booking_notify_method']; ?></label>
-      <select name="notify" class="form-select">
-        <option value="whatsapp"><?php echo $lang['booking_notify_whatsapp']; ?></option>
-        <option value="email"><?php echo $lang['booking_notify_email']; ?></option>
-      </select>
-    </div>
-
-    <button type="submit" class="btn btn-primary w-100"><?php echo $lang['booking_button_confirm']; ?></button>
-  </form>
+  </div>
 </div>
 
 <?php include_once __DIR__ . '/includes/footer.php'; ?>

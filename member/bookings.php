@@ -58,7 +58,7 @@ $dir   = $rtl ? 'rtl' : 'ltr';
 $align = $rtl ? 'text-end' : 'text-start';
 ?>
 
-<div class="d-flex justify-content-between align-items-center mb-3">
+<div class="d-flex justify-content-between align-items-center mb-4">
   <h2 class="m-0"><?php echo h($lang['my_bookings'] ?? 'My Bookings'); ?></h2>
   <div class="d-flex gap-2">
     <a href="<?php echo SITE_URL; ?>/booking.php" class="btn btn-primary">

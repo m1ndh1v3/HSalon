@@ -473,3 +473,52 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
+// ==========================
+// ACTIVE STATE
+// ==========================
+document.addEventListener("DOMContentLoaded", () => {
+  const page = window.location.pathname.split('/').pop().replace('.php','');
+  document.querySelectorAll('.mobile-nav-item').forEach(item=>{
+    if(item.dataset.page === page) item.classList.add('active');
+  });
+});
+
+// ==========================
+// THEME TOGGLE
+// ==========================
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("mobileThemeToggle");
+  if (!btn) return;
+
+  const body = document.body;
+  const icon = btn.querySelector("i");
+
+  btn.addEventListener("click", () => {
+    const current = body.classList.contains("light") ? "light" : "dark";
+    const next = current === "light" ? "dark" : "light";
+
+    body.classList.remove(current);
+    body.classList.add(next);
+
+    icon.className = `bi bi-${next === "light" ? "moon" : "sun"}`;
+
+    localStorage.setItem("theme", next);
+
+    fetch(`?theme=${next}`).catch(()=>{});
+  });
+});
+
+// ==========================
+// LANGUAGE TOGGLE
+// ==========================
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("mobileLangToggle");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    fetch(`${SITE_URL}/includes/lang_switch_action.php`, {cache:"no-store"})
+    .then(() => window.location.reload(true))
+    .catch(()=>{});
+  });
+});

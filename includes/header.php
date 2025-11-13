@@ -57,10 +57,10 @@ if (isset($_SESSION['admin_id'])) {
       <span><?php echo SITE_NAME; ?></span>
     </a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
+    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
       aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
 
     <div class="collapse navbar-collapse" id="navbarMenu">
       <ul class="navbar-nav mx-auto text-center gap-2 justify-content-center flex-grow-1" style="min-width:0; flex-basis:auto;">      
@@ -86,7 +86,7 @@ if (isset($_SESSION['admin_id'])) {
               <li class="nav-item"><a class="nav-link" href="<?php echo SITE_URL; ?>/index.php"><?php echo $lang['home']; ?></a></li>
               <li class="nav-item"><a class="nav-link" href="<?php echo SITE_URL; ?>/services.php"><?php echo $lang['services']; ?></a></li>
               <li class="nav-item"><a class="nav-link" href="<?php echo SITE_URL; ?>/gallery.php"><?php echo $lang['gallery']; ?></a></li>
-              <a href="<?php echo SITE_URL; ?>/booking.php" class="btn btn-primary px-3"><?php echo $lang['book_now']; ?></a>
+              <!-- <a href="<?php echo SITE_URL; ?>/booking.php" class="btn btn-primary px-3"><?php echo $lang['book_now']; ?></a> -->
       </ul>
 
       <ul class="navbar-nav icon-row flex-row justify-content-center gap-3 mt-3 mt-lg-0 <?php echo ($lang_code === 'ar') ? 'flex-row-reverse' : ''; ?>">
@@ -114,6 +114,48 @@ if (isset($_SESSION['admin_id'])) {
   </div>
 </nav>
 
+<!-- Floating Language Toggle -->
+<button id="mobileLangToggle" class="mobile-lang-btn">
+  <i class="bi bi-translate"></i>
+</button>
+
+<!-- Floating Theme Toggle -->
+<button id="mobileThemeToggle" class="mobile-theme-btn">
+  <i class="bi bi-<?php echo ($theme=='light')?'moon':'sun'; ?>"></i>
+</button>
+
+<!-- Bottom Navigation Bar -->
+<div class="mobile-nav-bar">
+  <a href="<?php echo SITE_URL; ?>/index.php" class="mobile-nav-item" data-page="home">
+    <i class="bi bi-house"></i>
+    <span><?php echo $lang['home']; ?></span>
+  </a>
+
+  <a href="<?php echo SITE_URL; ?>/services.php" class="mobile-nav-item" data-page="services">
+    <i class="bi bi-scissors"></i>
+    <span><?php echo $lang['services']; ?></span>
+  </a>
+
+  <!-- Center Floating Profile Button -->
+  <a href="<?php
+        if (isset($_SESSION['admin_id'])) echo SITE_URL.'/admin/dashboard.php';
+        else if (isset($_SESSION['client_id'])) echo SITE_URL.'/member/index.php';
+        else echo SITE_URL.'/login.php';
+      ?>"
+     class="mobile-profile-btn">
+    <i class="bi bi-person-circle"></i>
+  </a>
+
+  <a href="<?php echo SITE_URL; ?>/gallery.php" class="mobile-nav-item" data-page="gallery">
+    <i class="bi bi-images"></i>
+    <span><?php echo $lang['gallery']; ?></span>
+  </a>
+
+  <a href="<?php echo SITE_URL; ?>/booking.php" class="mobile-nav-item" data-page="book">
+    <i class="bi bi-calendar-check"></i>
+    <span><?php echo $lang['book_now']; ?></span>
+  </a>
+</div>
 
 <main class="container mt-4">
 

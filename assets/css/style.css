@@ -1632,11 +1632,6 @@ footer {
   will-change: auto !important;
 }
 
-/* prevent content from sitting under the fixed bar */
-body {
-  padding-top: 40px;
-}
-
 .hero-logo-bg {
   position: absolute;
   inset: 0;
@@ -2018,7 +2013,7 @@ body.dark #mainNavbar .nav-link.active {
   transform: rotate(20deg);
 }
 #mainNavbar .navbar-brand img {
-  height: 40px;
+  height: 30px;
   width: auto;
   object-fit: contain;
 }
@@ -2115,4 +2110,163 @@ body.dark .flatpickr-weekdays {
 
 .body.dark .flatpickr-current-month {
   color: #f1f1f1 !important;
+}
+/* ==========================
+   PREMIUM MOBILE NAV (Option A)
+   Strong Glass + Blur + Elevated Profile Button
+   ========================== */
+
+/* Base variables (existing theme compatible) */
+:root {
+  --nav-glass-bg-light: rgba(255, 255, 255, 0.45);
+  --nav-glass-bg-dark: rgba(30, 30, 30, 0.45);
+  --nav-border-light: rgba(255, 255, 255, 0.35);
+  --nav-border-dark: rgba(0, 0, 0, 0.35);
+}
+
+/* Detect theme automatically */
+body.light .mobile-nav-bar {
+  background: var(--nav-glass-bg-light);
+  border-top: 1px solid var(--nav-border-light);
+}
+body.dark .mobile-nav-bar {
+  background: var(--nav-glass-bg-dark);
+  border-top: 1px solid var(--nav-border-dark);
+}
+
+/* ==========================
+   Bottom Navigation Bar
+   ========================== */
+.mobile-nav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: env(safe-area-inset-bottom);
+  z-index: 999999;
+  transition: background 0.3s ease, border 0.3s ease;
+}
+
+/* Nav items */
+.mobile-nav-item {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.75rem;
+  color: var(--text) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.mobile-nav-item i {
+  font-size: 1.32rem;
+}
+
+/* Press animation */
+.mobile-nav-item:active {
+  transform: scale(0.92);
+  opacity: 0.65;
+}
+
+/* Active state glow */
+.mobile-nav-item.active i,
+.mobile-nav-item.active span {
+  color: var(--rose) !important;
+  text-shadow: 0 0 8px rgba(255, 110, 130, 0.75);
+  opacity: 1;
+}
+
+/* ==========================
+   Floating Center Profile Button
+   ========================== */
+.mobile-profile-btn {
+  position: absolute;
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #b76e79, #d68d9b);
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.35),
+    0 0 14px rgba(255, 110, 130, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff !important;
+  z-index: 9999999;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.mobile-profile-btn i {
+  font-size: 2.15rem;
+}
+
+/* Lift animation on press */
+.mobile-profile-btn:active {
+  transform: translateX(-50%) scale(0.92);
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.25),
+    0 0 10px rgba(255, 110, 130, 0.5);
+}
+
+/* Hover lift (Android WebView-safe) */
+.mobile-profile-btn:hover {
+  transform: translateX(-50%) translateY(-3px);
+}
+
+/* ==========================
+   Floating Theme + Language Buttons
+   (Polished to match new glass)
+   ========================== */
+.mobile-theme-btn,
+.mobile-lang-btn {
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+body.dark .mobile-theme-btn,
+body.dark .mobile-lang-btn {
+  background: rgba(20, 20, 20, 0.45);
+  border: 1px solid rgba(0, 0, 0, 0.35);
+}
+
+/* Press effect */
+.mobile-theme-btn:active,
+.mobile-lang-btn:active {
+  transform: scale(0.92);
+  opacity: 0.75;
+}
+
+/* Hide on desktop */
+@media (min-width: 992px) {
+  .mobile-nav-bar,
+  .mobile-profile-btn,
+  .mobile-theme-btn,
+  .mobile-lang-btn {
+    display: none !important;
+  }
+}
+
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 30px !important;
+  }
 }

@@ -13,7 +13,7 @@ $lang = array(
   'my_account' => 'حسابي',
   'rights_reserved' => 'جميع الحقوق محفوظة',
   'welcome' => 'صالون هيا للعرائس',
-  'choose_service' => 'اختيار الخدمة',
+  'choose_service' => 'اختيار الجلسة',
   'choose_time' => 'اختيار الموعد',
   'confirm_booking' => 'تأكيد الموعد',
   'booking_success' => 'تم حجز موعدك بنجاح!',
@@ -35,7 +35,7 @@ $lang = array(
   'manage_services' => 'إدارة الجلسات',
   'manage_schedule' => 'إدارة المواعيد اليومية',
   'manage_settings' => 'إعدادات النظام',
-  'service_name' => 'اسم الخدمة',
+  'service_name' => 'اسم الجلسة',
   'service_price' => 'السعر',
   'service_duration' => 'المدة (بالدقائق)',
   'add_service' => 'إضافة خدمة جديدة',
@@ -49,7 +49,7 @@ $lang = array(
   'booking_full_name' => 'الاسم الكامل',
   'booking_phone' => 'رقم الهاتف',
   'booking_email_optional' => 'البريد الإلكتروني (اختياري)',
-  'booking_select_service' => 'اختاري الخدمة',
+  'booking_select_service' => 'إختيار الجلسة',
   'booking_select_date' => 'التاريخ',
   'booking_select_time' => 'الوقت',
   'booking_select_time_hint' => 'يرجى اختيار التاريخ أولاً',
@@ -74,7 +74,7 @@ $lang = array(
   'no_bookings_yet' => 'لا توجد مواعيد حالياً',
   'booking_success_title' => 'تم إرسال طلبك بنجاح!',
   'booking_pending_msg' => 'طلب الموعد قيد المراجعة وسيتم تأكيده قريباً.',
-  'booking_service' => 'الخدمة',
+  'booking_service' => 'الجلسة',
   'booking_time' => 'الموعد',
   'booking_contact_whatsapp' => 'Whatsapp/واتساب',
   'book_another' => 'لحجز موعد آخر',
@@ -109,7 +109,7 @@ $lang['saturday'] = 'السبت';
 // ==========================
 // /lang/ar.php (services additions)
 // ==========================
-$lang['service_details'] = 'تفاصيل الخدمة';
+$lang['service_details'] = 'تفاصيل الجلسة';
 $lang['service_not_found'] = 'لم يتم العثور على خدمات حالياً.';
 $lang['service_price_label'] = 'السعر';
 $lang['service_duration_label'] = 'المدة';
@@ -120,7 +120,7 @@ $lang['service_book_now'] = 'حجز موعد';
 // ==========================
 // /lang/ar.php (services additions)
 // ==========================
-$lang['service_details'] = 'تفاصيل الخدمة';
+$lang['service_details'] = 'تفاصيل الجلسة';
 $lang['service_not_found'] = 'لم يتم العثور على خدمات حالياً.';
 $lang['service_price_label'] = 'السعر';
 $lang['service_duration_label'] = 'المدة';
@@ -131,8 +131,8 @@ $lang['client_reviews'] = 'تقييمات الزبائن';
 $lang['write_review'] = 'اكتب رأيك هنا...';
 $lang['submit_review'] = 'إرسال التقييم';
 $lang['update_review'] = 'تحديث التقييم';
-$lang['select_service'] = 'اختر الخدمة (اختياري)';
+$lang['select_service'] = 'الجلسة/الخدمة (اختياري)';
 $lang['no_reviews'] = 'لا توجد تقييمات بعد';
-$lang['service_label'] = 'الخدمة: ';
+$lang['service_label'] = 'الجلسة: ';
 
 ?>
