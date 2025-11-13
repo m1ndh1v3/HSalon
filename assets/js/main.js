@@ -377,6 +377,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const track = document.querySelector('.gallery-track');
+  if(!track) return;
   const lang = document.documentElement.lang || 'en';
   const isRTL = lang.startsWith('ar');
   const speed = 60; // slower movement
@@ -415,32 +416,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-
-  // ===== FIXED SELECT CHEVRONS =====
-  document.querySelectorAll('.form-select').forEach(select => {
-    const wrap = document.createElement('div');
-    wrap.className = 'select-wrapper position-relative';
-    select.parentNode.insertBefore(wrap, select);
-    wrap.appendChild(select);
-
-    const chevron = document.createElement('i');
-    chevron.className = 'bi bi-chevron-down select-chevron';
-    wrap.appendChild(chevron);
-
-    let open = false;
-    select.addEventListener('focus', () => {
-      open = true;
-      chevron.classList.add('rotate-up');
-    });
-    select.addEventListener('blur', () => {
-      open = false;
-      chevron.classList.remove('rotate-up');
-    });
-    select.addEventListener('click', () => {
-      open = !open;
-      chevron.classList.toggle('rotate-up', open);
-    });
-  });
 
   // ===== FLATPICKR =====
   if (window.flatpickr) {
@@ -522,3 +497,4 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(()=>{});
   });
 });
+

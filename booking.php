@@ -198,18 +198,24 @@ $textAlign = $isRtl ? 'text-end' : 'text-start';
             </div>
           </div>
 
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label class="form-label"><?php echo $lang['booking_select_date']; ?></label>
-              <input type="date" id="datePicker" name="date" class="form-control" required min="<?php echo date('Y-m-d'); ?>">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label"><?php echo $lang['booking_select_time']; ?></label>
+          <div class="col-md-6">
+            <label class="form-label"><?php echo $lang['booking_select_date']; ?></label>
+
+              <input type="date" id="datePicker" name="date" class="form-control" required
+                    min="<?php echo date('Y-m-d'); ?>">
+
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label"><?php echo $lang['booking_select_time']; ?></label>
+
               <select name="time" id="timeSelect" class="form-select" required disabled>
                 <option value=""><?php echo $lang['booking_select_time_hint']; ?></option>
               </select>
-            </div>
+
           </div>
+
+        </div>
         </div>
 
         <div class="card mb-3 p-3 booking-card-section">

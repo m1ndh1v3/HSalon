@@ -22,7 +22,9 @@ $theme = $_SESSION['theme'];
 <html lang="<?php echo $lang_code; ?>" dir="<?php echo ($lang_code == 'ar' ? 'rtl' : 'ltr'); ?>">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  
   <title><?php echo SITE_NAME; ?></title>
   <script>
     const SITE_URL = "<?php echo SITE_URL; ?>";
@@ -33,6 +35,7 @@ $theme = $_SESSION['theme'];
   <link rel="icon" href="<?php echo SITE_URL; ?>/assets/img/hsalon_logo.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ar.js"></script>
   <script src="<?php echo SITE_URL; ?>/assets/js/main.js?v=<?php echo time(); ?>"></script>
 
 

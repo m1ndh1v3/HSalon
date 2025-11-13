@@ -5,6 +5,16 @@
 /* Fonts & Base Setup */
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap');
 
+
+/* Base variables (existing theme compatible) */
+:root {
+  --nav-glass-bg-light: rgba(255, 255, 255, 0.45);
+  --nav-glass-bg-dark: rgba(30, 30, 30, 0.45);
+  --nav-border-light: rgba(255, 255, 255, 0.35);
+  --nav-border-dark: rgba(0, 0, 0, 0.35);
+  padding-top: env(safe-area-inset-top);
+}
+
 html, body {
   font-family: "Cairo", "Poppins", sans-serif;
   background: var(--bg-gradient);
@@ -12,6 +22,15 @@ html, body {
   min-height: 100vh;
   transition: background 0.4s ease, color 0.4s ease;
   overflow-x: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  transform: none;
+  backface-visibility: visible;  
+}
+
+body {
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
 }
 
 /* ==========================
@@ -611,13 +630,6 @@ footer {
   backdrop-filter: blur(4px);
 }
 
-/* improve overall smooth scroll rendering */
-html, body {
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-}
 body.dark .card,
 body.light .card {
   background: var(--card-bg);
@@ -1617,13 +1629,6 @@ body.dark .work-hours-section a.btn:hover {
   transform: rotate(20deg);
 }
 
-
-/* ===== Fix: allow fixed navbar to stick (ancestors must not be transformed) ===== */
-html, body {
-  transform: none !important;
-  backface-visibility: visible !important;
-}
-
 /* optional: also undo transforms on common wrappers to be extra safe */
 .navbar,
 .card,
@@ -2033,32 +2038,6 @@ body.dark #mainNavbar .nav-link.active {
    BOOKING FORM FINAL FIX
    ========================== */
 
-/* Remove Bootstrap default dropdown arrow */
-.form-select {
-  background-image: none !important;
-}
-
-/* Custom Chevron */
-.select-wrapper {
-  position: relative;
-}
-.select-chevron {
-  position: absolute;
-  top: 50%;
-  right: 1rem;
-  transform: translateY(-50%) rotate(0deg);
-  pointer-events: none;
-  color: var(--rose);
-  transition: transform 0.25s ease;
-}
-html[dir="rtl"] .select-chevron {
-  right: auto;
-  left: 1rem;
-}
-.select-chevron.rotate-up {
-  transform: translateY(-50%) rotate(180deg);
-}
-
 /* Dropdown option backgrounds */
 body.light .form-select option {
   background-color: #fff;
@@ -2115,14 +2094,6 @@ body.dark .flatpickr-weekdays {
    PREMIUM MOBILE NAV (Option A)
    Strong Glass + Blur + Elevated Profile Button
    ========================== */
-
-/* Base variables (existing theme compatible) */
-:root {
-  --nav-glass-bg-light: rgba(255, 255, 255, 0.45);
-  --nav-glass-bg-dark: rgba(30, 30, 30, 0.45);
-  --nav-border-light: rgba(255, 255, 255, 0.35);
-  --nav-border-dark: rgba(0, 0, 0, 0.35);
-}
 
 /* Detect theme automatically */
 body.light .mobile-nav-bar {
@@ -2270,3 +2241,91 @@ body.dark .mobile-lang-btn {
     padding-top: 30px !important;
   }
 }
+
+@media (max-width: 991px) {
+  #mainNavbar {
+    display: none !important;
+  }
+  #mobileLangToggle, 
+  #mobileThemeToggle {
+    position: fixed;
+    top: 22px;
+    left: 16px;
+    z-index: 999999 !important;
+    display: flex !important;
+  }
+
+  #mobileThemeToggle {
+    top: 72px;
+  }  
+}
+
+/* ==========================
+   FIX MOBILE FLOATING TOGGLES — RESTORE ORIGINAL STYLE
+   ========================== */
+
+@media (max-width: 991px) {
+
+  #mobileLangToggle,
+  #mobileThemeToggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 999999 !important;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255,255,255,0.35);
+    transition: background .25s ease, color .25s ease, transform .2s ease;
+  }
+
+  /* second button stacked under */
+  #mobileThemeToggle {
+    top: 72px;
+  }
+
+  /* LIGHT MODE */
+  body.light #mobileLangToggle,
+  body.light #mobileThemeToggle {
+    background: rgba(255,255,255,0.45);
+    color: #222;
+  }
+
+  body.light #mobileLangToggle:hover,
+  body.light #mobileThemeToggle:hover {
+    background: rgba(255,255,255,0.65);
+  }
+
+  /* DARK MODE */
+  body.dark #mobileLangToggle,
+  body.dark #mobileThemeToggle {
+    background: rgba(20,20,20,0.55);
+    border-color: rgba(0,0,0,0.4);
+    color: #f1f1f1;
+  }
+
+  body.dark #mobileLangToggle:hover,
+  body.dark #mobileThemeToggle:hover {
+    background: rgba(40,40,40,0.7);
+  }
+
+  /* icon size */
+  #mobileLangToggle i,
+  #mobileThemeToggle i {
+    font-size: 1.4rem;
+  }
+}
+
+body.dark .form-select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M3.204 5.596a.5.5 0 01.707 0L8 9.086l4.089-3.49a.5.5 0 11.656.754l-4.417 3.77a.75.75 0 01-.656 0l-4.417-3.77a.5.5 0 010-.754z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .75rem center;
+  background-size: 16px 16px;
+}
+
