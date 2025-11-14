@@ -90,7 +90,7 @@ $textDir = $isRtl ? 'rtl' : 'ltr';
 $textAlign = $isRtl ? 'text-end' : 'text-start';
 ?>
 
-<div class="container page-main">
+<div class="container">
   <h2 class="fw-bold text-center mb-4"><?php echo $lang['booking_page_title']; ?></h2>
 
   <div class="row justify-content-center">

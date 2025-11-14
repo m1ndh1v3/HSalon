@@ -6,7 +6,7 @@ require_once __DIR__ . '/config.php';
 include_once __DIR__ . '/includes/header.php';
 ?>
 
-  <section class="container page-main text-center">
+  <section class="container text-center">
     <div class="container">
       <h2 class="fw-bold mb-4"><?php echo $lang['gallery']; ?></h2>
 

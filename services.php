@@ -8,7 +8,7 @@ include_once __DIR__ . '/includes/header.php';
 $langKey = $_SESSION['lang'] ?? 'ar';
 ?>
 
-<main class="container page-main">
+<main class="container">
 
 <h2 class="fw-bold text-center mb-4"><?php echo $lang['services']; ?></h2>
 
