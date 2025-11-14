@@ -29,7 +29,7 @@ body.light {
   --rose: #b76e79;
   --rose-light: #fce8ec;
   --rose-dark: #9a5061;
-  --bg-gradient: linear-gradient(135deg, #f8f9fa, #fce8ec);
+  --bg-gradient: linear-gradient(135deg, #cf8899, #fce8ec);
   --card-bg: rgba(255,255,255,0.85);
   --nav-bg: rgba(255,255,255,0.8);
   --border: rgba(0,0,0,0.08);
