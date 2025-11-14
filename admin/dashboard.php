@@ -9,7 +9,6 @@ if (!isset($_SESSION['admin_id'])) {
 }
 include_once __DIR__ . '/../includes/header.php';
 
-// === Summary data ===
 $totalClients   = $pdo->query("SELECT COUNT(*) FROM clients")->fetchColumn();
 $totalServices  = $pdo->query("SELECT COUNT(*) FROM services")->fetchColumn();
 $totalBookings  = $pdo->query("SELECT COUNT(*) FROM bookings")->fetchColumn();
@@ -17,7 +16,6 @@ $approved       = $pdo->query("SELECT COUNT(*) FROM bookings WHERE status='appro
 $pending        = $pdo->query("SELECT COUNT(*) FROM bookings WHERE status='pending'")->fetchColumn();
 $cancelled      = $pdo->query("SELECT COUNT(*) FROM bookings WHERE status='cancelled'")->fetchColumn();
 
-// === Latest 5 bookings ===
 $stmt = $pdo->query("
   SELECT
     b.*,
@@ -36,18 +34,17 @@ $isDark = ($_SESSION['theme'] ?? 'light') === 'dark';
 
 <h2 class="text-center mb-4">لوحة التحكم الإدارية</h2>
 
-<!-- Summary cards -->
 <div class="row text-center mb-4" dir="rtl">
   <?php
   $cards = [
-    ['bi-people',         'الزبائن',    $totalClients],
-    ['bi-calendar2-check','المواعيد',   $totalBookings],
-    ['bi-scissors',       'الجلسات',    $totalServices],
-    ['bi-bar-chart',      'الإحصائيات', $approved + $pending + $cancelled]
+    ['bi-people','الزبائن',$totalClients],
+    ['bi-calendar2-check','المواعيد',$totalBookings],
+    ['bi-scissors','الجلسات',$totalServices],
+    ['bi-bar-chart','الإحصائيات',$approved + $pending + $cancelled]
   ];
   foreach ($cards as [$icon,$label,$value]):
   ?>
-  <div class="col-md-3 mb-3">
+  <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
     <div class="card shadow-sm p-3 border-0 text-white summary-card">
       <i class="bi <?= $icon ?> fs-2 mb-2"></i>
       <h5><?= $label ?></h5>
@@ -57,7 +54,6 @@ $isDark = ($_SESSION['theme'] ?? 'light') === 'dark';
   <?php endforeach; ?>
 </div>
 
-<!-- Chart + Latest bookings -->
 <div class="row mb-5" dir="rtl">
   <div class="col-md-6 mb-4">
     <div class="card shadow-sm p-3">
@@ -73,6 +69,7 @@ $isDark = ($_SESSION['theme'] ?? 'light') === 'dark';
       </div>
     </div>
   </div>
+
   <div class="col-md-6 mb-4">
     <div class="card shadow-sm p-3">
       <h5 class="text-center mb-3">آخر 5 مواعيد</h5>
@@ -87,22 +84,22 @@ $isDark = ($_SESSION['theme'] ?? 'light') === 'dark';
         </thead>
         <tbody>
           <?php if ($latestBookings): foreach ($latestBookings as $b): ?>
-            <tr>
-              <td><?= $b['id'] ?></td>
-              <td><?= clean($b['client_name']) ?></td>
-              <td><?= clean($b['service_name']) ?></td>
-              <td>
-                <?php
-                  echo match($b['status']) {
-                    'approved'  => '<span class="badge bg-success">موافقة</span>',
-                    'cancelled' => '<span class="badge bg-danger">ملغاة</span>',
-                    default     => '<span class="badge bg-warning text-dark">معلقة</span>'
-                  };
-                ?>
-              </td>
-            </tr>
+          <tr>
+            <td><?= $b['id'] ?></td>
+            <td><?= clean($b['client_name']) ?></td>
+            <td><?= clean($b['service_name']) ?></td>
+            <td>
+              <?php
+                echo match($b['status']) {
+                  'approved'  => '<span class="badge bg-success">موافقة</span>',
+                  'cancelled' => '<span class="badge bg-danger">ملغاة</span>',
+                  default     => '<span class="badge bg-warning text-dark">معلقة</span>'
+                };
+              ?>
+            </td>
+          </tr>
           <?php endforeach; else: ?>
-            <tr><td colspan="4" class="text-muted">لا توجد مواعيد حديثة.</td></tr>
+          <tr><td colspan="4" class="text-muted">لا توجد مواعيد حديثة.</td></tr>
           <?php endif; ?>
         </tbody>
       </table>
@@ -110,35 +107,46 @@ $isDark = ($_SESSION['theme'] ?? 'light') === 'dark';
   </div>
 </div>
 
-<!-- Quick navigation -->
 <div class="row text-center" dir="rtl">
-  <div class="col-md-3 mb-3">
+
+  <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
     <a href="bookings.php" class="card p-3 text-decoration-none shadow-sm hover-card quick-nav-card">
       <i class="bi bi-calendar-check fs-1"></i>
       <h5>إدارة المواعيد</h5>
     </a>
   </div>
-  <div class="col-md-3 mb-3">
+
+  <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
     <a href="clients.php" class="card p-3 text-decoration-none shadow-sm hover-card quick-nav-card">
       <i class="bi bi-people fs-1"></i>
       <h5>إدارة الزبائن</h5>
     </a>
   </div>
-  <div class="col-md-3 mb-3">
+
+  <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
     <a href="services.php" class="card p-3 text-decoration-none shadow-sm hover-card quick-nav-card">
       <i class="bi bi-scissors fs-1"></i>
       <h5>إدارة الجلسات</h5>
     </a>
   </div>
-  <div class="col-md-3 mb-3">
+
+  <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
     <a href="work_hours.php" class="card p-3 text-decoration-none shadow-sm hover-card quick-nav-card">
       <i class="bi bi-clock fs-1"></i>
       <h5>مواعيد العمل</h5>
     </a>
   </div>
+
+  <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+    <a href="../logout.php"
+       class="card p-3 text-decoration-none shadow-sm hover-card quick-nav-card logout-card d-flex flex-column align-items-center justify-content-center">
+      <i class="bi bi-box-arrow-right fs-1 mb-2"></i>
+      <h5 class="fw-semibold">تسجيل الخروج</h5>
+    </a>
+  </div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 
 <?php include_once __DIR__ . '/../includes/footer.php'; ?>

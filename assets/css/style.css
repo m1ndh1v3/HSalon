@@ -29,8 +29,9 @@ html, body {
 
 /* Safe area ONLY inside the real Android/iOS app */
 body.is-app {
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-top: env(safe-area-inset-top) !important;
+  padding-top: constant(safe-area-inset-top) !important;
+  background-color: #000; /* black behind notch */
 }
 
 /* ==========================
@@ -72,7 +73,7 @@ body.dark {
   transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
 }
 .card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-1px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 .card h5, .card h3, .card p {
@@ -251,7 +252,7 @@ body.light .nav-link .bi-moon { display: inline-block; }
 .dropdown-menu {
   inset: auto !important;
   inset-inline-end: 0 !important;
-  transform: translateY(5px);
+  transform: translateY(3px);
   border-radius: 0.5rem;
   border: 1px solid var(--border);
   box-shadow: 0 4px 20px rgba(0,0,0,0.15);
@@ -385,7 +386,7 @@ body.dark .summary-card {
 
 /* hover effect quick nav */
 .hover-card { transition: transform .2s, box-shadow .2s; }
-.hover-card:hover { transform: translateY(-5px); box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+.hover-card:hover { transform: translateY(-1px); box-shadow: 0 0 10px rgba(0,0,0,0.2); }
 body.dark .quick-nav-card {
   background: #222 !important;
   color: #f1f1f1 !important;
@@ -1317,7 +1318,7 @@ body.dark .hero-landing .hero-overlay {
   transition: transform .3s ease, box-shadow .3s ease;
 }
 .work-hours-section .hour-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0,0,0,.15);
 }
 
@@ -1330,7 +1331,7 @@ body.dark .hero-landing .hero-overlay {
   transition: transform .3s ease, box-shadow .3s ease;
 }
 .services-preview .service-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(0,0,0,.2);
 }
 
@@ -1598,7 +1599,7 @@ body.dark .work-hours-section a.btn:hover {
   #mainNavbar .profile-toggle .dropdown-menu {
     position: absolute !important;
     left: 50% !important;
-    transform: translateX(-50%) translateY(10px) !important;
+    transform: translateX(-50%) translateY(5px) !important;
     min-width: 180px;
     text-align: center;
     border-radius: 0.75rem;
@@ -1882,6 +1883,9 @@ body.dark .booking-info-box {
   background-color: rgba(255, 255, 255, 0.05);
   color: #f8f9fa;
 }
+body.dark .booking-info-box p {
+  color: #f1f1f1 !important;
+}
 
 .success-actions a.btn,
 a.btn-success {
@@ -1940,6 +1944,21 @@ body.dark .dashboard-card .icon {
 .dashboard-card:hover .icon {
   transform: scale(1.1);
   color: var(--rose-dark);
+}
+
+.logout-card {
+  background: #dc3545 !important;
+  color: #fff !important;
+}
+
+.logout-card i,
+.logout-card h5 {
+  color: #fff !important;
+}
+
+.logout-card:hover {
+  background: #c82333 !important; /* darker red on hover */
+  box-shadow: 0 0 14px rgba(220,53,69,0.45) !important;
 }
 
 .fade-in {
@@ -2090,6 +2109,20 @@ body.dark .flatpickr-weekdays {
 .body.dark .flatpickr-current-month {
   color: #f1f1f1 !important;
 }
+
+body.dark .flatpickr-months .flatpickr-month {
+  color: #fff !important;
+}
+
+body.dark .flatpickr-months .flatpickr-prev-month svg,
+body.dark .flatpickr-months .flatpickr-next-month svg {
+  fill: #fff !important;
+}
+
+body.dark .flatpickr-weekdays span {
+  color: #fff !important;
+}
+
 /* ==========================
    PREMIUM MOBILE NAV (Option A)
    Strong Glass + Blur + Elevated Profile Button
@@ -2161,40 +2194,52 @@ body.dark .mobile-nav-bar {
    Floating Center Profile Button
    ========================== */
 .mobile-profile-btn {
-  position: absolute;
-  bottom: 35px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: fixed !important;
+  bottom: calc(env(safe-area-inset-bottom) + 34px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
   width: 72px;
   height: 72px;
   border-radius: 50%;
   background: linear-gradient(145deg, #b76e79, #d68d9b);
   box-shadow:
-    0 12px 26px rgba(0, 0, 0, 0.35),
-    0 0 14px rgba(255, 110, 130, 0.55);
+    0 12px 26px rgba(0,0,0,0.35),
+    0 0 14px rgba(255,110,130,0.55);
+
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   color: #fff !important;
-  z-index: 9999999;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  z-index: 999999 !important;
+
+  transition: transform .25s ease, box-shadow .25s ease;
 }
 
+/* icon size */
 .mobile-profile-btn i {
   font-size: 2.15rem;
 }
 
-/* Lift animation on press */
+/* press effect */
 .mobile-profile-btn:active {
-  transform: translateX(-50%) scale(0.92);
+  transform: translateX(-50%) scale(0.92) !important;
   box-shadow:
-    0 6px 14px rgba(0, 0, 0, 0.25),
-    0 0 10px rgba(255, 110, 130, 0.5);
+    0 6px 14px rgba(0,0,0,0.25),
+    0 0 10px rgba(255,110,130,0.5);
 }
 
-/* Hover lift (Android WebView-safe) */
+/* hover lift */
 .mobile-profile-btn:hover {
-  transform: translateX(-50%) translateY(-3px);
+  transform: translateX(-50%) translateY(-2px) !important;
+}
+
+/* dark mode */
+body.dark .mobile-profile-btn {
+  background: linear-gradient(145deg, #a96271, #c98592);
+  box-shadow:
+    0 14px 28px rgba(0,0,0,0.55),
+    0 0 16px rgba(245,162,176,0.55);
 }
 
 /* ==========================
@@ -2242,61 +2287,66 @@ body.dark .mobile-lang-btn {
   }
 }
 
-@media (max-width: 991px) {
-  #mainNavbar {
-    display: none !important;
-  }
-  #mobileLangToggle, 
-  #mobileThemeToggle {
-    position: fixed;
-    top: 22px;
-    left: 16px;
-    z-index: 999999 !important;
-    display: flex !important;
-  }
-
-  #mobileThemeToggle {
-    top: 72px;
-  }  
+body.dark .form-select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M3.204 5.596a.5.5 0 01.707 0L8 9.086l4.089-3.49a.5.5 0 11.656.754l-4.417 3.77a.75.75 0 01-.656 0l-4.417-3.77a.5.5 0 010-.754z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .75rem center;
+  background-size: 16px 16px;
 }
 
-/* ==========================
-   FIX MOBILE FLOATING TOGGLES — RESTORE ORIGINAL STYLE
-   ========================== */
+body.is-app {
+  padding-top: env(safe-area-inset-top);
+  padding-top: constant(safe-area-inset-top);
+}
+
+body:not(.is-app) {
+  margin-top: 0;
+}
+
+/* ========== MOBILE TOGGLES — BOTTOM LEFT STACK ========== */
 
 @media (max-width: 991px) {
+
+  #mainNavbar {
+    display: none;
+  }
+
+  body {
+    padding-top: 0;
+    margin-top: 0;
+    padding-bottom: 100px;
+  }  
 
   #mobileLangToggle,
   #mobileThemeToggle {
     position: fixed;
-    top: 20px;
     left: 20px;
-    z-index: 999999 !important;
+    bottom: 140px;
     width: 46px;
     height: 46px;
     border-radius: 12px;
-    display: flex !important;
+    display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.35rem;
     backdrop-filter: blur(18px) saturate(160%);
     -webkit-backdrop-filter: blur(18px) saturate(160%);
     border: 1px solid rgba(255,255,255,0.35);
     transition: background .25s ease, color .25s ease, transform .2s ease;
+    z-index: 999999;
   }
 
-  /* second button stacked under */
+  /* theme toggle stacked below language toggle */
   #mobileThemeToggle {
-    top: 72px;
+    bottom: 80px;
   }
 
   /* LIGHT MODE */
   body.light #mobileLangToggle,
   body.light #mobileThemeToggle {
     background: rgba(255,255,255,0.45);
-    color: #222;
+    color: #000;
   }
-
   body.light #mobileLangToggle:hover,
   body.light #mobileThemeToggle:hover {
     background: rgba(255,255,255,0.65);
@@ -2307,50 +2357,23 @@ body.dark .mobile-lang-btn {
   body.dark #mobileThemeToggle {
     background: rgba(20,20,20,0.55);
     border-color: rgba(0,0,0,0.4);
-    color: #f1f1f1;
+    color: #fff;
   }
-
   body.dark #mobileLangToggle:hover,
   body.dark #mobileThemeToggle:hover {
     background: rgba(40,40,40,0.7);
   }
 
-  /* icon size */
-  #mobileLangToggle i,
-  #mobileThemeToggle i {
-    font-size: 1.4rem;
-  }
+#mobileLangToggle:hover,
+#mobileThemeToggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 12px rgba(183,110,121,0.45);
 }
 
-body.dark .form-select {
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M3.204 5.596a.5.5 0 01.707 0L8 9.086l4.089-3.49a.5.5 0 11.656.754l-4.417 3.77a.75.75 0 01-.656 0l-4.417-3.77a.5.5 0 010-.754z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right .75rem center;
-  background-size: 16px 16px;
-}
-#mobileLangToggle {
-  position: fixed !important;
-  top: 20px !important;
-  left: 20px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  pointer-events: auto;
+body.dark #mobileLangToggle:hover,
+body.dark #mobileThemeToggle:hover {
+  box-shadow: 0 0 12px rgba(245,162,176,0.55);
 }
 
-#mobileThemeToggle {
-  position: fixed !important;
-  top: 68px !important;   /* 20px + 48px button height */
-  left: 20px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  pointer-events: auto;
-}
 
-/* ensure no top content gap */
-body,
-.hero-landing,
-.container,
-section {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
 }
