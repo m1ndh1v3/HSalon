@@ -2401,22 +2401,18 @@ body.is-app .page-main {
   }
 }
 
-/* ==========================================
-   FINAL UNIFIED SPACING (the rest ignored)
-   ========================================== */
-
 .page-main {
-  padding-top: calc( env(safe-area-inset-top) + 60px ) !important;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 20px) !important;
 }
 
-/* Android / iOS app wrapper */
+/* Android/iOS app wrapper */
 body.is-app .page-main {
-  padding-top: calc( env(safe-area-inset-top) + 70px ) !important;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 24px) !important;
 }
 
 /* Desktop */
 @media (min-width: 992px) {
   .page-main {
-    padding-top: 90px !important;
+    padding-top: 40px !important;
   }
 }

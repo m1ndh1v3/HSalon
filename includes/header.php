@@ -23,8 +23,9 @@ $theme = $_SESSION['theme'];
 <html lang="<?php echo $lang_code; ?>" dir="<?php echo ($lang_code == 'ar' ? 'rtl' : 'ltr'); ?>">
 <head>
   <meta charset="utf-8">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="color-scheme" content="light dark">
   
   <title><?php echo SITE_NAME; ?></title>
   <script>
