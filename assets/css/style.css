@@ -12,7 +12,6 @@
   --nav-glass-bg-dark: rgba(30, 30, 30, 0.45);
   --nav-border-light: rgba(255, 255, 255, 0.35);
   --nav-border-dark: rgba(0, 0, 0, 0.35);
-  padding-top: env(safe-area-inset-top);
 }
 
 html, body {
@@ -28,9 +27,10 @@ html, body {
   backface-visibility: visible;  
 }
 
-body {
-  padding-top: constant(safe-area-inset-top);
+/* Safe area ONLY inside the real Android/iOS app */
+body.is-app {
   padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* ==========================
@@ -2328,4 +2328,29 @@ body.dark .form-select {
   background-position: right .75rem center;
   background-size: 16px 16px;
 }
+#mobileLangToggle {
+  position: fixed !important;
+  top: 20px !important;
+  left: 20px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: auto;
+}
 
+#mobileThemeToggle {
+  position: fixed !important;
+  top: 68px !important;   /* 20px + 48px button height */
+  left: 20px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: auto;
+}
+
+/* ensure no top content gap */
+body,
+.hero-landing,
+.container,
+section {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
