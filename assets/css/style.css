@@ -2335,11 +2335,6 @@ body.dark #mobileThemeToggle:hover {
 
 }
 
-/* App mode = apply notch padding ONCE */
-body.is-app {
-  padding-top: calc(env(safe-area-inset-top) + 12px) !important;
-}
-
 /* Ensure navbar is hidden in app mode */
 body.is-app #mainNavbar {
   display: none !important;
