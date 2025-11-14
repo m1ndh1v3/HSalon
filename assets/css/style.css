@@ -2274,19 +2274,9 @@ body.dark #mobileThemeToggle:hover {
     max-width: 100% !important;
   }
 
-  .hero-landing {
-    margin-top: 0 !important;
-    padding-top: env(safe-area-inset-top) !important;
-  }
-
 }
 
 @media (max-width: 991px) {
-
-  body {
-    margin-top: 0;
-    padding-bottom: 100px;
-  }  
 
   #mobileLangToggle,
   #mobileThemeToggle {
@@ -2345,22 +2335,24 @@ body.dark #mobileThemeToggle:hover {
 
 }
 
-
-/* =====================================================
-   GLOBAL SAFE PAGE SPACING
-   ===================================================== */
-.page-main {
-  padding-top: 20px;
-}
-
-/* Desktop */
-@media (min-width: 992px) {
-  .page-main {
-    padding-top: 60px;
-  }
-}
-
+/* App mode = apply notch padding ONCE */
 body.is-app {
-  background-color: #000;
-  padding-top: calc(env(safe-area-inset-top, 0px) + 32px);
+  padding-top: calc(env(safe-area-inset-top) + 12px) !important;
+}
+
+/* Ensure navbar is hidden in app mode */
+body.is-app #mainNavbar {
+  display: none !important;
+}
+
+/* Page spacing normalized */
+body.is-app .page-main {
+  padding-top: 12px !important;   /* spacing under the notch */
+  margin-top: 0 !important;
+}
+
+/* Hero section normalized */
+body.is-app .hero-landing {
+  padding-top: calc(env(safe-area-inset-top) + 24px) !important;
+  margin-top: 0 !important;
 }
