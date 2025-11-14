@@ -1,12 +1,10 @@
-/* ==========================
-   /assets/css/style.css — HSalon Admin NeoGlass Theme (Final Polished)
-   ========================== */
 
-/* Fonts & Base Setup */
+
+
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@400;500;600&display=swap');
 
 
-/* Base variables (existing theme compatible) */
+
 :root {
   --nav-glass-bg-light: rgba(255, 255, 255, 0.45);
   --nav-glass-bg-dark: rgba(30, 30, 30, 0.45);
@@ -27,16 +25,14 @@ html, body {
   backface-visibility: visible;  
 }
 
-/* Safe area ONLY inside the real Android/iOS app */
+
 body.is-app {
   padding-top: env(safe-area-inset-top) !important;
   padding-top: constant(safe-area-inset-top) !important;
-  background-color: #000; /* black behind notch */
+  background-color: #000; 
 }
 
-/* ==========================
-   Light / Dark Variables
-   ========================== */
+
 body.light {
   --rose: #b76e79;
   --rose-light: #fce8ec;
@@ -61,9 +57,7 @@ body.dark {
   --shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-/* ==========================
-   Cards & Panels
-   ========================== */
+
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -80,7 +74,7 @@ body.dark {
   color: var(--text);
 }
 .card i {
-  /* color: var(--rose); */
+  
   color: #fff;
 }
 
@@ -88,7 +82,7 @@ body.dark .card i {
   color: #fff;
 }
 
-/* Summary Cards */
+
 .card.bg-primary,
 .card.bg-success,
 .card.bg-warning,
@@ -104,9 +98,7 @@ body.dark .card i {
 .card.bg-primary { background: linear-gradient(135deg, #b76e79, #d68d9b) !important; }
 
 
-/* ==========================
-   Buttons
-   ========================== */
+
 .btn-primary {
   background: var(--rose);
   border-color: var(--rose);
@@ -124,9 +116,7 @@ body.dark .card i {
   color: #fff;
 }
 
-/* ==========================
-   Modals
-   ========================== */
+
 .modal-content {
   background: var(--card-bg);
   color: var(--text);
@@ -137,9 +127,7 @@ body.dark .card i {
 .modal-header { border-bottom-color: var(--border); }
 .modal-footer { border-top-color: var(--border); }
 
-/* ==========================
-   Footer
-   ========================== */
+
 footer {
   background: linear-gradient(135deg, var(--rose-light), #ffffff);
   color: #2b2b2b;
@@ -149,9 +137,7 @@ footer {
 }
 footer p { margin: 0; }
 
-/* ==========================
-   Interactive Elements
-   ========================== */
+
 a {
   color: var(--rose);
   text-decoration: none;
@@ -161,9 +147,7 @@ a:hover { color: var(--rose-dark); }
 
 
 
-/* ==========================
-   Responsive Adjustments
-   ========================== */
+
 @media (max-width: 768px) {
   .navbar-brand { font-size: 1.2rem; }
   .card h5 { font-size: 1rem; }
@@ -171,11 +155,9 @@ a:hover { color: var(--rose-dark); }
   .table { font-size: 0.9rem; }
 }
 
-/* ==========================
-   Dark Mode Form & UI Fixes — Matte Charcoal Edition
-   ========================== */
 
-/* Universal text color fix */
+
+
 body.dark,
 body.dark p,
 body.dark h1,
@@ -191,7 +173,7 @@ body.dark .card-text {
   color: #f1f1f1 !important;
 }
 
-/* Inputs, selects, textareas */
+
 body.dark .form-control,
 body.dark .form-select,
 body.dark textarea {
@@ -209,7 +191,7 @@ body.dark .form-control::placeholder {
   color: rgba(255,255,255,0.5);
 }
 
-/* Input icons (date/time pickers) */
+
 body.dark input[type="date"]::-webkit-calendar-picker-indicator,
 body.dark input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(1) brightness(1.5);
@@ -225,13 +207,13 @@ body.dark .dropdown-item:hover {
   color: #fff;
 }
 
-/* Prevent dropdown cutoff in RTL */
+
 [dir="rtl"] .dropdown-menu-end {
   right: auto;
   left: 0;
 }
 
-/* Modals & notifications */
+
 body.dark .modal-content {
   background-color: #222;
   color: #fff;
@@ -242,13 +224,13 @@ body.dark .modal-footer {
   border-color: rgba(255,255,255,0.1);
 }
 
-/* Theme toggle & icon visibility */
+
 body.dark .nav-link .bi-moon,
 body.light .nav-link .bi-sun { display: none; }
 body.dark .nav-link .bi-sun,
 body.light .nav-link .bi-moon { display: inline-block; }
 
-/* align right for RTL, left for LTR automatically */
+
 .dropdown-menu {
   inset: auto !important;
   inset-inline-end: 0 !important;
@@ -259,12 +241,12 @@ body.light .nav-link .bi-moon { display: inline-block; }
   z-index: 1050;
 }
 
-/* ensure dropdown fits view */
+
 .dropdown-menu.show {
   overflow: visible;
 }
 
-/* slight hover smoothness for dropdown items */
+
 .dropdown-item {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -273,11 +255,9 @@ body.light .nav-link .bi-moon { display: inline-block; }
   color: var(--rose-dark);
 }
 
-/* ==========================
-   INDEX GRAY BUTTONS — NeoGlass Balanced
-   ========================== */
 
-/* Light mode */
+
+
 body.light .btn-outline-secondary,
 body.light .btn-secondary {
   color: #fff !important;
@@ -293,7 +273,7 @@ body.light .btn-secondary:hover {
   box-shadow: 0 0 10px rgba(183,110,121,0.6);
 }
 
-/* Dark mode */
+
 body.dark .btn-outline-secondary,
 body.dark .btn-secondary {
   color: #fff !important;
@@ -309,9 +289,7 @@ body.dark .btn-secondary:hover {
   box-shadow: 0 0 10px rgba(245,162,176,0.5);
 }
 
-/* ==========================
-   BOOKING + PROFILE SPECIAL STYLING — Unified Rose Buttons
-   ========================== */
+
 
 section .card * {
   pointer-events: none;
@@ -329,13 +307,11 @@ section .card .text-danger.fw-bold {
   opacity: 0.8;
 }
 
-/* ==========================
-   THEME POLISH — Exact Requested Fixes
-   ========================== */
 
-/* --- LIGHT MODE --- */
 
-/* pagination buttons use rose theme */
+
+
+
 body.light .page-link {
   color: var(--rose);
   border: 1px solid var(--rose-light);
@@ -351,9 +327,9 @@ body.light .page-link:hover {
 }
 
 
-/* --- DARK MODE --- */
 
-/* footer fits dark palette */
+
+
 body.dark footer {
   background: linear-gradient(135deg,#141414,#1f1f1f);
   color: #eaeaea;
@@ -361,7 +337,7 @@ body.dark footer {
   box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);
 }
 
-/* index “work hours” cards text white (except red ‘closed’) */
+
 body.dark section .card .fw-semibold,
 body.dark section .card .small.text-muted {
   color: #fff !important;
@@ -384,7 +360,7 @@ body.dark .summary-card {
   color: #f1f1f1;
 }
 
-/* hover effect quick nav */
+
 .hover-card { transition: transform .2s, box-shadow .2s; }
 .hover-card:hover { transform: translateY(-1px); box-shadow: 0 0 10px rgba(0,0,0,0.2); }
 body.dark .quick-nav-card {
@@ -395,14 +371,12 @@ body.dark .quick-nav-card:hover {
   background: #2b2b2b !important;
 }
 
-/* ==========================
-   TABLE THEME FIX — Adaptive Tables (Light/Dark)
-   ========================== */
+
 .adaptive-table {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Light mode */
+
 body.light .adaptive-table {
   background: #fff;
   color: #212529;
@@ -416,7 +390,7 @@ body.light .adaptive-table tbody tr:hover {
   background: rgba(183,110,121,0.08);
 }
 
-/* Dark mode */
+
 body.dark .adaptive-table {
   background: #1e1e1e;
   color: #f1f1f1;
@@ -437,11 +411,9 @@ body.dark .adaptive-table .text-muted {
   color: rgba(255,255,255,0.6) !important;
 }
 
-/* ==========================
-   FINAL TABLE & INACTIVE ROW FIX
-   ========================== */
 
-/* Light mode */
+
+
 body.light .table,
 body.light .table-striped,
 body.light .table-hover {
@@ -454,7 +426,7 @@ body.light .table-hover {
   --bs-table-border-color: rgba(0,0,0,0.1) !important;
 }
 
-/* Dark mode — default bright text */
+
 body.dark .table,
 body.dark .table-striped,
 body.dark .table-hover {
@@ -467,7 +439,7 @@ body.dark .table-hover {
   --bs-table-border-color: rgba(255,255,255,0.1) !important;
 }
 
-/* Dark mode inactive/expired rows (dark background + dark text) */
+
 body.dark .table tbody tr.inactive,
 body.dark .table tbody tr.expired,
 body.dark .table tbody tr.table-secondary {
@@ -484,29 +456,27 @@ body.dark .table tbody tr.expired:hover {
   color: #212529 !important;
 }
 
-/* Muted text inside inactive rows */
+
 body.dark .table tbody tr.inactive .text-muted,
 body.dark .table tbody tr.expired .text-muted {
   color: #6c757d !important;
 }
 
-/* Regular dark rows text fix */
+
 body.dark .table td,
 body.dark .table th {
   color: #f1f1f1 !important;
   border-color: rgba(255,255,255,0.08) !important;
 }
 
-/* Muted text globally readable in dark mode */
+
 body.dark .table .text-muted {
   color: rgba(255,255,255,0.6) !important;
 }
 
-/* ==========================
-   FINAL AUTO-DETECT TABLE COLOR FIX (Dark/Light + Expired Rows)
-   ========================== */
 
-/* general dark mode defaults */
+
+
 body.dark .table,
 body.dark .table-striped,
 body.dark .table-hover {
@@ -519,19 +489,19 @@ body.dark .table-hover {
   --bs-table-border-color: rgba(255,255,255,0.1) !important;
 }
 
-/* ensure bright text everywhere */
+
 body.dark .table td,
 body.dark .table th {
   color: #f1f1f1 !important;
   border-color: rgba(255,255,255,0.08) !important;
 }
 
-/* keep muted readable */
+
 body.dark .table .text-muted {
   color: rgba(255,255,255,0.6) !important;
 }
 
-/* automatically dark-text expired or inactive rows */
+
 body.dark .table tr.table-secondary,
 body.dark .table tr.text-muted,
 body.dark .table tr:has(td.text-muted),
@@ -554,11 +524,9 @@ body.dark .table tr:has(.status-expired):hover {
   background-color: #e9ecef !important;
   color: #212529 !important;
 }
-/* ==========================
-   PAGINATION THEME STYLES — Light / Dark Unified
-   ========================== */
 
-/* Light mode */
+
+
 body.light .pagination .page-link {
   color: var(--rose);
   background-color: #fff;
@@ -578,7 +546,7 @@ body.light .pagination .page-item.active .page-link {
   box-shadow: 0 0 8px rgba(183,110,121,0.6);
 }
 
-/* Dark mode */
+
 body.dark .pagination .page-link {
   color: #f1f1f1;
   background-color: #2b2b2b;
@@ -598,7 +566,7 @@ body.dark .pagination .page-item.active .page-link {
   box-shadow: 0 0 8px rgba(245,162,176,0.6);
 }
 
-/* rounded pagination */
+
 .pagination .page-link {
   border-radius: 0.5rem !important;
   font-weight: 600;
@@ -611,11 +579,9 @@ html {
   scroll-behavior: smooth;
 }
 
-/* ==========================
-   PERFORMANCE FIX — smoother scroll & hardware acceleration
-   ========================== */
 
-/* isolate GPU repaint regions */
+
+
 .navbar,
 .card,
 footer {
@@ -623,7 +589,7 @@ footer {
   transform: translateZ(0);
 }
 
-/* reduce heavy blur that kills FPS */
+
 .navbar {
   backdrop-filter: blur(6px);
 }
@@ -636,11 +602,9 @@ body.light .card {
   background: var(--card-bg);
   backdrop-filter: none;
 }
-/* ==========================
-   DARK MODE — TABLE HEADER + CALENDAR FIX
-   ========================== */
 
-/* generic table header fix (all pages) */
+
+
 body.dark table thead {
   background-color: #2b2b2b !important;
   color: #f1f1f1 !important;
@@ -655,7 +619,7 @@ body.dark table tbody td {
   color: #f1f1f1 !important;
 }
 
-/* calendar page dark theme */
+
 body.dark .calendar-grid {
   background-color: #1e1e1e !important;
   border-color: rgba(255,255,255,0.1) !important;
@@ -675,7 +639,7 @@ body.dark .calendar-day .p-2 {
   color: #f1f1f1 !important;
 }
 
-/* booking cards inside calendar dark mode */
+
 body.dark .calendar-day .card {
   background-color: #222 !important;
   border-color: rgba(255,255,255,0.1) !important;
@@ -688,9 +652,7 @@ body.dark .calendar-day .card .fw-semibold {
   color: #fff !important;
 }
 
-/* ==========================
-   Notifications Modal Styling — Light / Dark
-   ========================== */
+
 .notif-modal {
   background: var(--card-bg);
   color: var(--text);
@@ -728,9 +690,7 @@ body.dark .notif-modal .btn-close:hover {
   opacity: 1;
 }
 
-/* ==========================
-   Notifications Modal Centering Fix — Stable
-   ========================== */
+
 #notifModal.show {
   display: flex !important;
   align-items: center !important;
@@ -751,11 +711,9 @@ body.dark .notif-modal .btn-close:hover {
   overflow-y: auto;
 }
 
-/* ==========================
-   Animated Hamburger & Active Link Highlight
-   ========================== */
 
-/* hamburger animation */
+
+
 .navbar-toggler {
   border: none;
   outline: none !important;
@@ -799,7 +757,7 @@ body.dark .notif-modal .btn-close:hover {
 }
 
 
-/* active link glow/underline */
+
 .navbar .nav-link.active {
   position: relative;
   color: var(--rose) !important;
@@ -817,11 +775,9 @@ body.dark .notif-modal .btn-close:hover {
   opacity: 0.9;
 }
 
-/* ==========================
-   Navbar Icon & Toggler Width Fix — Prevent Shrink
-   ========================== */
 
-/* hamburger keeps proper width */
+
+
 .navbar-toggler {
   width: 48px !important;
   height: 36px !important;
@@ -830,7 +786,7 @@ body.dark .notif-modal .btn-close:hover {
   justify-content: center;
 }
 
-/* restore icon visibility inside */
+
 .navbar-toggler-icon,
 .navbar-toggler-icon::before,
 .navbar-toggler-icon::after {
@@ -840,7 +796,7 @@ body.dark .notif-modal .btn-close:hover {
   right: 0;
   margin: auto;
 }
-/* ========== Simplified Navbar Styles ========== */
+
 
 #mainNavbar {
   background: var(--nav-bg);
@@ -850,7 +806,7 @@ body.dark .notif-modal .btn-close:hover {
   z-index: 1040;
 }
 
-/* brand and links */
+
 #mainNavbar .navbar-brand {
   font-weight: 700;
   color: var(--rose);
@@ -864,7 +820,7 @@ body.dark .notif-modal .btn-close:hover {
 #mainNavbar .nav-link:hover { color: var(--rose); }
 #mainNavbar .nav-link.active { color: var(--rose); font-weight: 700; }
 
-/* buttons and icons — refined static hover glow */
+
 #mainNavbar .icon-only {
   width: 40px;
   height: 40px;
@@ -897,7 +853,7 @@ body.dark .notif-modal .btn-close:hover {
 }
 
 
-/* profile icon highlight */
+
 #mainNavbar .profile-toggle > .nav-link.icon-only {
   background: var(--rose);
   color: #fff !important;
@@ -912,7 +868,7 @@ body.dark .notif-modal .btn-close:hover {
   box-shadow: 0 0 12px rgba(183,110,121,0.7);
 }
 
-/* dark mode adjustment */
+
 body.dark #mainNavbar .icon-only {
   color: #f1f1f1;
   background: rgba(255,255,255,0.05);
@@ -956,11 +912,9 @@ body.light #mainNavbar .icon-only {
 }
 
 
-/* ==========================
-   Navbar Icon Hover — Individual Behaviors (Final Polished)
-   ========================== */
 
-/* keep profile icon rotation + ring pulse */
+
+
 #mainNavbar .profile-toggle > .nav-link.icon-only {
   position: relative;
   overflow: visible;
@@ -988,7 +942,7 @@ body.light #mainNavbar .icon-only {
 }
 
 
-/* ========== THEME TOGGLE ========== */
+
 #themeToggle i {
   transition: transform 0.6s ease, color 0.3s ease, opacity 0.3s ease;
 }
@@ -1003,12 +957,12 @@ body.dark #themeToggle:hover i.bi-sun {
 body.light #themeToggle i.bi-sun { display: none; }
 body.dark #themeToggle i.bi-moon { display: none; }
 
-/* ========== LANGUAGE TOGGLE ========== */
+
 #langToggle {
   transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
-/* light mode — always black icon */
+
 body.light #langToggle,
 body.light #langToggle i {
   color: #000 !important;
@@ -1016,13 +970,13 @@ body.light #langToggle i {
 body.light #langToggle:hover {
   background: var(--rose);
   box-shadow: 0 0 8px rgba(183,110,121,0.4);
-  color: #000 !important; /* stays black even on hover */
+  color: #000 !important; 
 }
 body.light #langToggle:hover i {
   color: var(--rose)!important;
 }
 
-/* dark mode — add same hover color (rose) */
+
 body.dark #langToggle {
   color: #f1f1f1;
 }
@@ -1035,7 +989,7 @@ body.dark #langToggle:hover i {
   color: var(--rose);
 }
 
-/* ========== OTHER NAVBAR ICONS ========== */
+
 #mainNavbar .icon-only:not(.profile-toggle):hover {
   background: rgba(183,110,121,0.1);
   color: var(--rose);
@@ -1048,7 +1002,7 @@ body.dark #mainNavbar .icon-only:not(.profile-toggle):hover {
 }
 
 
-/* ========== Responsive Fix ========== */
+
 @media (max-width: 991.98px) {
   #mainNavbar .navbar-collapse {
     background: var(--nav-bg);
@@ -1103,7 +1057,7 @@ body.dark #mainNavbar .icon-only:not(.profile-toggle):hover {
   }
 }
 
-/* ========== RTL Alignment ========== */
+
 [dir="rtl"] #mainNavbar .icon-row {
   flex-direction: row-reverse;
 }
@@ -1135,9 +1089,7 @@ body.dark #mainNavbar .icon-only:not(.profile-toggle):hover {
   }
 }
 
-/* ==========================
-   Neutral Modals & Buttons — Unified Header/Footer (No Blue)
-   ========================== */
+
 .modal-content {
   border: none !important;
   border-radius: 1rem !important;
@@ -1152,7 +1104,7 @@ body.dark .modal-content {
   color: #eee !important;
 }
 
-/* --- Unified Modal Header/Footer --- */
+
 .modal-header,
 .modal-footer {
   border: none !important;
@@ -1176,7 +1128,7 @@ body.dark .modal-footer {
   color: #eee !important;
 }
 
-/* --- Remove any blue-tinted Bootstrap classes --- */
+
 .modal-header[class*="bg-"],
 .modal-footer[class*="bg-"],
 .modal-header[class*="text-"],
@@ -1185,7 +1137,7 @@ body.dark .modal-footer {
   color: inherit !important;
 }
 
-/* --- Close button (RTL aware) --- */
+
 .btn-close {
   filter: none !important;
   opacity: 0.8 !important;
@@ -1198,17 +1150,17 @@ html[dir="rtl"] .modal-header .btn-close {
   margin-right: auto !important;
 }
 
-/* --- Smooth entry animation --- */
+
 .modal.fade .modal-dialog { transform: translateY(-10px); }
 .modal.show .modal-dialog { transform: translateY(0); }
 
-/* --- Footer Buttons --- */
+
 .modal-footer .btn {
   min-width: 100px;
   border-radius: 0.5rem;
 }
 
-/* --- Kill blue borders, shadows, hover from .btn-outline-primary etc. --- */
+
 .btn-outline-primary,
 .btn-primary,
 .btn-link {
@@ -1233,7 +1185,7 @@ body.dark .btn-link:hover {
   background-color: var(--rose-dark);
 }
 
-/* --- Secondary Buttons --- */
+
 .modal-footer .btn-outline-secondary {
   color: inherit;
   border-color: rgba(0, 0, 0, 0.2) ;
@@ -1248,9 +1200,7 @@ body.dark .modal-footer .btn-outline-secondary:hover {
   background-color: rgba(255, 255, 255, 0.1) ;
 }
 
-/* ==========================
-   Unified Landing Page Styles (Final Compact Version)
-   ========================== */
+
 .hero-landing {
   position: relative;
   min-height: 95vh;
@@ -1268,7 +1218,7 @@ body.dark .modal-footer .btn-outline-secondary:hover {
   z-index: 0;
 }
 
-/* Light mode variant */
+
 body.light .hero-landing {
   background: linear-gradient(135deg, #d59393, #e6cece);
   color: #222;
@@ -1292,7 +1242,7 @@ body.light .hero-landing a.btn-primary:hover {
   border-color: var(--rose-dark);
 }
 
-/* Dark mode variant */
+
 body.dark .hero-landing {
   background: linear-gradient(135deg, var(--rose-dark), var(--rose));
   color: #333;
@@ -1312,7 +1262,7 @@ body.dark .hero-landing .hero-overlay {
   background: var(--rose-dark);
 }
 
-/* Work Hours */
+
 .work-hours-section .hour-card {
   background: var(--rose-light);
   transition: transform .3s ease, box-shadow .3s ease;
@@ -1322,7 +1272,7 @@ body.dark .hero-landing .hero-overlay {
   box-shadow: 0 4px 12px rgba(0,0,0,.15);
 }
 
-/* Services */
+
 .services-preview .icon-wrapper {
   font-size: 2rem;
   color: var(--rose-dark);
@@ -1336,7 +1286,7 @@ body.dark .hero-landing .hero-overlay {
 }
 
 body.light .icon-wrapper {
-  /* color: #000; */
+  
   display: none;
 }
 
@@ -1344,7 +1294,7 @@ body.dark .icon-wrapper {
   display: none;
 }
 
-/* About / Highlight Sections */
+
 .about-section,
 .about-highlight {
   background: linear-gradient(135deg, var(--rose-dark), var(--rose));
@@ -1361,7 +1311,7 @@ body.dark .icon-wrapper {
   color: var(--rose-dark);
 }
 
-/* Gallery / Masonry Grid */
+
 .masonry-grid {
   column-count: 4;
   column-gap: 1rem;
@@ -1388,11 +1338,9 @@ body.dark .icon-wrapper {
 @media (max-width:768px){.masonry-grid{column-count:2}}
 @media (max-width:576px){.masonry-grid{column-count:1}}
 
-/* ==========================
-   Navbar Dropdown — Optimized Fast Version
-   ========================== */
 
-/* desktop / universal */
+
+
 body.dark #mainNavbar .dropdown-menu {
   background-color: #1f1f1f !important;
   border: 1px solid rgba(255,255,255,0.1);
@@ -1419,7 +1367,7 @@ body.dark #mainNavbar .dropdown-item:hover {
   color: #000 !important;
 }
 
-/* mobile dropdowns */
+
 @media (max-width: 991.98px) {
   body.dark #mainNavbar .navbar-collapse .dropdown-menu {
     background-color: #1f1f1f !important;
@@ -1448,9 +1396,7 @@ body.dark #mainNavbar .dropdown-item:hover {
   }
 }
 
-/* ==========================
-   Mobile Dropdown Fix — Dark Theme
-   ========================== */
+
 
 @media (max-width: 991.98px) {
   body.dark #mainNavbar .navbar-collapse .dropdown-menu {
@@ -1485,7 +1431,7 @@ body.dark #mainNavbar .dropdown-item:hover {
   color: var(--rose-dark);
 }
 
-/* Dark Mode Variant */
+
 body.dark .services-section {
   background: linear-gradient(135deg, #ad6c6c, #a66565);
   color: #f1f1f1;
@@ -1501,9 +1447,7 @@ body.dark .services-section a.btn:hover {
   color: #000;
 }
 
-/* ==========================
-   Gallery Section Background Match (Light/Dark)
-   ========================== */
+
 .gallery-showcase {
   background: linear-gradient(135deg, var(--rose-dark), var(--rose));
   color: #fff;
@@ -1521,7 +1465,7 @@ body.dark .services-section a.btn:hover {
   color: var(--rose-dark);
 }
 
-/* Dark Mode Variant */
+
 body.dark .gallery-showcase {
   background: linear-gradient(135deg, #ad6c6c, #a66565);
   color: #f1f1f1;
@@ -1537,7 +1481,7 @@ body.dark .gallery-showcase a.btn:hover {
   color: #000;
 }
 
-/* Work Hours Section */
+
 
 .work-hours-section {
   background: linear-gradient(135deg, var(--rose-dark), var(--rose));
@@ -1556,7 +1500,7 @@ body.dark .gallery-showcase a.btn:hover {
   color: var(--rose-dark);
 }
 
-/* Dark Mode Variant */
+
 body.dark .work-hours-section {
   background: linear-gradient(135deg, #bc8888, #e67676);
   color: #f1f1f1;
@@ -1572,9 +1516,7 @@ body.dark .work-hours-section a.btn:hover {
   color: #000;
 }
 
-/* ==========================
-   FINAL FIX — FORCE NAVBAR FIXED TO TOP
-   ========================== */
+
 #mainNavbar {
   position: fixed !important;
   top: 0 !important;
@@ -1588,9 +1530,7 @@ body.dark .work-hours-section a.btn:hover {
   backdrop-filter: blur(8px) !important;
 }
 
-/* ==========================
-   Fix Profile Dropdown Shift on Mobile
-   ========================== */
+
 @media (max-width: 991.98px) {
   #mainNavbar .profile-toggle {
     position: relative;
@@ -1609,7 +1549,7 @@ body.dark .work-hours-section a.btn:hover {
     display: block;
   }
 
-  /* keep profile icon fixed and prevent shifting */
+  
   #mainNavbar .profile-toggle > .nav-link {
     display: inline-flex !important;
     align-items: center;
@@ -1630,7 +1570,7 @@ body.dark .work-hours-section a.btn:hover {
   transform: rotate(20deg);
 }
 
-/* optional: also undo transforms on common wrappers to be extra safe */
+
 .navbar,
 .card,
 footer {
@@ -1661,7 +1601,7 @@ footer {
   z-index: 1;
 }
 
-/* reset hamburger alignment to perfectly centered (LTR + RTL) */
+
 .navbar-toggler-icon,
 .navbar-toggler-icon::before,
 .navbar-toggler-icon::after {
@@ -1670,9 +1610,7 @@ footer {
   margin: auto !important;
 }
 
-/* ==========================
-   Hero Contact Icons (larger icons)
-   ========================== */
+
 .contact-icons {
   margin-top: 2rem;
   gap: 1.2rem;
@@ -1713,14 +1651,12 @@ footer {
   filter: none;
 }
 
-/* WhatsApp icon green, transparent background */
+
 .contact-icons a[href*="wa.me"] i {
   color: #25D366 !important;
 }
 
-/* ==========================
-   Reviews Section — Polished Modern Theme (Final Fixed Version)
-   ========================== */
+
 .reviews-section {
   background: linear-gradient(135deg, #f8f4f5 0%, #f1e3e6 100%);
   color: #222;
@@ -1733,9 +1669,7 @@ body.dark .reviews-section {
   color: #f8f8f8;
 }
 
-/* ==========================
-   Review Cards
-   ========================== */
+
 .reviews-section .card {
   background: rgba(255, 255, 255, 0.9);
   border: none;
@@ -1751,9 +1685,7 @@ body.dark .reviews-section .card {
   transform: translateY(-4px);
 }
 
-/* ==========================
-   Star Rating Input (Interactive — Member Editable)
-   ========================== */
+
 .star-rating {
   display: flex;
   flex-direction: row-reverse;
@@ -1769,8 +1701,8 @@ body.dark .reviews-section .card {
 
 .star-rating label {
   cursor: pointer;
-  font-size: 1.5rem; /* smaller default for clear transition */
-  color: #a0a0a0; /* gray for empty */
+  font-size: 1.5rem; 
+  color: #a0a0a0; 
   opacity: 0.75;
   transform: scale(1);
   transition: color 0.25s ease, transform 0.2s ease, opacity 0.25s ease;
@@ -1781,7 +1713,7 @@ body.dark .star-rating label {
   opacity: 0.65;
 }
 
-/* Hovered or selected (filled) stars */
+
 .star-rating label:hover,
 .star-rating label:hover ~ label,
 .star-rating input:checked ~ label {
@@ -1791,14 +1723,12 @@ body.dark .star-rating label {
   text-shadow: 0 0 10px rgba(255, 193, 7, 0.55);
 }
 
-/* smooth icon transition */
+
 .star-rating label i {
   transition: inherit;
 }
 
-/* ==========================
-   Displayed Stars (Read-only — in Reviews List)
-   ========================== */
+
 .reviews-section .bi-star-fill {
   color: #ffc107 !important;
   text-shadow: 0 0 4px rgba(255,204,51,0.4);
@@ -1812,9 +1742,7 @@ body.dark .reviews-section .bi-star {
   opacity: 0.85;
 }
 
-/* ==========================
-   Review Texts
-   ========================== */
+
 .reviews-section .text-muted {
   opacity: 0.85;
 }
@@ -1825,11 +1753,9 @@ body.dark .reviews-section .text-rose {
   color: #ffb6c1;
 }
 
-/* ==========================
-   FIX — full-width sections + navbar height compensation + smooth scroll
-   ========================== */
 
-/* make each section stretch horizontally with no side gaps */
+
+
 section {
   position: relative;
   width: 100vw;
@@ -1840,9 +1766,7 @@ section {
   overflow: hidden;
 }
 
-/* ==========================
-   FIX — spacing between main hero buttons only (not social icons)
-   ========================== */
+
 
 @media (max-width: 768px) {
   .hero-landing .mt-4 .btn {
@@ -1853,7 +1777,7 @@ section {
   .hero-landing .mt-4 .btn:last-child {
     margin-bottom: 0 !important;
   }
-  /* main hero buttons */
+  
   .hero-landing .mt-4 .btn {
     display: block;
     width: 100%;
@@ -1863,7 +1787,7 @@ section {
     margin-bottom: 0 !important;
   }
 
-  /* social contact icons */
+  
   .hero-landing .contact-icons a {
     width: 52px;
     height: 52px;
@@ -1906,11 +1830,11 @@ a.btn-success {
 }
 
 body.light h2.text-success {
-  color: #198754 !important; /* default Bootstrap green for light theme */
+  color: #198754 !important; 
 }
 
 body.dark h2.text-success {
-  color: #28d17c !important; /* brighter green for dark backgrounds */
+  color: #28d17c !important; 
 }
 .dashboard-card {
   border: none;
@@ -1957,7 +1881,7 @@ body.dark .dashboard-card .icon {
 }
 
 .logout-card:hover {
-  background: #c82333 !important; /* darker red on hover */
+  background: #c82333 !important; 
   box-shadow: 0 0 14px rgba(220,53,69,0.45) !important;
 }
 
@@ -2018,7 +1942,7 @@ body.dark .dashboard-card .icon {
   100% { transform: translateX(50%); }
 }
 
-/* consistent navbar hover across themes */
+
 #mainNavbar .nav-link:hover,
 body.dark #mainNavbar .nav-link:hover {
   color: var(--rose) !important;
@@ -2029,7 +1953,7 @@ body.dark #mainNavbar .nav-link.active {
   font-weight: 700;
 }
 
-/* subtle rotation for profile icon */
+
 #mainNavbar .profile-toggle > .nav-link.icon-only i {
   transition: transform 0.25s ease;
 }
@@ -2053,11 +1977,9 @@ body.dark #mainNavbar .nav-link.active {
   color: var(--rose);
 }
 
-/* ==========================
-   BOOKING FORM FINAL FIX
-   ========================== */
 
-/* Dropdown option backgrounds */
+
+
 body.light .form-select option {
   background-color: #fff;
   color: #212529;
@@ -2067,7 +1989,7 @@ body.dark .form-select option {
   color: #f1f1f1;
 }
 
-/* Flatpickr themed fix */
+
 .flatpickr-calendar {
   background: var(--card-bg) !important;
   border: 1px solid var(--border) !important;
@@ -2090,7 +2012,7 @@ body.light .flatpickr-weekdays {
 body.dark .flatpickr-months,
 body.dark .flatpickr-weekdays {
   background: #2a2a2a !important;
-  color: #ffffff !important; /* fixed: white top text */
+  color: #ffffff !important; 
 }
 .flatpickr-day {
   color: inherit !important;
@@ -2123,12 +2045,9 @@ body.dark .flatpickr-weekdays span {
   color: #fff !important;
 }
 
-/* ==========================
-   PREMIUM MOBILE NAV (Option A)
-   Strong Glass + Blur + Elevated Profile Button
-   ========================== */
 
-/* Detect theme automatically */
+
+
 body.light .mobile-nav-bar {
   background: var(--nav-glass-bg-light);
   border-top: 1px solid var(--nav-border-light);
@@ -2138,9 +2057,7 @@ body.dark .mobile-nav-bar {
   border-top: 1px solid var(--nav-border-dark);
 }
 
-/* ==========================
-   Bottom Navigation Bar
-   ========================== */
+
 .mobile-nav-bar {
   position: fixed;
   bottom: 0;
@@ -2157,7 +2074,7 @@ body.dark .mobile-nav-bar {
   transition: background 0.3s ease, border 0.3s ease;
 }
 
-/* Nav items */
+
 .mobile-nav-item {
   flex: 1;
   text-align: center;
@@ -2176,13 +2093,13 @@ body.dark .mobile-nav-bar {
   font-size: 1.32rem;
 }
 
-/* Press animation */
+
 .mobile-nav-item:active {
   transform: scale(0.92);
   opacity: 0.65;
 }
 
-/* Active state glow */
+
 .mobile-nav-item.active i,
 .mobile-nav-item.active span {
   color: var(--rose) !important;
@@ -2190,9 +2107,7 @@ body.dark .mobile-nav-bar {
   opacity: 1;
 }
 
-/* ==========================
-   Floating Center Profile Button
-   ========================== */
+
 .mobile-profile-btn {
   position: fixed !important;
   bottom: calc(env(safe-area-inset-bottom) + 34px) !important;
@@ -2216,12 +2131,12 @@ body.dark .mobile-nav-bar {
   transition: transform .25s ease, box-shadow .25s ease;
 }
 
-/* icon size */
+
 .mobile-profile-btn i {
   font-size: 2.15rem;
 }
 
-/* press effect */
+
 .mobile-profile-btn:active {
   transform: translateX(-50%) scale(0.92) !important;
   box-shadow:
@@ -2229,12 +2144,12 @@ body.dark .mobile-nav-bar {
     0 0 10px rgba(255,110,130,0.5);
 }
 
-/* hover lift */
+
 .mobile-profile-btn:hover {
   transform: translateX(-50%) translateY(-2px) !important;
 }
 
-/* dark mode */
+
 body.dark .mobile-profile-btn {
   background: linear-gradient(145deg, #a96271, #c98592);
   box-shadow:
@@ -2242,10 +2157,7 @@ body.dark .mobile-profile-btn {
     0 0 16px rgba(245,162,176,0.55);
 }
 
-/* ==========================
-   Floating Theme + Language Buttons
-   (Polished to match new glass)
-   ========================== */
+
 .mobile-theme-btn,
 .mobile-lang-btn {
   backdrop-filter: blur(18px) saturate(160%);
@@ -2263,14 +2175,14 @@ body.dark .mobile-lang-btn {
   border: 1px solid rgba(0, 0, 0, 0.35);
 }
 
-/* Press effect */
+
 .mobile-theme-btn:active,
 .mobile-lang-btn:active {
   transform: scale(0.92);
   opacity: 0.75;
 }
 
-/* Hide on desktop */
+
 @media (min-width: 992px) {
   .mobile-nav-bar,
   .mobile-profile-btn,
@@ -2303,7 +2215,7 @@ body:not(.is-app) {
   margin-top: 0;
 }
 
-/* ========== MOBILE TOGGLES — BOTTOM LEFT STACK ========== */
+
 
 @media (max-width: 991px) {
 
@@ -2336,12 +2248,12 @@ body:not(.is-app) {
     z-index: 999999;
   }
 
-  /* theme toggle stacked below language toggle */
+  
   #mobileThemeToggle {
     bottom: 80px;
   }
 
-  /* LIGHT MODE */
+  
   body.light #mobileLangToggle,
   body.light #mobileThemeToggle {
     background: rgba(255,255,255,0.45);
@@ -2352,7 +2264,7 @@ body:not(.is-app) {
     background: rgba(255,255,255,0.65);
   }
 
-  /* DARK MODE */
+  
   body.dark #mobileLangToggle,
   body.dark #mobileThemeToggle {
     background: rgba(20,20,20,0.55);
@@ -2375,5 +2287,32 @@ body.dark #mobileThemeToggle:hover {
   box-shadow: 0 0 12px rgba(245,162,176,0.55);
 }
 
+}
 
+@media (max-width: 991px) {
+  body > main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  body > main.container {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .hero-landing {
+    margin-top: 0 !important;
+    padding-top: env(safe-area-inset-top) !important;
+  }
+
+  #mainNavbar {
+    position: static !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    border: none !important;
+  }
 }

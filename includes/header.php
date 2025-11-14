@@ -18,6 +18,7 @@ if (!isset($_SESSION['theme'])) {
 }
 $theme = $_SESSION['theme'];
 ?>
+
 <!DOCTYPE html>
 <html lang="<?php echo $lang_code; ?>" dir="<?php echo ($lang_code == 'ar' ? 'rtl' : 'ltr'); ?>">
 <head>
