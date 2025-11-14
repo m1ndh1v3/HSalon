@@ -2385,19 +2385,19 @@ body.is-app main.container {
    ===================================================== */
 
 .page-main {
-  padding-top: 4rem !important;
+  padding-top: 1rem !important;
 }
 
 /* App wrapper (Android / iOS notch fix) */
 body.is-app .page-main {
-  padding-top: calc(env(safe-area-inset-top) + 40px) !important;
-  padding-top: calc(constant(safe-area-inset-top) + 40px) !important;
+  padding-top: calc(env(safe-area-inset-top) + 10px) !important;
+  padding-top: calc(constant(safe-area-inset-top) + 10px) !important;
 }
 
 /* Desktop spacing */
 @media (min-width: 992px) {
   .page-main {
-    padding-top: 2.5rem !important;
+    padding-top: 1rem !important;
   }
 }
 
