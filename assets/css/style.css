@@ -25,12 +25,6 @@ html, body {
   backface-visibility: visible;  
 }
 
-
-body.is-app {
-  background-color: #000; 
-}
-
-
 body.light {
   --rose: #b76e79;
   --rose-light: #fce8ec;
@@ -2366,8 +2360,7 @@ body.dark #mobileThemeToggle:hover {
   }
 }
 
-body.is-app .page-main {
-  padding-top: calc(env(safe-area-inset-top, 0px) + 24px);
+body.is-app {
+  background-color: #000;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 32px);
 }
-
-
