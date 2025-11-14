@@ -30,11 +30,7 @@ $theme = $_SESSION['theme'];
   <script>
     const SITE_URL = "<?php echo SITE_URL; ?>";
   </script>  
-  <script>
-    if (window.Capacitor) {
-      document.body.classList.add('is-app');
-    }
-  </script>
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
   <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/style.css?v=<?php echo time(); ?>">
@@ -48,7 +44,12 @@ $theme = $_SESSION['theme'];
 
 </head>
 <body class="<?php echo $theme; ?> theme-body">
-
+  <script>
+    if (window.Capacitor) {
+      document.body.classList.add('is-app');
+    }
+  </script>
+  
 <?php
 $unread_count = 0;
 if (isset($_SESSION['admin_id'])) {
@@ -167,7 +168,7 @@ if (isset($_SESSION['admin_id'])) {
   </a>
 </div>
 
-<main class="container mt-4">
+<main class="container page-main">
 
 
 <?php if (isset($_SESSION['admin_id'])): ?>

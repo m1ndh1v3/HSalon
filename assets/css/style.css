@@ -2224,8 +2224,6 @@ body:not(.is-app) {
   }
 
   body {
-    padding-top: 0;
-    margin-top: 0;
     padding-bottom: 100px;
   }  
 
@@ -2290,10 +2288,6 @@ body.dark #mobileThemeToggle:hover {
 }
 
 @media (max-width: 991px) {
-  body > main {
-    padding: 0 !important;
-    margin: 0 !important;
-  }
 
   body > main.container {
     padding: 0 !important;
@@ -2307,12 +2301,122 @@ body.dark #mobileThemeToggle:hover {
     padding-top: env(safe-area-inset-top) !important;
   }
 
-  #mainNavbar {
-    position: static !important;
-    height: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow: hidden !important;
-    border: none !important;
+}
+
+body.is-app {
+  padding-top: env(safe-area-inset-top);
+  padding-top: constant(safe-area-inset-top);
+}
+
+body.is-app main.container {
+  margin-top: calc(env(safe-area-inset-top) + 70px) !important;
+  margin-top: calc(constant(safe-area-inset-top) + 70px) !important;
+}
+
+@media (max-width: 991px) {
+
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-top: constant(safe-area-inset-top);
+    margin-top: 0;
+    padding-bottom: 100px;
+  }  
+
+  #mobileLangToggle,
+  #mobileThemeToggle {
+    position: fixed;
+    left: 20px;
+    bottom: 140px;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255,255,255,0.35);
+    transition: background .25s ease, color .25s ease, transform .2s ease;
+    z-index: 999999;
+  }
+
+  #mobileThemeToggle {
+    bottom: 80px;
+  }
+
+  body.light #mobileLangToggle,
+  body.light #mobileThemeToggle {
+    background: rgba(255,255,255,0.45);
+    color: #000;
+  }
+  body.light #mobileLangToggle:hover,
+  body.light #mobileThemeToggle:hover {
+    background: rgba(255,255,255,0.65);
+  }
+
+  body.dark #mobileLangToggle,
+  body.dark #mobileThemeToggle {
+    background: rgba(20,20,20,0.55);
+    border-color: rgba(0,0,0,0.4);
+    color: #fff;
+  }
+  body.dark #mobileLangToggle:hover,
+  body.dark #mobileThemeToggle:hover {
+    background: rgba(40,40,40,0.7);
+  }
+
+  #mobileLangToggle:hover,
+  #mobileThemeToggle:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 12px rgba(183,110,121,0.45);
+  }
+
+  body.dark #mobileLangToggle:hover,
+  body.dark #mobileThemeToggle:hover {
+    box-shadow: 0 0 12px rgba(245,162,176,0.55);
+  }
+
+}
+
+
+/* =====================================================
+   GLOBAL SAFE PAGE SPACING
+   ===================================================== */
+
+.page-main {
+  padding-top: 4rem !important;
+}
+
+/* App wrapper (Android / iOS notch fix) */
+body.is-app .page-main {
+  padding-top: calc(env(safe-area-inset-top) + 40px) !important;
+  padding-top: calc(constant(safe-area-inset-top) + 40px) !important;
+}
+
+/* Desktop spacing */
+@media (min-width: 992px) {
+  .page-main {
+    padding-top: 2.5rem !important;
+  }
+}
+
+/* ==========================================
+   FINAL UNIFIED SPACING (the rest ignored)
+   ========================================== */
+
+.page-main {
+  padding-top: calc( env(safe-area-inset-top) + 60px ) !important;
+}
+
+/* Android / iOS app wrapper */
+body.is-app .page-main {
+  padding-top: calc( env(safe-area-inset-top) + 70px ) !important;
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+  .page-main {
+    padding-top: 90px !important;
   }
 }

@@ -8,7 +8,9 @@ include_once __DIR__ . '/includes/header.php';
 $langKey = $_SESSION['lang'] ?? 'ar';
 ?>
 
-<h2 class="text-center mb-4"><?php echo $lang['services']; ?></h2>
+<main class="container page-main">
+
+<h2 class="fw-bold text-center mb-4"><?php echo $lang['services']; ?></h2>
 
 <div class="row justify-content-center">
 <?php
@@ -41,5 +43,7 @@ try {
 }
 ?>
 </div>
+
+</main>
 
 <?php include_once __DIR__ . '/includes/footer.php'; ?>
