@@ -2319,14 +2319,16 @@ body.is-app #mainNavbar {
   display: none;
 }
 
-/* Page spacing normalized */
-body.is-app .page-main {
-  padding-top: 12px;   /* spacing under the notch */
-  margin-top: 0;
+body.is-app {
+  padding-top: env(safe-area-inset-top) !important;
 }
 
-/* Hero section normalized */
+body.is-app .page-main {
+  margin-top: 0 !important;
+  padding-top: calc(env(safe-area-inset-top) + 6px) !important;
+}
+
 body.is-app .hero-landing {
-  padding-top: 0;
-  margin-top: 0;
+  padding-top: calc(env(safe-area-inset-top) + 0px) !important;
+  margin-top: 0 !important;
 }
