@@ -216,8 +216,7 @@ $textAlign = $isRtl ? 'text-end' : 'text-start';
           </div>
 
         </div>
-        </div>
-
+        
         <div class="card mb-3 p-3 booking-card-section">
           <div class="d-flex align-items-center gap-2 mb-3">
             <span class="rounded-circle d-inline-flex align-items-center justify-content-center" style="width:32px;height:32px;background:linear-gradient(135deg,#b76e79,#d68d9b);color:#fff;">
@@ -228,7 +227,7 @@ $textAlign = $isRtl ? 'text-end' : 'text-start';
               <small class="text-muted"><?php echo $lang['booking_notify_hint'] ?? ($isRtl ? 'اختاري طريقة استلام تأكيد أو تذكير بالموعد.' : 'How would you like to receive confirmation or reminders?'); ?></small>
             </div>
           </div>
-
+          
           <div class="mb-0">
             <select name="notify" class="form-select">
               <option value="whatsapp"><?php echo $lang['booking_notify_whatsapp']; ?></option>
@@ -236,17 +235,16 @@ $textAlign = $isRtl ? 'text-end' : 'text-start';
             </select>
           </div>
         </div>
-
-        <div class="card p-3 booking-card-submit mb-5">
+        
           <button type="submit" class="btn btn-primary w-100 py-2">
             <i class="bi bi-check2-circle"></i>
             <span class="ms-2"><?php echo $lang['booking_button_confirm']; ?></span>
           </button>
-        </div>
-
+        
       </form>
     </div>
   </div>
+</div>
 </div>
 
 <?php include_once __DIR__ . '/includes/footer.php'; ?>

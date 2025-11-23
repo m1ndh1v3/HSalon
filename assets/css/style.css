@@ -1636,8 +1636,6 @@ footer {
   background: linear-gradient(135deg, #f8f4f5 0%, #f1e3e6 100%);
   color: #222;
   transition: background 0.4s ease, color 0.4s ease;
-  padding-top: 5rem;
-  padding-bottom: 5rem;
 }
 body.dark .reviews-section {
   background: linear-gradient(135deg, #3a2a2d 0%, #1e1718 100%);
@@ -2078,7 +2076,7 @@ body.dark .mobile-nav-bar {
 
 .mobile-profile-btn {
   position: fixed !important;
-  bottom: calc(env(safe-area-inset-bottom) + 34px) !important;
+  bottom: calc(env(safe-area-inset-bottom) + 14px) !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
 
@@ -2179,9 +2177,6 @@ body:not(.is-app) {
     display: none;
   }
 
-  body {
-    padding-bottom: 100px;
-  }  
 
   #mobileLangToggle,
   #mobileThemeToggle {
@@ -2321,13 +2316,12 @@ body.is-app {
 }
 
 body.is-app .page-main {
-  margin-top: 0 !important;
   padding-top: calc(env(safe-area-inset-top) + 6px) !important;
 }
 
 body.is-app .hero-landing {
-  padding-top: calc(env(safe-area-inset-top) + 0px) !important;
   margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 .container-fluid {
