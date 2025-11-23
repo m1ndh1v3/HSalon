@@ -169,7 +169,7 @@ if (isset($_SESSION['admin_id'])) {
   </a>
 </div>
 
-<main class="container page-main">
+<main class="page-main">
 
 
 <?php if (isset($_SESSION['admin_id'])): ?>

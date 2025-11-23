@@ -6,62 +6,69 @@ require_once __DIR__ . '/config.php';
 include_once __DIR__ . '/includes/header.php';
 ?>
 
-<!-- Hero Section -->
-<section class="hero-landing d-flex align-items-center text-center position-relative">
-  <div class="hero-logo-bg">
-    <img src="assets/img/hsalon_logo.png" alt="Logo Watermark">
-  </div>
+<section class="hero-landing position-relative d-flex align-items-center">
+    <div class="container-fluid hero-split px-0">
+        <div class="row g-0 align-items-center">
 
-  <div class="container fade-in position-relative">
-    <h1 class="fw-bold display-4 mb-3"><?php echo $lang['welcome']; ?></h1>
+            <!-- LEFT COLUMN — LOGO (1/3 WIDTH) -->
+            <div class="col-lg-4 hero-left d-flex align-items-center justify-content-center">
+                <img src="assets/img/hsalon_logo.png" 
+                     alt="HSALON Logo"
+                     class="hero-logo-img">
+            </div>
 
-    <div class="mt-4">
-      <a href="booking.php" class="btn btn-lg btn-primary px-5 py-3 rounded-pill me-2">
-        <i class="bi bi-calendar-check"></i> <?php echo $lang['book_now']; ?>
-      </a>
-      <?php
-      if (isset($_SESSION['admin_id']) || isset($_SESSION['client_id'])) {
-        $btnHref = isset($_SESSION['admin_id']) ? SITE_URL . '/admin/dashboard.php' : SITE_URL . '/member/index.php';
-        $btnLabel = $lang['dashboard'] ?? 'جدول المواعيد';
-        $btnIcon = 'bi-person-circle';
-      } else {
-        $btnHref = SITE_URL . '/login.php';
-        $btnLabel = $lang['login_signup'] ?? 'تسجيل / إنشاء حساب';
-        $btnIcon = 'bi-person-plus';
-      }
-      ?>
-      <a href="<?php echo $btnHref; ?>" class="btn btn-lg btn-outline-light px-5 py-3 rounded-pill">
-        <i class="bi <?php echo $btnIcon; ?>"></i> <?php echo $btnLabel; ?>
-      </a>
+            <!-- RIGHT COLUMN — ORIGINAL CONTENT (2/3 WIDTH) -->
+            <div class="col-lg-8 hero-right text-center px-4 fade-in">
+
+                <h1 class="fw-bold display-4 mb-3"><?php echo $lang['welcome']; ?></h1>
+
+                <div class="mt-4">
+                    <a href="booking.php" class="btn btn-lg btn-primary px-5 py-3 rounded-pill me-2">
+                        <i class="bi bi-calendar-check"></i> <?php echo $lang['book_now']; ?>
+                    </a>
+
+                    <?php
+                    if (isset($_SESSION['admin_id']) || isset($_SESSION['client_id'])) {
+                        $btnHref = isset($_SESSION['admin_id']) ? SITE_URL . '/admin/dashboard.php' : SITE_URL . '/member/index.php';
+                        $btnLabel = $lang['dashboard'] ?? 'جدول المواعيد';
+                        $btnIcon = 'bi-person-circle';
+                    } else {
+                        $btnHref = SITE_URL . '/login.php';
+                        $btnLabel = $lang['register'] ?? 'تسجيل / إنشاء حساب';
+                        $btnIcon = 'bi-person-plus';
+                    }
+                    ?>
+
+                    <a href="<?php echo $btnHref; ?>" class="btn btn-lg btn-outline-light px-5 py-3 rounded-pill">
+                        <i class="bi <?php echo $btnIcon; ?>"></i> <?php echo $btnLabel; ?>
+                    </a>
+                </div>
+
+                <!-- CONTACT ICONS -->
+                <div class="contact-icons mt-5 d-flex justify-content-center flex-wrap gap-3">
+                    <a href="tel:+972501234567" class="btn btn-light rounded-circle p-3 fs-3">
+                        <img src="assets/img/icons/phonecall.svg" width="30" height="30">
+                    </a>
+                    <a href="https://wa.me/972501234567" target="_blank" class="btn btn-success rounded-circle p-3 fs-3">
+                        <img src="assets/img/icons/whatsapp.svg" width="30" height="30">
+                    </a>
+                    <a href="https://www.instagram.com/yourpage" target="_blank" class="btn btn-light rounded-circle p-3 fs-3">
+                        <img src="assets/img/icons/instagram2.svg" width="30" height="30">
+                    </a>
+                    <a href="https://maps.google.com/?q=31.771959,35.217018" target="_blank" class="btn btn-light rounded-circle p-3 fs-3">
+                        <img src="assets/img/icons/google-maps.svg" width="30" height="30">
+                    </a>
+                    <a href="https://waze.com/ul?ll=31.771959,35.217018&navigate=yes" target="_blank" class="btn btn-light rounded-circle p-3 fs-3">
+                        <img src="assets/img/icons/waze3.svg" width="30" height="30">
+                    </a>
+                </div>
+
+            </div>
+        </div>
     </div>
 
-    <!-- Contact Methods inside Hero -->
-    <div class="contact-icons mt-5 d-flex justify-content-center flex-wrap gap-3">
-      <a href="tel:+972501234567" class="btn btn-light rounded-circle p-3 fs-3" title="Phone">
-        <!-- <i class="bi bi-telephone-fill text-primary"></i> -->
-         <img src="assets/img/icons/phonecall.svg" alt="Phone" width="30" height="30">
-      </a>
-      <a href="https://wa.me/972501234567" target="_blank" class="btn btn-success rounded-circle p-3 fs-3" title="WhatsApp">
-        <!-- <i class="bi bi-whatsapp"></i> -->
-         <img src="assets/img/icons/whatsapp.svg" alt="WhatsApp" width="30" height="30">
-      </a>
-      <a href="https://www.instagram.com/yourpage" target="_blank" class="btn btn-light rounded-circle p-3 fs-3" title="Instagram">
-        <!-- <i class="bi bi-instagram text-danger"></i> -->
-         <img src="assets/img/icons/instagram2.svg" alt="Instagram" width="30" height="30">
-      </a>
-      <a href="https://maps.google.com/?q=31.771959,35.217018" target="_blank" class="btn btn-light rounded-circle p-3 fs-3" title="Google Maps">
-        <img src="assets/img/icons/google-maps.svg" alt="Google Maps" width="30" height="30">
-      </a>
-      <a href="https://waze.com/ul?ll=31.771959,35.217018&navigate=yes" target="_blank" class="btn btn-light rounded-circle p-3 fs-3" title="Waze">
-        <img src="assets/img/icons/waze3.svg" alt="Waze" width="30" height="30">
-      </a>
-    </div>
-  </div>
-
-  <div class="hero-overlay"></div>
+    <div class="hero-overlay"></div>
 </section>
-
-
 
 <!-- About Section -->
 <!-- <section class="about-highlight py-5 text-center">
